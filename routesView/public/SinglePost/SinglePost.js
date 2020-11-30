@@ -2,8 +2,9 @@ var states = ["JOIN US", "JOINED"],
   current_state = 0;
 function changeState() {
   current_state = !current_state;
-  document.getElementById("joinedButton").innerHTML = `${states[current_state ? 1 : 0]
-    }`;
+  document.getElementById("joinedButton").innerHTML = `${
+    states[current_state ? 1 : 0]
+  }`;
   document.getElementById("joinedButton").classList.toggle("disabledButton");
   return current_state;
 }
@@ -28,8 +29,8 @@ function result() {
   //Review : Comment(id)
   alert(
     "Rating : " +
-    count +
-    "\nReview : " +
-    document.getElementById("comment").value
+      count +
+      "\nReview : " +
+      document.getElementById("comment").value
   );
 }

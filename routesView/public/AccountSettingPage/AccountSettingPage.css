@@ -1,4 +1,4 @@
-*:not(.footer__title, .footer__description, .footer__contact) {
+* {
     background-color: rgba(var(--b3f,250,250,250),1);
 }
 
@@ -10,16 +10,17 @@
 .accountSettingPage {
     position: relative;
     display: flex;
-    background-color: rgba(var(--b3f,250,250,250),1);   
+    background-color: rgba(var(--b3f,250,250,250),1);
+}
+
+.accountSettingPage__paper {
+    background-color: #ffffff;
+    padding: 2%;
+    
 }
 
 .accountSettingPage__paper--width {
-    width: 74%; 
-    border-radius: 5px;
-}
-
-.navbar {
-    border-radius: 5px;
+    width: 74%;
 }
 
 .row--width {

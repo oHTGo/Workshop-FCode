@@ -43,6 +43,15 @@
   float: left;
 }
 
+.blog-post__edit {
+  float: right;
+}
+
+.blog-post__edit img {
+  width: 30px;
+  height: 30px;
+}
+
 .post__body {
   margin-bottom: 1rem;
 }

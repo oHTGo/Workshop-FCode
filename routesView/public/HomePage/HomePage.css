@@ -8,11 +8,6 @@
   padding-right: 10%;
 }
 
-.nav-link img, .dropdown-item img {
-  width: 25px;
-  height: 25px;
-}
-
 .nav-item {
   margin-right: 1rem;
 }
@@ -56,7 +51,7 @@
 }
 
 .blog-post__rate {
-  display: inline-block;
+  display: block;
   float: right;
   font-size: 1.1em;
   color: rgba(0, 0, 0, 0.5);
@@ -130,14 +125,14 @@
   background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
   text-decoration: none;
   font-weight: 700;
-  transition: 100ms;
+  transition: 500ms;
 }
 
 .blog-post__cta:hover {
   text-decoration: none;
   color: #fff;
-  background-color: #7fcec5;
-  background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+  background-color: #16a085;
+  background-image: none;
 }
 /*-------------- End posts content ----------------*/
 

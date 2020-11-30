@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>F-Code Workshop</title>
-    <link href='https://fonts.googleapis.com/css?family=Arsenal' rel='stylesheet'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="Login.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Arsenal"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="Login.css" />
+  </head>
 
-<body>
+  <body>
     <div class="login">
-        <div class="form__wrapper">
-            <h2>Welcome</h2>
-            <form>
-                <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-12">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                  <div class="col-sm-12">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                  </div>
-                </div>
-                
-                <div class="form-group row">
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
-                      <label class="form-check-label" for="gridCheck1">
-                        Remember me
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-                  </div>
-                </div>
-              </form>
-            </div>
+      <div class="form__wrapper">
+        <h2>Welcome</h2>
+        <h3>Use your FPT e-mail to login</h3>
+        <div class="google-btn">
+          <div class="google-icon-wrapper">
+            <img
+              class="google-icon"
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+            />
+          </div>
+          <p class="btn-text"><a href="#">Sign in with google</a></p>
         </div>
+        <div class="alert alert-danger login__errorbox" role="alert">
+          Your account do not have permission to access!
+        </div>
+      </div>
     </div>
-    
-
 
     <!--Cusom Js-->
     <!--JQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
