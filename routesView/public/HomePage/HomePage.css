@@ -1,0 +1,495 @@
+/* * {
+    background-color: rgba(var(--b3f,250,250,250),1);
+} */
+
+/*------------------ Navbar -----------------*/
+.navbar-center {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.nav-link img, .dropdown-item img {
+  width: 25px;
+  height: 25px;
+}
+
+.nav-item {
+  margin-right: 1rem;
+}
+
+/*------------------ End navbar -------------------*/
+
+/*------------------ Homepage content -------------*/
+
+/*--------------- Posts content ---------------*/
+.homepage__content {
+  padding: 2rem 2rem 2rem 5rem;
+  display: flex;
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+}
+
+.homepage__posts {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -2rem;
+}
+
+.blog-post {
+  width: 100%;
+  /* height: 20rem; */
+  height: fit-content;
+  background-color: #fff;
+  padding: 1rem 0rem 2rem 2rem;
+  /* box-shadow: 0 1.4rem 5rem rgba(0, 0, 0, .2); */
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+}
+
+.blog-post__info {
+  background-color: #fff;
+  transform: translateX(-3rem);
+  /* display: flex; */
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.blog-post__rate {
+  display: inline-block;
+  float: right;
+  font-size: 1.1em;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.blog-post__rate svg {
+  color: #fed330;
+}
+
+.blog-post__img {
+  min-width: 15rem;
+  max-width: 15rem;
+  height: 10rem;
+  transform: translateX(-6rem);
+  position: relative;
+}
+
+.blog-post__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.blog-post__date {
+  background-color: #fff;
+  cursor: default;
+  display: inline-block;
+}
+
+.blog-post__date span {
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0.2rem 0;
+  background-color: #fff;
+}
+
+.blot-post__title {
+  font-size: 1.2rem;
+  margin: 1rem 0 1.2rem;
+  text-transform: uppercase;
+  color: #16720a;
+  font-weight: 650;
+  background-color: #fff;
+  cursor: default;
+}
+
+.blog-post__description {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+  background-color: #fff;
+  cursor: default;
+  min-height: 8rem;
+  max-height: 8rem;
+  overflow: hidden;
+}
+
+.blog-post__cta {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #00b712;
+  background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
+  text-decoration: none;
+  font-weight: 700;
+  transition: 100ms;
+}
+
+.blog-post__cta:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #7fcec5;
+  background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+}
+/*-------------- End posts content ----------------*/
+
+/*-------------- Browsing area ----------------------*/
+.homepage__browse {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem 2rem 2rem;
+  background-color: #fff;
+  height: max-content;
+  border-radius: 5px;
+  margin-bottom: 5rem;
+}
+
+.homepage__browse h3 {
+  font-size: 1.4rem;
+  align-self: center;
+  margin-bottom: 1rem;
+  cursor: default;
+}
+
+.homepage__browse img {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 4rem;
+}
+
+.browse__tags a {
+  display: inline-block;
+  border: 1px solid #28a745;
+  padding: 3px 8px;
+  border-radius: 3px;
+  outline: 0;
+  color: #28a745;
+  margin: 5px;
+  transition: 50ms;
+}
+
+.browse__tags a:hover {
+  color: #fff;
+  background-color: rgb(40, 167, 69);
+  border-color: rgb(40, 167, 69);
+  text-decoration: none;
+}
+/*---------- End browsing area -------------*/
+
+/*------------ Ranking area ----------------*/
+.homepage__ranking {
+  display: flex;
+  flex-direction: column;
+  padding: 2.2rem 1.5rem 2.2rem 1.5rem;
+  background-color: #fff;
+  height: max-content;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.homepage__ranking h3 {
+  font-size: 1.4rem;
+  align-self: center;
+  margin-bottom: 1rem;
+  cursor: default;
+  position: relative;
+}
+
+.ranking__icon {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 5rem;
+}
+
+td,
+th {
+  /* border: 1px solid #dddddddd; */
+  text-align: center;
+  padding: 5px;
+  cursor: default;
+  min-height: 25px;
+  max-height: 25px;
+}
+
+td img {
+  width: 25px;
+  height: 25px;
+}
+
+td a:hover {
+  text-decoration: none;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+td svg {
+  color: yellow;
+}
+/*------------ End Ranking area --------------*/
+
+/*----------- Pagination ---------------*/
+.pagination {
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+  justify-content: center;
+}
+
+/*-------------- Footer Area -----------------*/
+footer {
+  width: 100%;
+  background-color: #4caf50;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+}
+
+.footer__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__title h3 {
+  color: #fff;
+  cursor: default;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.footer__title img {
+  width: 60px;
+  height: 60px;
+}
+
+.footer__description {
+  color: #fff;
+  line-height: 1.5rem;
+  letter-spacing: 1px;
+  font-size: 1rem;
+}
+
+.footer__contact {
+  text-align: center;
+}
+
+.footer__contact h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  cursor: default;
+}
+
+.contact__icons a {
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+.contact__icons img {
+  width: 35px;
+  height: 35px;
+}
+
+.footer__copyright {
+  position: absolute;
+  bottom: 10px;
+  left: 45%;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/*-------------- End footer are --------------*/
+
+/*------------------- SMALL DEVICE ---------------------------*/
+@media (max-width: 991.98px) {
+  /*------------ Posts content (Small devices) ------------*/
+  .homepage__content {
+    padding: 2rem 0 2rem 0;
+    flex-direction: column;
+  }
+
+  .homepage__posts {
+    align-items: center;
+  }
+
+  .blog-post {
+    flex-direction: column;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    width: 15rem;
+    min-height: 24rem;
+    /* max-height: 24rem; */
+    overflow: hidden;
+  }
+
+  .blog-post__img {
+    transform: none;
+    width: 100%;
+  }
+
+  .blog-post__info {
+    transform: none;
+  }
+
+  .blot-post__title {
+    font-size: 0.9rem;
+  }
+
+  .blog-post__description {
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .blog-post__cta {
+    text-align: center;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+    font-size: 0.6rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  /*-------------- End posts contents (small devices) ----------*/
+
+  .pagination {
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    width: 70%;
+    margin-top: 0rem;
+    margin-bottom: 5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  /*----------------- Browse area (Small Devices)---------*/
+  .homepage__side {
+    width: 15rem;
+    padding: 0;
+    align-self: center;
+  }
+  .homepage__browse {
+    width: 15rem;
+    padding: 1rem 1rem 1rem 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .homepage__browse h3 {
+    font-size: 1.1rem;
+  }
+
+  .homepage__browse img {
+    left: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .browse__tags a {
+    font-size: 0.8rem;
+  }
+  /*-------------- End browse are (Small devices) --------------*/
+
+  /*------------ Ranking area (Small devices) ---------------*/
+  .homepage__ranking h3 {
+    font-size: 1.2rem;
+  }
+
+  .ranking__icon {
+    width: 25px;
+    height: 25px;
+    left: 1.5rem;
+  }
+
+  td a,
+  td span,
+  td {
+    font-size: 0.7rem;
+  }
+
+  td svg {
+    width: 0.7em;
+    height: 0.7em;
+  }
+
+  /*----------- End ranking area (Small devices) --------------*/
+
+  /*-------------- Footer area (Small devices) -----------------*/
+  footer {
+    width: 100%;
+    height: auto;
+    padding: 1.5rem;
+    flex-direction: column;
+  }
+
+  .footer__title {
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-bottom: 0.7rem;
+  }
+
+  .footer__title h3 {
+    font-size: 1.2rem;
+    margin-left: 1rem;
+  }
+
+  .footer__title img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .footer__description {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__contact {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .footer__contact h3 {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    margin-right: 1rem;
+  }
+
+  .contact__icons a {
+    margin-left: 1rem;
+  }
+
+  .contact__icons img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .footer__copyright {
+    position: unset;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    cursor: default;
+  }
+
+  /*-------------- End footer (Small devices)--------------*/
+}
+
+/*------------------ End Homepage content ---------*/

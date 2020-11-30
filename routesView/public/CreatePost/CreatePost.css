@@ -1,0 +1,36 @@
+main {
+    background-color: rgba(var(--b3f,250,250,250),1);
+}
+
+.create__form {
+    padding: 2rem;
+}
+
+.create__wrapper {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem;
+    border-radius: 5px;
+}
+
+.create__wrapper h2 {
+    align-self: center;
+    margin-bottom: 3rem;
+}
+
+label {
+    font-weight: 500;
+}
+
+.create__wrapper button {
+    align-self: center;
+    margin-top: 1.6rem;
+    font-weight: 500;
+}
+
+/*----------------- SMALL DEVICES --------------------*/
+.create__wrapper h2 {
+    font-size: 1.3rem; 
+    margin-bottom: 2rem;  
+}

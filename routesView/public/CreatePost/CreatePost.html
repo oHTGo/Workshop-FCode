@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Post</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../HomePage/HomePage.css">
+  <link rel="stylesheet" href="./CreatePost.css">
+  <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-center">
+        <a class="navbar-brand" href="../HomePage/HomePage.html">
+            <img src="../img/rsz_logo_2000x2000 (1).png" alt="logo" width="40" height="40">
+        </a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse  bg-white" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto " >
+            <li class="nav-item bg-white">
+              <a class="nav-link" href="../HomePage/HomePage.html">
+                <img src="../img/home.svg">
+                Home<span class="sr-only"></span>
+              </a>
+            </li>
+            <li class="nav-item active bg-white">
+                <a class="nav-link" href="../CreatePost/CreatePost.html">
+                  <img src="../img/create.svg">
+                  Create</a>
+              </li>
+            <li class="nav-item bg-white">
+              <a class="nav-link" href="#">
+                <img src="../img/calendar.svg">
+                Schedule</a>
+            </li>
+            <li class="nav-item dropdown bg-white">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="../img/gear.svg" alt="setting">
+                Account
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="../UserPosts/UserPosts.html">
+                  <img src="../img/parcel.svg">
+                  User status</a>
+                <div class="dropdown-divider"></div>
+                
+                <a class="dropdown-item" href="#">
+                  <img src="../img/logout.svg">
+                  Logout</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0  bg-white">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" >
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      <div class="collapse navbar-collapse  bg-white" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item bg-white">
+            <a class="nav-link" href="../HomePage/HomePage.html">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active bg-white">
+            <a class="nav-link" href="../CreatePost/CreatePost.html">Create</a>
+          </li>
+          <li class="nav-item bg-white">
+            <a class="nav-link" href="#">Schedule</a>
+          </li>
+          <li class="nav-item dropdown bg-white">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../UserPosts/UserPosts.html">User status</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Logout</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0  bg-white">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="create__form">
+      <div class="create__wrapper">
+        <h2>Fill following information to write new post</h2>
+        <div class="form-group row">
+          <label for="example-datetime-local-input" class="col-6 col-sm-2  col-form-label">Date and time</label>
+          <div class="col-sm-3">
+            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="title-input" class="col-6 col-sm-2 col-form-label">Title</label>
+          <div class="col-sm-3">
+            <input class="form-control" type="text" placeholder="Your title" id="titll-input">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imageUpload">Image</label>
+          <input type="file" class="form-control-file" id="imageUpload">
+        </div>
+        <div class="form-group">
+          <label>Main content</label>
+          <textarea name="content"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="post__note">Your note</label>
+          <textarea class="form-control col-12 col-sm-6" id="post__note" rows="2"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success col-sm-2">Submit</button>
+      </div>
+    </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer__title col-lg-4 ">
+      <h3>F-Code Workshop</h3>
+      <img src="../img/rsz_logo_2000x2000 (1).png">
+    </div>
+    <div class="footer__description col-lg-4 ">
+      <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, qui! Animi neque corporis cumque aliquam saepe? Voluptate laborum</P>
+    </div>
+    <div class="footer__contact col-lg-4 ">
+      <h3>Contact</h3>
+      <div class="contact__icons">
+        <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
+        <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
+      </div>
+    </div>
+
+    <div class="footer__copyright">© F-Code Club 2020</div>
+  </footer>
+
+
+
+  <!----------------------Import JS------------------------------------------->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="../ckeditor/ckeditor.js"></script>
+  <script>CKEDITOR.replace('content')</script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "backend-workshop",
+  "version": "1.0.0",
+  "description": "Backend for Workshop",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "cross-env NODE_ENV=development nodemon index"
+  },
+  "author": "HTG",
+  "license": "ISC",
+  "engines": {
+    "node": "12.18.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.11",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "nodemon": "^2.0.6"
+  }
+}
