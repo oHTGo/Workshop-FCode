@@ -1,5 +1,5 @@
 {
-  "name": "backend-workshop",
+  "name": "workshop-fcode",
   "version": "1.0.0",
   "description": "Backend for Workshop",
   "main": "index.js",
@@ -11,6 +11,16 @@
   "license": "ISC",
   "engines": {
     "node": "12.18.3"
+  },
+  "apidoc": {
+    "name": "Backend for workshop",
+    "description": "",
+    "title": "API for Workshop",
+    "url": "https://localhost:8080/api",
+    "template": {
+      "forceLanguage": "en"
+    },
+    "withCompare": false
   },
   "dependencies": {
     "body-parser": "^1.19.0",
