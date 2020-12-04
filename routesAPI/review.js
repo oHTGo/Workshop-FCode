@@ -10,12 +10,23 @@ const Review = require("../models/Review");
 
 const checkUserLoggedIn = require("../middleware");
 
-//Get review
+/**
+ * @api {get}       /review/:topicId        1.  Get review
+ * @apiGroup Review
+ * @apiSuccess (Success) {String}     status      Status of request
+ * @apiSuccess (Success) {Object}   message   Object request
+ * @apiSuccess (Success) {String}     object._id     ID of review
+ * @apiSuccess (Success) {Number}     object.star     Star of review
+ * @apiSuccess (Success) {String}     object.reviewOfUser       Content of review
+ *
+ * @apiError (Error) {String} status      Status when complete
+ * @apiError (Error) {String} message      Message when complete
+ */
 router.get("/:topicId", checkUserLoggedIn, async (req, res) => {
 
     const findData = { user: req.user._id, topic: req.params.topicId };
 
-    const reviewData = await Review.findOne(findData);
+    const reviewData = await Review.findOne(findData, { user: 0, topic: 0, refreshToken: 0 });
 
     if (reviewData) {
         helper.setStatusSuccess(res, reviewData);
@@ -24,7 +35,15 @@ router.get("/:topicId", checkUserLoggedIn, async (req, res) => {
     }
 });
 
-//Create review
+/**
+ * @api {post}       /review/:topicId        2. Create review
+ * @apiGroup Review
+ * @apiParam (Parameter) {Number}     star       Star of review (1 <= star <= 5)
+ * @apiParam (Parameter) {String}     reviewOfUser     Content of review
+ *
+ * @apiError (Response) {String} status      Status when complete
+ * @apiError (Response) {String} message      Message when complete
+ */
 router.post("/:topicId", checkUserLoggedIn, (req, res) => {
     Review.find({ user: req.user._id, topic: req.params.topicId })
         .then(async data => {
@@ -67,7 +86,15 @@ router.post("/:topicId", checkUserLoggedIn, (req, res) => {
         });
 });
 
-//Update review
+/**
+ * @api {put}       /review/:topicId        3. Update review
+ * @apiGroup Review
+ * @apiParam (Parameter) {Number}     star       Star of review
+ * @apiParam (Parameter) {String}     reviewOfUser     Content of review
+ *
+ * @apiError (Response) {String} status      Status when complete
+ * @apiError (Response) {String} message      Message when complete
+ */
 router.put("/:topicId", checkUserLoggedIn, async (req, res) => {
     const newReview = {
         star: req.body.star,
@@ -90,7 +117,13 @@ router.put("/:topicId", checkUserLoggedIn, async (req, res) => {
         .catch(err => helper.setStatusBadRequest(res, err._message));
 });
 
-//Delete review
+/**
+ * @api {delte}       /review/:topicId        4. Delete review
+ * @apiGroup Review
+ * 
+ * @apiError (Response) {String} status      Status when complete
+ * @apiError (Response) {String} message      Message when complete
+ */
 router.delete("/:topicId", checkUserLoggedIn, async (req, res) => {
     const findData = { user: req.user._id, topic: req.params.topicId };
 
