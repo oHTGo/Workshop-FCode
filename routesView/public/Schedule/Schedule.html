@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="Schedule.css">
+  <link rel="stylesheet" href="../HomePage/HomePage.css">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
@@ -32,7 +33,7 @@
             </a>
           </li>
           <li class="nav-item bg-white">
-            <a class="nav-link active" href="../CreatePost/CreatePost.html">
+            <a class="nav-link" href="../CreatePost/CreatePost.html">
               <i class="far fa-calendar-plus"></i>
               Create</a>
           </li>
@@ -79,7 +80,7 @@
         <li class="nav-item dropdown bg-white">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Account
+            Le Hoang Khoi (K15 HCM)
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="../UserPosts/UserPosts.html">User status</a>
@@ -105,98 +106,104 @@
             aria-controls="navbarSchedule" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-      
+
           <div class="collapse navbar-collapse  bg-white" id="navbarSchedule">
             <ul class="navbar-nav mr-auto ">
               <li class="nav-item bg-white">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Today</button>
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Today</button>
               </li>
               <li class="nav-item bg-white">
-                <a class="nav-link" href="#">
+                <button id="decrease" class="btn btn-outline-success my-2 my-sm-0">
                   <i class="fas fa-chevron-left"></i>
-                </a>
-              </li>
-              <li class="nav-item bg-white">
-                <a class="nav-link" href="#">
+                </button>
+                <button id="increase" class="btn btn-outline-success my-2 my-sm-0">
                   <i class="fas fa-chevron-right"></i>
-                </a>
+                </button>
               </li>
               <li class="nav-item bg-white">
-                <a class="nav-link" href="/Schedule/Schedule.html">
-                  November 2020</a>
+
+              </li>
+              <li class="nav-item bg-white">
+                <a id="monthYearShow" class="nav-link"></a>
               </li>
             </ul>
           </div>
         </nav>
-        <table class="table table-bordered ">
-          <thead>
-            <tr>
-              <th scope="col">Sun</th>
-              <th scope="col">Mon</th>
-              <th scope="col">Tue</th>
-              <th scope="col">Wed</th>
-              <th scope="col">Thu</th>
-              <th scope="col">Fri</th>
-              <th scope="col">Sat</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-            </tr>
-            <tr>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-            </tr>
-            <tr>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-            </tr>
-            <tr>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-            </tr>
-            <tr>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-            </tr>
-            <tr>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-              <td><div> </div></td>
-            </tr>
-          </tbody>
-        </table>
+
+        <div class="schedule__dayname" style="padding-right: 2%; padding-left: 2%;">
+          <p>Sun</p>
+          <p>Mon</p>
+          <p>Tue</p>
+          <p>Wed</p>
+          <p>Thu</p>
+          <p>Fri</p>
+          <p>Sat</p>
+        </div>
+      </div>
+      <div class="schedule__wrapper">
+        <div style="padding-bottom: 2%; padding-left: 2%; padding-right: 2%;">
+          <div id="calendar">
+            <div id="0" class="day"></div>
+            <div id="1" class="day"></div>
+            <div id="2" class="day"></div>
+            <div id="3" class="day">
+              1
+              <a class="event" href="../SinglePost/SinglePost.html">How to use Git and Github</a>
+            </div>
+            <div id="4" class="day">2</div>
+            <div id="5" class="day">3</div>
+            <div id="6" class="day">4</div>
+            <div id="7" class="day">5</div>
+            <div id="8" class="day">
+              6
+              <a class="event" href="#">How a website work?</a>
+            </div>
+            <div id="9" class="day">7</div>
+            <div id="10" class="day">8</div>
+            <div id="11" class="day">9</div>
+            <div id="12" class="day">10</div>
+            <div id="13" class="day">11</div>
+            <div id="14" class="day">11</div>
+            <div id="15" class="day">12</div>
+            <div id="16" class="day">13</div>
+            <div id="17" class="day">14</div>
+            <div id="18" class="day">15</div>
+            <div id="19" class="day">
+              16
+              <a class="event" href="#">Crawling data and tips on Instagram</a>
+            </div>
+            <div id="20" class="day">17</div>
+            <div id="21" class="day">18</div>
+            <div id="22" class="day">19</div>
+            <div id="23" class="day">
+              20
+              <a class="event" href="../SinglePost/SinglePost.html">How to use Git and Github</a>
+            </div>
+            <div id="24" class="day">21</div>
+            <div id="25" class="day">22</div>
+            <div id="26" class="day">23</div>
+            <div id="27" class="day">24</div>
+            <div id="28" class="day">25</div>
+            <div id="29" class="day">26</div>
+            <div id="30" class="day">27</div>
+            <div id="31" class="day">28</div>
+            <div id="32" class="day">
+              29
+              <a class="event" href="#">How a website work?</a>
+            </div>
+            <div id="33" class="day">30</div>
+            <div id="34" class="day">31</div>
+            <div id="35" class="day"></div>
+            <div id="36" class="day"></div>
+            <div id="37" class="day"></div>
+            <div id="38" class="day"></div>
+            <div id="39" class="day"></div>
+            <div id="40" class="day"></div>
+            <div id="41" class="day"></div>
+          </div>
+        </div>
+        
+
       </div>
     </div>
   </main>
@@ -211,6 +218,27 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+  <script src="Schedule.js"></script>
 </body>
+
+<footer>
+  <div class="footer__title col-lg-4 ">
+    <h3>F-Code Workshop</h3>
+    <img src="../img/rsz_logo_2000x2000 (1).png">
+  </div>
+  <div class="footer__description col-lg-4 ">
+    <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, qui! Animi neque corporis cumque
+      aliquam saepe? Voluptate laborum</P>
+  </div>
+  <div class="footer__contact col-lg-4 ">
+    <h3>Contact</h3>
+    <div class="contact__icons">
+      <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
+      <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
+    </div>
+  </div>
+
+  <div class="footer__copyright">© F-Code Club 2020</div>
+</footer>
 
 </html>
