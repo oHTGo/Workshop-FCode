@@ -25,7 +25,7 @@ const checkUserLoggedIn = require("../middleware");
  * @apiSuccess (Success) {Object}     object.author    Information of author
  * @apiSuccess (Success) {String}     object.author._id     ID of author's topic
  * @apiSuccess (Success) {String}     object.author.name     Name of author's topic
- * @apiSuccess (Success) {String}     object.review     Review of members
+ * @apiSuccess (Success) {Object[]}   object.review     Object array have 1 element. It is a average rate of topic
  *
  * @apiError (Error) {String} status      Status when complete
  * @apiError (Error) {String} message      Message when complete
@@ -49,6 +49,13 @@ router.get("/", checkUserLoggedIn, async (req, res) => {
     const topicData = await Topic.find().populate(populateData);
 
     if (topicData) {
+        for (let i = 0; i < topicData.length; i++) {
+            let averageRate = 0;
+            for (const review of topicData[i].review) {
+                averageRate += review.star;
+            }
+            topicData[i].review = averageRate / topic.review.length;
+        }
         helper.setStatusSuccess(res, topicData);
     } else {
         helper.setStatusNotFound(res, "Don't have any topic");
@@ -93,7 +100,7 @@ router.post("/", checkUserLoggedIn, (req, res) => {
  * @api {get}       /topic/:topicId       3. Get topic information
  * @apiGroup Topic
  * @apiSuccess (Success) {String}     status      Status of request
- * @apiSuccess (Success) {Object}   message   Array of object request
+ * @apiSuccess (Success) {Object}     message   Array of object request
  * @apiSuccess (Success) {String}     object._id     ID of topic
  * @apiSuccess (Success) {String}     object.name     Name of topic
  * @apiSuccess (Success) {String}     object.detail     Detail of topic
@@ -105,7 +112,9 @@ router.post("/", checkUserLoggedIn, (req, res) => {
  * @apiSuccess (Success) {Object}     object.author    Information of author
  * @apiSuccess (Success) {String}     object.author._id     ID of author's topic
  * @apiSuccess (Success) {String}     object.author.name     Name of author's topic
- * @apiSuccess (Success) {String}     object.review     Review of members
+ * @apiSuccess (Success) {Object[]}   object.review     Review of members
+ * @apiSuccess (Success) {String}     object.review.reviewOfUser     Content of review
+ * @apiSuccess (Success) {Number}     object.review.star     Star of review
  *
  * @apiError (Error) {String} status      Status when complete
  * @apiError (Error) {String} message      Message when complete
