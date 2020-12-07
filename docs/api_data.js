@@ -331,10 +331,10 @@ define({ "api": [
           },
           {
             "group": "Success",
-            "type": "String",
+            "type": "Object[]",
             "optional": false,
             "field": "object.review",
-            "description": "<p>Review of members</p>"
+            "description": "<p>Object array have 1 element. It is a average rate of topic</p>"
           }
         ]
       }
@@ -465,10 +465,24 @@ define({ "api": [
           },
           {
             "group": "Success",
-            "type": "String",
+            "type": "Object[]",
             "optional": false,
             "field": "object.review",
             "description": "<p>Review of members</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object.review.reviewOfUser",
+            "description": "<p>Content of review</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Number",
+            "optional": false,
+            "field": "object.review.star",
+            "description": "<p>Star of review</p>"
           }
         ]
       }
