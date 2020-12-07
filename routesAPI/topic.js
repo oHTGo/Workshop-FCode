@@ -54,7 +54,7 @@ router.get("/", checkUserLoggedIn, async (req, res) => {
             for (const review of topicData[i].review) {
                 averageRate += review.star;
             }
-            topicData[i].review = averageRate / topic.review.length;
+            topicData[i].review = averageRate / topicData[i].review.length;
         }
         helper.setStatusSuccess(res, topicData);
     } else {
