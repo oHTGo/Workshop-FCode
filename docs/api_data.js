@@ -335,6 +335,13 @@ define({ "api": [
             "optional": false,
             "field": "object.review",
             "description": "<p>Object array have 1 element. It is a average rate of topic</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Object[]",
+            "optional": false,
+            "field": "object.participants",
+            "description": "<p>Object array have 1 element. It is a total participants of topic.</p>"
           }
         ]
       }
@@ -444,6 +451,27 @@ define({ "api": [
           },
           {
             "group": "Success",
+            "type": "Object[]",
+            "optional": false,
+            "field": "object.participants",
+            "description": "<p>List participants of topic</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object.participants._id",
+            "description": "<p>ID of participants's topic</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object.participants.name",
+            "description": "<p>Name of participants's topic</p>"
+          },
+          {
+            "group": "Success",
             "type": "Object",
             "optional": false,
             "field": "object.author",
@@ -511,6 +539,63 @@ define({ "api": [
     "filename": "routesAPI/topic.js",
     "groupTitle": "Topic",
     "name": "GetTopicTopicid"
+  },
+  {
+    "type": "get",
+    "url": "/topic/:topicId/join",
+    "title": "6.  Get status of participant's topic",
+    "group": "Topic",
+    "success": {
+      "fields": {
+        "Success": [
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status of request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Object",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Object request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Boolean",
+            "optional": false,
+            "field": "object.statusParticipant",
+            "description": "<p>Status of participant's topic</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error": [
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status when complete</p>"
+          },
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message when complete</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routesAPI/topic.js",
+    "groupTitle": "Topic",
+    "name": "GetTopicTopicidJoin"
   },
   {
     "type": "post",
@@ -582,6 +667,56 @@ define({ "api": [
     "filename": "routesAPI/topic.js",
     "groupTitle": "Topic",
     "name": "PostTopic"
+  },
+  {
+    "type": "post",
+    "url": "/topic/:topicId/join",
+    "title": "7.  Join topic",
+    "group": "Topic",
+    "success": {
+      "fields": {
+        "Success": [
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status of request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message of request</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error": [
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status when complete</p>"
+          },
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message when complete</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routesAPI/topic.js",
+    "groupTitle": "Topic",
+    "name": "PostTopicTopicidJoin"
   },
   {
     "type": "put",
