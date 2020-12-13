@@ -40,16 +40,29 @@
 }
 
 .blog-post__rate {
-  float: left;
+  position: unset;
+  left: 0;
+  top: 0;
+}
+
+.blog-post__icon a {
+  opacity: .5;
+  transition: 300ms;
+}
+
+.blog-post__icon a:hover {
+  opacity: 1;
+}
+
+.blog-post__icon img {
+  width: 30px;
+  height: 30px;
+  float: right;
+  cursor: pointer;
 }
 
 .blog-post__edit {
-  float: right;
-}
-
-.blog-post__edit img {
-  width: 30px;
-  height: 30px;
+  margin: 0 20px;
 }
 
 .post__body {
