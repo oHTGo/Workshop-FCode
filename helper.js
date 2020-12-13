@@ -12,6 +12,7 @@ function setStatusFailure(res, message) {
         jsonResquest.message = message;
     }
     res.status(500).json(jsonResquest);
+    return "Failure";
 }
 
 
@@ -21,6 +22,7 @@ function setStatusBadRequest(res, message) {
         jsonResquest.message = message;
     }
     res.status(400).json(jsonResquest);
+    return "BadRequest";
 }
 
 function setStatusUnauthorization(res, message) {
@@ -29,6 +31,7 @@ function setStatusUnauthorization(res, message) {
         jsonResquest.message = message;
     }
     res.status(401).json(jsonResquest);
+    return "Unauthorization";
 }
 
 function setStatusForbiddance(res, message) {
@@ -37,6 +40,7 @@ function setStatusForbiddance(res, message) {
         jsonResquest.message = message;
     }
     res.status(403).json(jsonResquest);
+    return "Forbiddance";
 }
 
 function setStatusNotFound(res, message) {
@@ -45,6 +49,7 @@ function setStatusNotFound(res, message) {
         jsonResquest.message = message;
     }
     res.status(404).json(jsonResquest);
+    return "NotFound";
 }
 
 module.exports = {
