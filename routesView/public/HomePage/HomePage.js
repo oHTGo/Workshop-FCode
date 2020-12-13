@@ -7,7 +7,8 @@ function readPost(id) {
 fetch("/api/topic")
   .then((response) => response.json())
   .then((data) => {
-    
+    // console.log(data);
+    // myStorage.setItem('CurrentUserID', data.message.author.name);
     let postsArray = data.message.map((element) => {
       const weeks = [
         "Sunday",
@@ -34,7 +35,7 @@ fetch("/api/topic")
       ];
       let postDate = new Date(element.date);
       let postDateFormat = postDate.getDate() + ' ' + months[postDate.getMonth()] + ', ' + postDate.getFullYear() + ' - ' + postDate.toLocaleTimeString();
-      
+      let postRate = Math.round(element.review[0] * 100) / 100;
       
       return `
         <div class="blog-post">
@@ -42,7 +43,7 @@ fetch("/api/topic")
             <img src="../img/5.png" alt="">
           </div>
           <div class="blog-post__rate">
-            <span class="starRate">${element.review[0]}</span>
+            <span class="starRate">${postRate}</span>
             <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -67,13 +68,12 @@ fetch("/api/topic")
     for (var i = 0; i < postsArray.length; i++) {
       if (
         document.getElementsByClassName("starRate")[i].innerText == "null" ||
-        document.getElementsByClassName("starRate")[i].innerText == "undefined"
+        document.getElementsByClassName("starRate")[i].innerText == "0"
       ) {
         document.getElementsByClassName("blog-post__rate")[i].style.display =
           "none";
       }
     }
 
-    
   })
   .catch((error) => console.log(error));

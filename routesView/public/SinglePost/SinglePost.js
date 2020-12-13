@@ -26,6 +26,30 @@ function starmark(item) {
   }
 }
 
+function updatereview() {
+  const reviewObj = {
+    star: count,
+    reviewOfUser: document.getElementById("comment").value,
+  };
+
+  fetch("/api/review/" + currentTopic, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(reviewObj),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      alert("Successfully update review!");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
 function createReview() {
   const reviewObj = {
     star: count,
@@ -42,12 +66,26 @@ function createReview() {
     .then((response) => response.json())
     .then((data) => {
       console.log("Success:", data);
-      alert('Successfully review!');
+      alert("Successfully review!");
       window.location.reload();
     })
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+function review() {
+  const reviewObj = {
+    star: count,
+    reviewOfUser: document.getElementById("comment").value,
+  };
+
+  fetch("/api/review/" + currentTopic)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.message.)
+    })
+    .catch((error) => console.log(error));
 }
 
 function deletePost(id) {
