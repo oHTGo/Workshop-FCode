@@ -1,6 +1,13 @@
+let myStorage = window.localStorage;
+
+function readPost(id) {
+  myStorage.setItem('topicId', id);
+  
+}
 fetch("/api/topic")
   .then((response) => response.json())
   .then((data) => {
+    
     let postsArray = data.message.map((element) => {
       const weeks = [
         "Sunday",
@@ -26,8 +33,9 @@ fetch("/api/topic")
         "December",
       ];
       let postDate = new Date(element.date);
-      let postDateFormat = postDate.getDate() + ' ' + months[postDate.getMonth()] + ', ' + postDate.getFullYear();
-
+      let postDateFormat = postDate.getDate() + ' ' + months[postDate.getMonth()] + ', ' + postDate.getFullYear() + ' - ' + postDate.toLocaleTimeString();
+      
+      
       return `
         <div class="blog-post">
           <div class="blog-post__img">
@@ -48,14 +56,14 @@ fetch("/api/topic")
             </div>
             
             <h1 class="blog-post__title">${element.name}</h1>
-            <p class="blog-post__description">${element.detail}</p>
-            <a href="../SinglePost/SinglePost.html" class="blog-post__cta">Read more</a>
+            <div class="blog-post__description">${element.detail}</div>
+            <a href="../SinglePost/SinglePost.html" class="blog-post__cta" id="readButton" onClick="readPost('${element._id}')">Read more</a>
           </div>
         </div>`;
     });
-
+    
     document.getElementById("homepage__posts-wrapper").innerHTML = postsArray;
-
+    
     for (var i = 0; i < postsArray.length; i++) {
       if (
         document.getElementsByClassName("starRate")[i].innerText == "null" ||
@@ -65,5 +73,7 @@ fetch("/api/topic")
           "none";
       }
     }
+
+    
   })
   .catch((error) => console.log(error));
