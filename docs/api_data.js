@@ -852,5 +852,69 @@ define({ "api": [
     "filename": "routesAPI/user.js",
     "groupTitle": "User",
     "name": "GetUser"
+  },
+  {
+    "type": "get",
+    "url": "/user/current",
+    "title": "Get current user information",
+    "group": "User",
+    "success": {
+      "fields": {
+        "Success": [
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status of request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Object",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Object request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object._id",
+            "description": "<p>ID of user</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object.name",
+            "description": "<p>Name of user</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error": [
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status when complete</p>"
+          },
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message when complete</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routesAPI/user.js",
+    "groupTitle": "User",
+    "name": "GetUserCurrent"
   }
 ] });
