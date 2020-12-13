@@ -30,4 +30,22 @@ router.get("/", checkUserLoggedIn, async (req, res) => {
     }
 });
 
+
+/**
+ * @api {get}       /user/current     Get current user information
+ * @apiGroup User
+ * @apiSuccess (Success) {String}     status            Status of request
+ * @apiSuccess (Success) {Object}     message           Object request
+ * @apiSuccess (Success) {String}     object._id        ID of user
+ * @apiSuccess (Success) {String}     object.name       Name of user
+ *
+ * @apiError (Error) {String} status      Status when complete
+ * @apiError (Error) {String} message      Message when complete
+ */
+router.get("/current", checkUserLoggedIn, (req, res) => {
+    let userResponse = req.user;
+    userResponse.isAdmin = undefined; userResponse.googleId = undefined; userResponse.refreshToken = undefined;
+    helper.setStatusSuccess(res, userResponse);
+});
+
 module.exports = router;
