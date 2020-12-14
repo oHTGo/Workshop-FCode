@@ -61,7 +61,7 @@ async function getTopic(req, res) {
         },
         {
             path: "review",
-            select: "star"
+            select: "star reviewOfUser"
         }
     ];
 
