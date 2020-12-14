@@ -2,13 +2,14 @@ var states = ["JOIN US", "JOINED"],
   current_state = 0,
   currentTopic = window.localStorage.topicId;
 
-console.log(window.localStorage.topicId);
+console.log("Current topic id: " + window.localStorage.topicId);
 function changeState() {
   current_state = !current_state;
   document.getElementById("joinedButton").innerHTML = `${
     states[current_state ? 1 : 0]
   }`;
   document.getElementById("joinedButton").classList.toggle("disabledButton");
+  joinTopic();
   return current_state;
 }
 
@@ -26,7 +27,29 @@ function starmark(item) {
   }
 }
 
-function updatereview() {
+function getReview() {
+  // this function get user's review if it existed, then to update review
+  fetch("/api/review/" + currentTopic)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.status === "Successful") {
+        document.getElementById("comment").innerHTML =
+          data.message.reviewOfUser;
+        let star = data.message.star;
+        for (var i = 0; i < 5; i++) {
+          if (i < star) {
+            document.getElementById(i + 1 + "one").style.color = "#fed330";
+          } else {
+            document.getElementById(i + 1 + "one").style.color = "black";
+          }
+        }
+      }
+      console.log(data);
+    })
+    .catch((error) => console.log(error));
+}
+
+function updateReview() {
   const reviewObj = {
     star: count,
     reviewOfUser: document.getElementById("comment").value,
@@ -75,17 +98,46 @@ function createReview() {
 }
 
 function review() {
-  const reviewObj = {
-    star: count,
-    reviewOfUser: document.getElementById("comment").value,
-  };
-
   fetch("/api/review/" + currentTopic)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.message.)
+    .then((res) => {
+      res.json();
+      console.log(res.status);
+      if (res.status == 404) {
+        createReview();
+      } else {
+        updateReview();
+      }
     })
+    .then((data) => {})
     .catch((error) => console.log(error));
+}
+
+function joinTopic() {
+  console.log(current_state);
+  let status;
+  if (current_state == 0) {
+    status = false;
+  } else {
+    status = true;
+  }
+  participantObj = {
+    statusParticipant : status
+  }
+
+  fetch("/api/topic/" + currentTopic + "/join", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body : JSON.stringify(participantObj),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 function deletePost(id) {
@@ -204,4 +256,6 @@ function getSinglePost() {
     })
     .catch((error) => console.log(error));
 }
+
 getSinglePost();
+getReview();
