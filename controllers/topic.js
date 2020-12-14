@@ -111,10 +111,11 @@ async function joinTopic(req, res) {
             topicResponse = await Topic.findOneAndUpdate(req.params.topicId, { $push: { participants: req.user._id } });
             (topicResponse) ? helper.setStatusSuccess(res, "Join topic successfully.") : helper.setStatusFailure(res, "Join topic failed.");
         } else {
-            topicResponse = await Topic.findOneAndUpdate(req.params.topicId, { $pull: { participants: [req.user._id] } });
+            topicResponse = await Topic.findOneAndUpdate(req.params.topicId, { $pullAll: { participants: [req.user._id] } });
             (topicResponse) ? helper.setStatusSuccess(res, "Unjoin topic successfully.") : helper.setStatusFailure(res, "Unjoin topic failed.");
         }
     } catch (err) {
+        console.log(err);
         if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
     }
 }
