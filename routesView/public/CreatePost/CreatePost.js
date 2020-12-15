@@ -40,7 +40,7 @@ post = () => {
     group: groupAuthor,
   };
   console.log(postObj);
-  fetch("/api/topic", {
+  fetch('/api/topic', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -58,26 +58,19 @@ post = () => {
     });
 };
 
-// Get data 
+let myStorage = window.localStorage
+function getCurrentUser() {
+  fetch("/api/user/current")
+    .then((res) => res.json())
+    .then((data) => {
+      myStorage.setItem("CurrentUserId", data.message._id);
+      myStorage.setItem("CurrentUsername", data.message.name);
+      document.getElementById('userAccount').insertAdjacentHTML("beforeend", data.message.name);
+    })
+    .catch((error) => console.log(error));
+}
 
-// async function fetchExam() {
-//   try {
-//       const response = await fetch('/api/topic', {
-//           method: 'GET',
-//           credentials: 'same-origin'
-//       });
-//       const exam = await response.json();
-//       return exam;
-//   } catch (error) {
-//       console.error(error);
-//   }
-// }
-// var object = 
-// async function renderExam() {
-//   const exam = await fetchExam();
-//    //console.log(exam.message[0].author);
-//   return exam.message[0].author;
-// };
+getCurrentUser();
 
 
 

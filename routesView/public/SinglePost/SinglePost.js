@@ -1,5 +1,19 @@
+function getCurrentUser() {
+  fetch("/api/user/current")
+    .then((res) => res.json())
+    .then((data) => {
+      myStorage.setItem("CurrentUserId", data.message._id);
+      myStorage.setItem("CurrentUsername", data.message.name);
+      document.getElementById('userAccount').insertAdjacentHTML("beforeend", data.message.name);
+    })
+    .catch((error) => console.log(error));
+}
+
+getCurrentUser();
+
+
 var states = ["JOIN US", "JOINED"],
-  current_state = 0,
+  current_state = getJoinStatus(),
   currentTopic = window.localStorage.topicId;
 
 console.log("Current topic id: " + window.localStorage.topicId);
@@ -44,7 +58,6 @@ function getReview() {
           }
         }
       }
-      console.log(data);
     })
     .catch((error) => console.log(error));
 }
@@ -112,24 +125,30 @@ function review() {
     .catch((error) => console.log(error));
 }
 
+function getJoinStatus() {
+  fetch("/api/topic/" + currentTopic + "/join")
+    .then((res) => res.json())
+    .then((data) => {
+      let statusParticipant = data.message.statusParticipant;
+      console.log(statusParticipant);
+      return statusParticipant;
+
+    })
+    .catch((error) => console.log(error));
+}
+
 function joinTopic() {
-  console.log(current_state);
-  let status;
-  if (current_state == 0) {
-    status = false;
-  } else {
-    status = true;
-  }
   participantObj = {
-    statusParticipant : status
-  }
+    statusParticipant: current_state,
+  };
+  console.log(participantObj);
 
   fetch("/api/topic/" + currentTopic + "/join", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body : JSON.stringify(participantObj),
+    body: JSON.stringify(participantObj),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -259,3 +278,4 @@ function getSinglePost() {
 
 getSinglePost();
 getReview();
+

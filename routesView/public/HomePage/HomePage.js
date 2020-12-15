@@ -1,9 +1,21 @@
 let myStorage = window.localStorage;
 
 function readPost(id) {
-  myStorage.setItem('topicId', id);
-  
+  myStorage.setItem("topicId", id);
 }
+
+function getCurrentUser() {
+  fetch("/api/user/current")
+    .then((res) => res.json())
+    .then((data) => {
+      myStorage.setItem("CurrentUserId", data.message._id);
+      myStorage.setItem("CurrentUsername", data.message.name);
+      document.getElementById('userAccount').insertAdjacentHTML("beforeend", data.message.name);
+    })
+    .catch((error) => console.log(error));
+}
+
+getCurrentUser();
 fetch("/api/topic")
   .then((response) => response.json())
   .then((data) => {
@@ -34,9 +46,16 @@ fetch("/api/topic")
         "December",
       ];
       let postDate = new Date(element.date);
-      let postDateFormat = postDate.getDate() + ' ' + months[postDate.getMonth()] + ', ' + postDate.getFullYear() + ' - ' + postDate.toLocaleTimeString();
+      let postDateFormat =
+        postDate.getDate() +
+        " " +
+        months[postDate.getMonth()] +
+        ", " +
+        postDate.getFullYear() +
+        " - " +
+        postDate.toLocaleTimeString();
       let postRate = Math.round(element.review[0] * 100) / 100;
-      
+
       return `
         <div class="blog-post">
           <div class="blog-post__img">
@@ -58,13 +77,15 @@ fetch("/api/topic")
             
             <h1 class="blog-post__title">${element.name}</h1>
             <div class="blog-post__description">${element.detail}</div>
-            <a href="../SinglePost/SinglePost.html" class="blog-post__cta" id="readButton" onClick="readPost('${element._id}')">Read more</a>
+            <a href="../SinglePost/SinglePost.html" class="blog-post__cta" id="readButton" onClick="readPost('${
+              element._id
+            }')">Read more</a>
           </div>
         </div>`;
     });
-    
+
     document.getElementById("homepage__posts-wrapper").innerHTML = postsArray;
-    
+
     for (var i = 0; i < postsArray.length; i++) {
       if (
         document.getElementsByClassName("starRate")[i].innerText == "null" ||
@@ -74,6 +95,5 @@ fetch("/api/topic")
           "none";
       }
     }
-
   })
   .catch((error) => console.log(error));
