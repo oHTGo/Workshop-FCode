@@ -2,7 +2,7 @@ const helper = require("../helper");
 
 const Topic = require("../models/Topic");
 
-async function getListsTopic(req, res) {
+async function getListTopic(req, res) {
     const populate = [
         {
             path: "author participants group",
@@ -15,7 +15,7 @@ async function getListsTopic(req, res) {
     ];
 
     try {
-        const topicResponse = await Topic.find().populate(populate);
+        const topicResponse = await Topic.find({status: 1}, {status: 0}).populate(populate);
 
         for (let i = 0; i < topicResponse.length; i++) {
             let averageRate = 0;
@@ -38,6 +38,7 @@ async function createTopic(req, res) {
         name: req.body.name,
         detail: req.body.detail,
         note: req.body.note,
+        background: req.body.background,
         date: req.body.date,
         group: req.body.group,
         participants: [],
@@ -66,7 +67,7 @@ async function getTopic(req, res) {
     ];
 
     try {
-        const topicResponse = await Topic.findById(req.params.topicId).populate(populate);
+        const topicResponse = await Topic.findById(req.params.topicId, {status: 0}).populate(populate);
 
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 
@@ -81,6 +82,7 @@ async function updateTopic(req, res) {
         name: req.body.name,
         detail: req.body.detail,
         note: req.body.note,
+        background: req.body.background,
         group: req.body.group,
         date: req.body.date
     };
@@ -134,7 +136,7 @@ async function checkStatusParticipant(req, res) {
 }
 
 module.exports = {
-    getListsTopic,
+    getListTopic,
     createTopic,
     getTopic,
     updateTopic,

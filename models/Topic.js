@@ -9,6 +9,7 @@ const topicSchema = Schema({
   },
   detail: String,
   note: String,
+  background: String,
   group: [{
     type: Schema.Types.ObjectId,
     ref: "User"
@@ -25,6 +26,12 @@ const topicSchema = Schema({
   author: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  status: {
+    type: Number,
+    default: 0,
+    min: -1,
+    max: 1
   }
 }, { timestamps: true });
 

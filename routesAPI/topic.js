@@ -2,12 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-//Init Hepler
-const helper = require("../helper");
-
-const Topic = require("../models/Topic");
-
-const checkUserLoggedIn = require("../middleware");
+const middleware = require("../middleware");
 
 const topicController = require("../controllers/topic");
 
@@ -20,6 +15,7 @@ const topicController = require("../controllers/topic");
  * @apiSuccess (Success) {String}     object.name     Name of topic
  * @apiSuccess (Success) {String}     object.detail     Detail of topic
  * @apiSuccess (Success) {String}     object.note     Note of topic
+ * @apiSuccess (Success) {String}     object.background     URL background of topic
  * @apiSuccess (Success) {Date}       object.date     Date start of topic
  * @apiSuccess (Success) {Object[]}   object.group    List members of group topic
  * @apiSuccess (Success) {String}     object.group._id     ID of member's topic
@@ -33,21 +29,22 @@ const topicController = require("../controllers/topic");
  * @apiError (Error) {String} status      Status when complete
  * @apiError (Error) {String} message      Message when complete
  */
-router.get("/", checkUserLoggedIn, topicController.getListsTopic);
+router.get("/", middleware.checkUserLoggedIn, topicController.getListTopic);
 
 /**
  * @api {post}       /topic        2. Create Topic
  * @apiGroup Topic
- * @apiParam (Parameter) {String}     name       Name of topic
- * @apiParam (Parameter) {String}     detail     Detail of topic
- * @apiParam (Parameter) {String}     note       Note of topic
- * @apiParam (Parameter) {Date}       date       Date start of topic
- * @apiParam (Parameter) {Object[]}   group      Array userID is members
+ * @apiParam (Parameter) {String}     name                  Name of topic
+ * @apiParam (Parameter) {String}     detail                Detail of topic
+ * @apiParam (Parameter) {String}     note                  Note of topic
+ * @apiParam (Parameter) {String}     background            URL background of topic
+ * @apiParam (Parameter) {Date}       date                  Date start of topic
+ * @apiParam (Parameter) {Object[]}   group                 Array userID is members
  *
  * @apiError (Response) {String} status      Status when complete
  * @apiError (Response) {String} message      Message when complete
  */
-router.post("/", checkUserLoggedIn, topicController.createTopic);
+router.post("/", middleware.checkUserLoggedIn, topicController.createTopic);
 
 /**
  * @api {get}       /topic/:topicId       3. Get topic information
@@ -58,6 +55,7 @@ router.post("/", checkUserLoggedIn, topicController.createTopic);
  * @apiSuccess (Success) {String}     object.name     Name of topic
  * @apiSuccess (Success) {String}     object.detail     Detail of topic
  * @apiSuccess (Success) {String}     object.note     Note of topic
+ * @apiSuccess (Success) {String}     object.background     URL background of topic
  * @apiSuccess (Success) {Date}       object.date     Date start of topic
  * @apiSuccess (Success) {Object[]}   object.group    List members of group topic
  * @apiSuccess (Success) {String}     object.group._id     ID of member's topic
@@ -75,7 +73,7 @@ router.post("/", checkUserLoggedIn, topicController.createTopic);
  * @apiError (Error) {String} status      Status when complete
  * @apiError (Error) {String} message      Message when complete
  */
-router.get("/:topicId", checkUserLoggedIn, topicController.getTopic);
+router.get("/:topicId", middleware.checkUserLoggedIn, topicController.getTopic);
 
 /**
  * @api {put}       /topic/:topicId        4. Update Topic
@@ -83,13 +81,14 @@ router.get("/:topicId", checkUserLoggedIn, topicController.getTopic);
  * @apiParam (Parameter) {String}     name       Name of topic
  * @apiParam (Parameter) {String}     detail     Detail of topic
  * @apiParam (Parameter) {String}     note       Note of topic
+ * @apiParam (Parameter) {String}     background            URL background of topic
  * @apiParam (Parameter) {Date}       date       Date start of topic
  * @apiParam (Parameter) {Object[]}   group      Array userID is members
  *
  * @apiError (Response) {String} status      Status when complete
  * @apiError (Response) {String} message      Message when complete
  */
-router.put("/:topicId", checkUserLoggedIn, topicController.updateTopic);
+router.put("/:topicId", middleware.checkUserLoggedIn, topicController.updateTopic);
 
 /**
  * @api {delte}       /topic/:topicId        5. Delete Topic
@@ -98,7 +97,7 @@ router.put("/:topicId", checkUserLoggedIn, topicController.updateTopic);
  * @apiError (Response) {String} status      Status when complete
  * @apiError (Response) {String} message      Message when complete
  */
-router.delete("/:topicId", checkUserLoggedIn, topicController.deleteTopic);
+router.delete("/:topicId", middleware.checkUserLoggedIn, topicController.deleteTopic);
 
 /**
  * @api {get}       /topic/:topicId/join        6.  Get status of participant's topic
@@ -110,7 +109,7 @@ router.delete("/:topicId", checkUserLoggedIn, topicController.deleteTopic);
  * @apiError (Error) {String} status      Status when complete
  * @apiError (Error) {String} message      Message when complete
  */
-router.get("/:topicId/join", checkUserLoggedIn, topicController.checkStatusParticipant);
+router.get("/:topicId/join", middleware.checkUserLoggedIn, topicController.checkStatusParticipant);
 
 /**
  * @api {post}       /topic/:topicId/join        7.  Join topic
@@ -121,6 +120,6 @@ router.get("/:topicId/join", checkUserLoggedIn, topicController.checkStatusParti
  * @apiError (Error) {String} status      Status when complete
  * @apiError (Error) {String} message      Message when complete
  */
-router.post("/:topicId/join", checkUserLoggedIn, topicController.joinTopic);
+router.post("/:topicId/join", middleware.checkUserLoggedIn, topicController.joinTopic);
 
 module.exports = router;
