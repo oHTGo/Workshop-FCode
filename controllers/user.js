@@ -1,6 +1,7 @@
 const helper = require("../helper");
 
 const User = require("../models/User");
+const Topic = require("../models/Topic");
 
 async function getCurrentUser(req, res) {
     let userResponse = req.user;
@@ -17,7 +18,49 @@ async function getListUser(req, res) {
     }
 }
 
+async function getListTopicOfUser(req, res) {
+    const populate = [
+        {
+            path: "author",
+            select: "name"
+        }
+    ];
+
+    let search = {};
+    (req.user.isAdmin) ? search = {} : search = { author: req.user._id };
+
+    try {
+        const topicResponse = await Topic.find(search, { name: 1, createdAt: 1, updatedAt: 1, author: 1, status: 1 }).populate(populate);
+        (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
+    } catch (err) {
+        helper.setStatusFailure(res);
+    }
+}
+
+async function censoreTopic(req, res) {
+    let action;
+    try {
+        switch (req.body.action) {
+            case "accept":
+                action = 1;
+                break;
+            case "reject":
+                action = -1;
+                break;
+            default:
+                throw helper.setStatusBadRequest(res, "Action does not exist.");
+        }
+
+        const topicResponse = await Topic.findByIdAndUpdate(req.body.topicId, { status: action });
+        (topicResponse) ? helper.setStatusSuccess(res, "Action to topic successfully.") : helper.setStatusFailure(res, req.params.action + "Action to topic failed.");
+    } catch (err) {
+        if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
+    }
+}
+
 module.exports = {
     getCurrentUser,
-    getListUser
+    getListUser,
+    getListTopicOfUser,
+    censoreTopic
 }
