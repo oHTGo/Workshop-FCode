@@ -201,7 +201,7 @@ define({ "api": [
     "name": "PutReviewTopicid"
   },
   {
-    "type": "delte",
+    "type": "delete",
     "url": "/topic/:topicId",
     "title": "5. Delete Topic",
     "group": "Topic",
@@ -228,12 +228,12 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routesAPI/topic.js",
     "groupTitle": "Topic",
-    "name": "DelteTopicTopicid"
+    "name": "DeleteTopicTopicid"
   },
   {
     "type": "get",
     "url": "/topic",
-    "title": "1.  Get lists of topic information",
+    "title": "1.  Get an accepted list topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -381,7 +381,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/topic/:topicId",
-    "title": "3. Get topic information",
+    "title": "3. Get topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -656,7 +656,7 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object[]",
+            "type": "Array",
             "optional": false,
             "field": "group",
             "description": "<p>Array userID is members</p>"
@@ -784,7 +784,7 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Object[]",
+            "type": "Array",
             "optional": false,
             "field": "group",
             "description": "<p>Array userID is members</p>"

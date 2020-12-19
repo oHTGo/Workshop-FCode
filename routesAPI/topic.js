@@ -7,7 +7,7 @@ const middleware = require("../middleware");
 const topicController = require("../controllers/topic");
 
 /**
- * @api {get}       /topic        1.  Get lists of topic information
+ * @api {get}       /topic        1.  Get an accepted list topic
  * @apiGroup Topic
  * @apiSuccess (Success) {String}     status      Status of request
  * @apiSuccess (Success) {Object[]}   message   Array of object request
@@ -39,7 +39,7 @@ router.get("/", middleware.checkUserLoggedIn, topicController.getListTopic);
  * @apiParam (Parameter) {String}     note                  Note of topic
  * @apiParam (Parameter) {String}     background            URL background of topic
  * @apiParam (Parameter) {Date}       date                  Date start of topic
- * @apiParam (Parameter) {Object[]}   group                 Array userID is members
+ * @apiParam (Parameter) {Array}   group                 Array userID is members
  *
  * @apiError (Response) {String} status      Status when complete
  * @apiError (Response) {String} message      Message when complete
@@ -47,7 +47,7 @@ router.get("/", middleware.checkUserLoggedIn, topicController.getListTopic);
 router.post("/", middleware.checkUserLoggedIn, topicController.createTopic);
 
 /**
- * @api {get}       /topic/:topicId       3. Get topic information
+ * @api {get}       /topic/:topicId       3. Get topic
  * @apiGroup Topic
  * @apiSuccess (Success) {String}     status      Status of request
  * @apiSuccess (Success) {Object}     message   Array of object request
@@ -83,7 +83,7 @@ router.get("/:topicId", middleware.checkUserLoggedIn, topicController.getTopic);
  * @apiParam (Parameter) {String}     note       Note of topic
  * @apiParam (Parameter) {String}     background            URL background of topic
  * @apiParam (Parameter) {Date}       date       Date start of topic
- * @apiParam (Parameter) {Object[]}   group      Array userID is members
+ * @apiParam (Parameter) {Array}   group      Array userID is members
  *
  * @apiError (Response) {String} status      Status when complete
  * @apiError (Response) {String} message      Message when complete
@@ -91,7 +91,7 @@ router.get("/:topicId", middleware.checkUserLoggedIn, topicController.getTopic);
 router.put("/:topicId", middleware.checkUserLoggedIn, topicController.updateTopic);
 
 /**
- * @api {delte}       /topic/:topicId        5. Delete Topic
+ * @api {delete}       /topic/:topicId        5. Delete Topic
  * @apiGroup Topic
  * 
  * @apiError (Response) {String} status      Status when complete
