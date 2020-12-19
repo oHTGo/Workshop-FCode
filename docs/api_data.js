@@ -1,6 +1,6 @@
 define({ "api": [
   {
-    "type": "delete",
+    "type": "delte",
     "url": "/review/:topicId",
     "title": "4. Delete review",
     "group": "Review",
@@ -27,7 +27,7 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routesAPI/review.js",
     "groupTitle": "Review",
-    "name": "DeleteReviewTopicid"
+    "name": "DelteReviewTopicid"
   },
   {
     "type": "get",
@@ -61,7 +61,6 @@ define({ "api": [
           {
             "group": "Success",
             "type": "Number",
-            "size": "1-5",
             "optional": false,
             "field": "object.star",
             "description": "<p>Star of review</p>"
@@ -112,10 +111,9 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "Number",
-            "size": "1-5",
             "optional": false,
             "field": "star",
-            "description": "<p>Star of review</p>"
+            "description": "<p>Star of review (1 &lt;= star &lt;= 5)</p>"
           },
           {
             "group": "Parameter",
@@ -163,7 +161,6 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "Number",
-            "size": "1-5",
             "optional": false,
             "field": "star",
             "description": "<p>Star of review</p>"
@@ -823,7 +820,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/user",
-    "title": "1. Get lists of user information",
+    "title": "Get lists of user information",
     "group": "User",
     "success": {
       "fields": {
@@ -887,7 +884,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/user/current",
-    "title": "2. Get current user information",
+    "title": "Get current user information",
     "group": "User",
     "success": {
       "fields": {
@@ -951,7 +948,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/user/topic",
-    "title": "3. Get list topic of current user or get list all topic (if is admin)",
+    "title": "Get list topic of current user or full user (if is admin)",
     "group": "User",
     "success": {
       "fields": {
@@ -1007,10 +1004,10 @@ define({ "api": [
           },
           {
             "group": "Success",
-            "type": "Number",
+            "type": "Boolean",
             "optional": false,
             "field": "object.status",
-            "description": "<p>Status of topic (0: waiting, 1: accept, -1: reject)</p>"
+            "description": "<p>Status of topic (0: waiting, 1: accept: -1: reject)</p>"
           }
         ]
       }
@@ -1041,9 +1038,9 @@ define({ "api": [
     "name": "GetUserTopic"
   },
   {
-    "type": "post",
-    "url": "/user/topic/:topicId",
-    "title": "4. Set status of topic (require is admin)",
+    "type": "get",
+    "url": "/user/topic",
+    "title": "Get list topic of current user or full user (if is admin)",
     "group": "User",
     "parameter": {
       "fields": {
@@ -1052,7 +1049,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "action",
+            "field": "status",
             "description": "<p>Status of topic (&quot;accept&quot; or &quot;reject&quot;)</p>"
           }
         ]
@@ -1081,6 +1078,6 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routesAPI/user.js",
     "groupTitle": "User",
-    "name": "PostUserTopicTopicid"
+    "name": "GetUserTopic"
   }
 ] });
