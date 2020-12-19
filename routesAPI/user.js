@@ -26,6 +26,7 @@ router.get("/", middleware.checkUserLoggedIn, userController.getListUser);
  * @apiSuccess (Success) {Object}     message           Object request
  * @apiSuccess (Success) {String}     object._id        ID of user
  * @apiSuccess (Success) {String}     object.name       Name of user
+ * @apiSuccess (Success) {Boolean}    object.isAdmin    Access of user
  *
  * @apiError (Error) {String} status      Status when complete
  * @apiError (Error) {String} message      Message when complete
