@@ -97,8 +97,9 @@ async function updateTopic(req, res) {
 }
 
 async function deleteTopic(req, res) {
+    const search = { _id: req.params.topicId, author: req.user._id };
     try {
-        const topicResponse = await Topic.findByIdAndRemove(req.params.topicId);
+        const topicResponse = await Topic.findOneAndRemove(search);
         (topicResponse) ? helper.setStatusSuccess(res, "Delete a topic successfully.") : helper.setStatusFailure(res, "Delete a topic failed.");
     } catch (err) {
         helper.setStatusBadRequest(res, "Topic ID is not valid.");
