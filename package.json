@@ -16,7 +16,7 @@
     "name": "Backend for workshop",
     "description": "",
     "title": "API for Workshop",
-    "url": "http://localhost:8080/api",
+    "url": "https://localhost:8080/api",
     "template": {
       "forceLanguage": "en",
       "withCompare": false,

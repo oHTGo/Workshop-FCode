@@ -67,7 +67,7 @@ async function getTopic(req, res) {
     ];
 
     try {
-        const topicResponse = await Topic.findById(req.params.topicId).populate(populate);
+        const topicResponse = await Topic.findById(req.params.topicId, {status: 0}).populate(populate);
 
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 
@@ -92,14 +92,14 @@ async function updateTopic(req, res) {
         const topicResponse = await Topic.findOneAndUpdate(search, update, options);
         (topicResponse) ? helper.setStatusSuccess(res, "Update a topic successfully.") : helper.setStatusFailure(res, "Update a topic failed.");
     } catch (err) {
-        (err._message) ? helper.setStatusBadRequest(res, err._message) : helper.setStatusBadRequest(res, "Topic ID is not valid.");
+        (err._message) ? helper.setStatusBadRequest(res, err._message) : helper.setStatusBadRequest(res, "Topic ID is not valid");
     }
 }
 
 async function deleteTopic(req, res) {
     const search = { _id: req.params.topicId, author: req.user._id };
     try {
-        const topicResponse = await Topic.findByIdAndRemove(search);
+        const topicResponse = await Topic.findOneAndRemove(search);
         (topicResponse) ? helper.setStatusSuccess(res, "Delete a topic successfully.") : helper.setStatusFailure(res, "Delete a topic failed.");
     } catch (err) {
         helper.setStatusBadRequest(res, "Topic ID is not valid.");
@@ -124,7 +124,7 @@ async function joinTopic(req, res) {
 
 async function checkStatusParticipant(req, res) {
     try {
-        let topicResponse = await Topic.findOneAndUpdate(req.params.topicId);
+        let topicResponse = await Topic.findById(req.params.topicId);
         if (!topicResponse) throw helper.setStatusNotFound(res, "Topic doesn't exist.");
         if (!topicResponse.participants.includes(req.user._id)) {
             helper.setStatusSuccess(res, { statusParticipant: false });

@@ -5,7 +5,7 @@ const Topic = require("../models/Topic");
 
 async function getCurrentUser(req, res) {
     let userResponse = req.user;
-    userResponse.isAdmin = undefined; userResponse.googleId = undefined; userResponse.refreshToken = undefined;
+    userResponse.googleId = undefined; userResponse.refreshToken = undefined;
     helper.setStatusSuccess(res, userResponse);
 }
 
@@ -38,21 +38,21 @@ async function getListTopicOfUser(req, res) {
 }
 
 async function censoreTopic(req, res) {
-    let statusPost;
+    let action;
     try {
         switch (req.body.action) {
             case "accept":
-                statusPost = 1;
+                action = 1;
                 break;
             case "reject":
-                statusPost = -1;
+                action = -1;
                 break;
             default:
                 throw helper.setStatusBadRequest(res, "Action does not exist.");
         }
 
-        const topicResponse = await Topic.findByIdAndUpdate(req.params.topicId, { status: statusPost });
-        (topicResponse) ? helper.setStatusSuccess(res, "Action to topic successfully.") : helper.setStatusFailure(res, "Action to topic failed.");
+        const topicResponse = await Topic.findByIdAndUpdate(req.body.topicId, { status: action });
+        (topicResponse) ? helper.setStatusSuccess(res, "Action to topic successfully.") : helper.setStatusFailure(res, req.params.action + "Action to topic failed.");
     } catch (err) {
         if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
     }
