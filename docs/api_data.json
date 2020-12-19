@@ -916,6 +916,13 @@
             "optional": false,
             "field": "object.name",
             "description": "<p>Name of user</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Boolean",
+            "optional": false,
+            "field": "object.isAdmin",
+            "description": "<p>Access of user</p>"
           }
         ]
       }
