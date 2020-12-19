@@ -18,9 +18,10 @@
     "title": "API for Workshop",
     "url": "https://localhost:8080/api",
     "template": {
-      "forceLanguage": "en"
-    },
-    "withCompare": false
+      "forceLanguage": "en",
+      "withCompare": false,
+      "withGenerator": false
+    }
   },
   "dependencies": {
     "body-parser": "^1.19.0",

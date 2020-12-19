@@ -6,34 +6,35 @@ const middleware = require("../middleware");
 const userController = require("../controllers/user");
 
 /**
- * @api {get}       /user        Get lists of user information
+ * @api {get}             /user                         1. Get list of user information
  * @apiGroup User
- * @apiSuccess (Success) {String}     status      Status of request
- * @apiSuccess (Success) {Object[]}   message   Array of object request
- * @apiSuccess (Success) {String}     object._id     ID of user
- * @apiSuccess (Success) {String}     object.name     Name of user
+ * @apiSuccess (Success) {String}     status            Status of request
+ * @apiSuccess (Success) {Object[]}   message           Array of object request
+ * @apiSuccess (Success) {String}     object._id        ID of user
+ * @apiSuccess (Success) {String}     object.name       Name of user
  *
- * @apiError (Error) {String} status      Status when complete
- * @apiError (Error) {String} message      Message when complete
+ * @apiError   (Error)   {String}     status            Status when complete
+ * @apiError   (Error)   {String}     message           Message when complete
  */
 router.get("/", middleware.checkUserLoggedIn, userController.getListUser);
 
 
 /**
- * @api {get}       /user/current     Get current user information
+ * @api {get}             /user/current                 2. Get current user information
  * @apiGroup User
  * @apiSuccess (Success) {String}     status            Status of request
  * @apiSuccess (Success) {Object}     message           Object request
  * @apiSuccess (Success) {String}     object._id        ID of user
  * @apiSuccess (Success) {String}     object.name       Name of user
+ * @apiSuccess (Success) {Boolean}    object.isAdmin    Access of user
  *
- * @apiError (Error) {String} status      Status when complete
- * @apiError (Error) {String} message      Message when complete
+ * @apiError   (Error)   {String}     status            Status when complete
+ * @apiError   (Error)   {String}     message           Message when complete
  */
 router.get("/current", middleware.checkUserLoggedIn, userController.getCurrentUser);
 
 /**
- * @api {get}       /user/topic       Get list topic of current user or full user (if is admin)
+ * @api {get}            /user/topic                        3. Get list topic of current user or list all topic (if is admin)
  * @apiGroup User
  * @apiSuccess (Success) {String}     status                Status of request
  * @apiSuccess (Success) {Object[]}   message               Array of object request
@@ -44,18 +45,18 @@ router.get("/current", middleware.checkUserLoggedIn, userController.getCurrentUs
  * @apiSuccess (Success) {String}     object.author.name    Name of author's topic
  * @apiSuccess (Success) {Boolean}    object.status         Status of topic (0: waiting, 1: accept: -1: reject)
  *
- * @apiError (Error) {String} status      Status when complete
- * @apiError (Error) {String} message     Message when complete
+ * @apiError   (Error)   {String}     status                Status when complete
+ * @apiError   (Error)   {String}     message               Message when complete
  */
 router.get("/topic", middleware.checkUserLoggedIn, userController.getListTopicOfUser);
 
 /**
- * @api {get}       /user/topic       Get list topic of current user or full user (if is admin)
+ * @api {get}            /user/topic/:topicId       4. Set status topic (require is admin)
  * @apiGroup User
  * @apiParam (Parameter) {String}    status         Status of topic ("accept" or "reject")
  *
- * @apiError (Error) {String} status      Status when complete
- * @apiError (Error) {String} message     Message when complete
+ * @apiError (Error)     {String}    status         Status when complete
+ * @apiError (Error)     {String}    message        Message when complete
  */
 router.get("/topic/:topicId", middleware.checkUserLoggedIn, middleware.checkAdmin, userController.censoreTopic);
 

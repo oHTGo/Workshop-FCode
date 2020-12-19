@@ -5,7 +5,7 @@ const Topic = require("../models/Topic");
 
 async function getCurrentUser(req, res) {
     let userResponse = req.user;
-    userResponse.isAdmin = undefined; userResponse.googleId = undefined; userResponse.refreshToken = undefined;
+    userResponse.googleId = undefined; userResponse.refreshToken = undefined;
     helper.setStatusSuccess(res, userResponse);
 }
 
