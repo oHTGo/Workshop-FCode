@@ -36,7 +36,7 @@ async function createReview(req, res) {
         if (!topicResponse) throw helper.setStatusNotFound(res, "Don't find topic.");
 
         const reviewResponse = await newReview.save();
-        (reviewResponse) ? helper.setStatusSuccess(res, "Create a review successfully.") : helper.setStatusFailure(res, "Can't create review.");
+        (reviewResponse) ? helper.setStatusSuccess(res, "Create a review successfully.") : helper.setStatusFailure(res, "Create a review failed.");
     } catch (err) {
         if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
     }
@@ -52,7 +52,7 @@ async function updateReview(req, res) {
 
     try {
         const reviewResponse = await Review.findOneAndUpdate(search, updateReview, options);
-        (reviewResponse) ? helper.setStatusSuccess(res, "Update a review successfully.") : helper.setStatusFailure(res, "Can't update review.");
+        (reviewResponse) ? helper.setStatusSuccess(res, "Update a review successfully.") : helper.setStatusFailure(res, "Update a review failed.");
     } catch (err) {
         if (err._message) {
             helper.setStatusBadRequest(res, err._message);
@@ -67,7 +67,7 @@ async function deleteReview(req, res) {
 
     const reviewReponse = await Review.findOneAndRemove(search);
 
-    (reviewReponse) ? helper.setStatusSuccess(res, "Delete a review successfully.") : helper.setStatusFailure(res, "Can't delete review.");
+    (reviewReponse) ? helper.setStatusSuccess(res, "Delete a review successfully.") : helper.setStatusFailure(res, "Delete a review failed.");
 }
 module.exports = {
     getReview,
