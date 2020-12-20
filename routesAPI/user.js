@@ -51,13 +51,13 @@ router.get("/current", middleware.checkUserLoggedIn, userController.getCurrentUs
 router.get("/topic", middleware.checkUserLoggedIn, userController.getListTopicOfUser);
 
 /**
- * @api {get}            /user/topic/:topicId       4. Set status topic (require is admin)
+ * @api {post}            /user/topic/:topicId       4. Set status topic (require is admin)
  * @apiGroup User
  * @apiParam (Parameter) {String}    status         Status of topic ("accept" or "reject")
  *
  * @apiError (Error)     {String}    status         Status when complete
  * @apiError (Error)     {String}    message        Message when complete
  */
-router.get("/topic/:topicId", middleware.checkUserLoggedIn, middleware.checkAdmin, userController.censoreTopic);
+router.post("/topic/:topicId", middleware.checkUserLoggedIn, middleware.checkAdmin, userController.censoreTopic);
 
 module.exports = router;
