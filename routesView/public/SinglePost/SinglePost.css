@@ -14,6 +14,8 @@
   margin-right: 1rem;
 }
 
+
+
 .header__title {
   font-size: 2.3em;
   text-align: center;
@@ -45,6 +47,13 @@
   top: 0;
 }
 
+.blog-post__icon {
+  width: fit-content;
+  position: absolute;
+  top: 40px;
+  right: 35px;
+}
+
 .blog-post__icon a {
   opacity: .5;
   transition: 300ms;
@@ -57,7 +66,6 @@
 .blog-post__icon img {
   width: 30px;
   height: 30px;
-  float: right;
   cursor: pointer;
 }
 
@@ -66,7 +74,7 @@
 }
 
 .post__body {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .post__body img {
@@ -113,6 +121,56 @@
   box-shadow: none;
 }
 
+/* Comment section */
+.comment__section {
+  margin-top: 20px;
+}
+
+.comment__wrapper {
+  padding: 0 1rem 1rem 1rem;
+  /* border: 1px solid #6c757d; */
+  border-radius: 5px;
+}
+
+.comment__box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: .7rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  
+}
+
+.comment__rate {
+  margin-left: auto;
+  display: flex;
+}
+
+.comment__rate span {
+  font-weight: 500 !important;
+  color: rgba(0, 0, 0, 0.5) !important;
+  margin-right: 2px;
+}
+
+.loadmore-button__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.loadmore-button {
+  cursor: pointer;
+  width: fit-content;
+  color: #007bff;
+  transition: 300ms;
+}
+
+.loadmore-button:hover {
+  color:#6c5ce7;
+}
+
+/* End comment section */
+
 /*-------------------- SMALL DEVICES ----------------*/
 @media (max-width: 991.98px) {
   .homepage__side {
@@ -126,5 +184,15 @@
 
   .header__title {
     font-size: 1.7em;
+  }
+
+  .blog-post__icon {
+    top: 5%;
+    right: 5%;
+  }
+
+  .blog-post__icon img {
+    width: 20px;
+    height: 20px;
   }
 }
