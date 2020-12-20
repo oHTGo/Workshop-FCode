@@ -113,10 +113,6 @@
             <div class="input-group">
               <select class="custom-select" id="partnerSelection">
                 <option id="defaultOption" value="0" selected>None</option>
-                <!-- <option value="1">Le Hoang Khoi (K15)</option>
-                <option value="2">Nguyen Nhat Huy (K15)</option>
-                <option value="3">Bui Ngoc Huy (K15)</option> -->
-              
               </select>
             </div>
           </div>
@@ -128,9 +124,12 @@
             <input name="title-input" class="form-control" type="text" placeholder="Your title" id="title-input" required>
           </div>
         </div>
-        <div class="form-group">
-          <label for="imageUpload">Image</label>
-          <input type="file" class="form-control-file" id="imageUpload">
+        <div class="form-group row">
+          <label for="imageUpload" class="col-6 col-sm-2">Background image</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="imageUpload" placeholder="URL">
+          </div>
+          
         </div>
         <div class="form-group">
           <label>Main content</label>

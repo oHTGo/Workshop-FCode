@@ -4,40 +4,46 @@ fetch("/api/user")
     let usersArray = data.message.map((user) => {
       return `<option value="${user._id}">${user.name}</option>`;
     });
+    currentUser = `<option value="${myStorage.CurrentUserId}">${myStorage.CurrentUsername}</option>`
+    
+    usersArray.splice(usersArray.indexOf(currentUser), 1); // delete current account from partner list
+
     document
       .getElementById("defaultOption")
       .insertAdjacentHTML("afterend", usersArray);
   })
   .catch((error) => console.log(error));
 
-// myStorage = window.localStorage;
-
-// fetch("/api/topic")
-//   .then((response) => response.json())
-//   .then((data) => {
-//     var objectAuthor = {name : data.message[0].author.name, _id : data.message[0].author._id }
-//     myStorage.setItem('object', JSON.stringify(objectAuthor));
-//   })
-//   .catch((error) => console.log(error));
-//   console.log(JSON.parse(myStorage.getItem('object')))
-
   
 post = () => {
   let partner = document.getElementById("partnerSelection");
+  
+
   let groupAuthor = [
-    
     {
       _id: document.getElementById("partnerSelection").value,
-      name: partner.options[partner.selectedIndex].text,
+      // name: partner.options[partner.selectedIndex].text,
     }
   ];
 
-  const postObj = {
-    name: document.getElementById("title-input").value,
-    date: document.getElementById("example-datetime-local-input").value,
-    detail: CKEDITOR.instances['main-content'].getData(),
-    note: document.getElementById("post__note").value,
-    group: groupAuthor,
+  let postObj = {};
+  if (groupAuthor[0]._id === '0') {
+    postObj = {
+      name: document.getElementById("title-input").value,
+      date: document.getElementById("example-datetime-local-input").value,
+      detail: CKEDITOR.instances['main-content'].getData(),
+      note: document.getElementById("post__note").value,
+      background: document.getElementById('imageUpload').value      
+    }
+  } else {
+    postObj = {
+      name: document.getElementById("title-input").value,
+      date: document.getElementById("example-datetime-local-input").value,
+      detail: CKEDITOR.instances['main-content'].getData(),
+      note: document.getElementById("post__note").value,
+      background: document.getElementById('imageUpload').value,   
+      group: groupAuthor,
+    };
   };
   console.log(postObj);
   fetch('/api/topic', {
@@ -50,8 +56,8 @@ post = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log("Success:", data);
-      alert('Succsessfully post!');
-      window.location.reload();
+      // alert('Succsessfully post!');
+      // window.location.reload();
     })
     .catch((error) => {
       console.error("Error:", error);
