@@ -1047,7 +1047,7 @@ define({ "api": [
     "name": "GetUserTopic"
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/topic/:topicId",
     "title": "4. Set status topic (require is admin)",
     "group": "User",
@@ -1087,6 +1087,6 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routesAPI/user.js",
     "groupTitle": "User",
-    "name": "GetUserTopicTopicid"
+    "name": "PostUserTopicTopicid"
   }
 ] });
