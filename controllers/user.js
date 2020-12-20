@@ -51,8 +51,8 @@ async function censoreTopic(req, res) {
                 throw helper.setStatusBadRequest(res, "Action does not exist.");
         }
 
-        const topicResponse = await Topic.findByIdAndUpdate(req.body.topicId, { status: action });
-        (topicResponse) ? helper.setStatusSuccess(res, "Action to topic successfully.") : helper.setStatusFailure(res, req.params.action + "Action to topic failed.");
+        const topicResponse = await Topic.findByIdAndUpdate(req.params.topicId, { status: action });
+        (topicResponse) ? helper.setStatusSuccess(res, "Action to topic successfully.") : helper.setStatusFailure(res, "Action to topic failed.");
     } catch (err) {
         if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
     }
