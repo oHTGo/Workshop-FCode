@@ -59,7 +59,7 @@ fetch("/api/topic")
       return `
         <div class="blog-post">
           <div class="blog-post__img">
-            <img src="../img/5.png" alt="">
+            <img src="${element.background}" alt="">
           </div>
           <div class="blog-post__rate">
             <span class="starRate">${postRate}</span>
