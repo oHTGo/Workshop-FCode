@@ -1058,7 +1058,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "status",
+            "field": "action",
             "description": "<p>Status of topic (&quot;accept&quot; or &quot;reject&quot;)</p>"
           }
         ]

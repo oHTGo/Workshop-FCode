@@ -53,7 +53,7 @@ router.get("/topic", middleware.checkUserLoggedIn, userController.getListTopicOf
 /**
  * @api {post}            /user/topic/:topicId       4. Set status topic (require is admin)
  * @apiGroup User
- * @apiParam (Parameter) {String}    status         Status of topic ("accept" or "reject")
+ * @apiParam (Parameter) {String}    action         Status of topic ("accept" or "reject")
  *
  * @apiError (Error)     {String}    status         Status when complete
  * @apiError (Error)     {String}    message        Message when complete
