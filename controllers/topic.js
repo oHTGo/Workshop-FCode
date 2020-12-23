@@ -84,7 +84,8 @@ async function updateTopic(req, res) {
         note: req.body.note,
         background: req.body.background,
         group: req.body.group,
-        date: req.body.date
+        date: req.body.date,
+        status: 0
     };
     const options = { new: true, omitUndefined: true, runValidators: true };
 
