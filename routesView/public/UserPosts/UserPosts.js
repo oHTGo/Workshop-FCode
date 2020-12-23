@@ -88,7 +88,8 @@ async function renderWaitingPosts() {
         <tr>
           <td>${waitingPosts.indexOf(element) + 1}</td>
           <td>
-            <a href="../SinglePost/SinglePost.html">
+            <a href="../SinglePost/SinglePost.html" onClick="readPost('${
+              element._id}')">
               ${element.name}
             </a>
           </td>
@@ -121,7 +122,8 @@ async function renderAcceptedPosts() {
         <tr>
           <td>${acceptedPosts.indexOf(element) + 1}</td>
           <td>
-            <a href="../SinglePost/SinglePost.html">
+            <a href="../SinglePost/SinglePost.html" onClick="readPost('${
+              element._id}')">
               ${element.name}
             </a>
           </td>
@@ -154,7 +156,8 @@ async function renderRejectedPosts() {
         <tr>
           <td>${rejectedPosts.indexOf(element) + 1}</td>
           <td>
-            <a href="../SinglePost/SinglePost.html">
+            <a href="../SinglePost/SinglePost.html" onClick="readPost('${
+              element._id}')">
               ${element.name}
             </a>
           </td>
