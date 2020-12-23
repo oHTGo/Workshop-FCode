@@ -15,6 +15,10 @@ function getCurrentUser() {
     .catch((error) => console.log(error));
 }
 
+function resetTopicId() {
+  window.localStorage.setItem('topicId', '');
+}
+
 getCurrentUser();
 fetch("/api/topic")
   .then((response) => response.json())
@@ -78,8 +82,7 @@ fetch("/api/topic")
             <h1 class="blog-post__title">${element.name}</h1>
             <div class="blog-post__description">${element.detail}</div>
             <a href="../SinglePost/SinglePost.html" class="blog-post__cta" id="readButton" onClick="readPost('${
-              element._id
-            }')">Read more</a>
+              element._id}')">Read more</a>
           </div>
         </div>`;
     });
