@@ -1,5 +1,3 @@
-
-
 function getCurrentUser() {
   fetch("/api/user/current")
     .then((res) => res.json())
@@ -16,9 +14,10 @@ getCurrentUser();
 console.log("Current topic id: " + window.localStorage.topicId);
 
 /* ------------- Manage Join status of users ------------*/
-let current_state, states = ["JOIN US", "JOINED"],
-currentTopic = window.localStorage.topicId;
- 
+let current_state,
+  states = ["JOIN US", "JOINED"],
+  currentTopic = window.localStorage.topicId;
+
 function getJoinStatus() {
   return fetch("/api/topic/" + window.localStorage.topicId + "/join")
     .then((res) => res.json())
@@ -30,7 +29,8 @@ function getJoinStatus() {
     .catch((error) => console.log(error));
 }
 
-function joinTopic(topicId) {  // this function is to post the join status to server
+function joinTopic(topicId) {
+  // this function is to post the join status to server
   participantObj = {
     statusParticipant: current_state,
   };
@@ -174,8 +174,51 @@ function review() {
 /*--------------------------------------------------------------------*/
 
 /*--------------------- Admin action -------------------*/
-function rejectPost() {
-  fetch('')
+function rejectPost(id) {
+  const rejectObj = {
+    action : "reject",
+  };
+  console.log(rejectObj);
+
+  fetch("/api/user/topic/" + id, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(rejectObj),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      alert("Successfully reject!");
+      window.location.replace("../HomePage/HomePage.html");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function acceptPost(id) {
+  const acceptObj = {
+    action : "accept",
+  };
+
+  fetch("/api/user/topic/" + id, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(acceptObj),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      alert("Successfully acceept!");
+      window.location.replace("../HomePage/HomePage.html");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 /*------------------------------------------------------*/
@@ -188,68 +231,67 @@ function deletePost(id) {
     .then((res) => res.json())
     .then((res) => {
       console.log(res);
-      // window.location.replace("../HomePage/HomePage.html");
+      window.location.replace("../HomePage/HomePage.html");
     });
 }
 
 myStorage = window.localStorage;
-function getSinglePost() {
-  fetch("/api/topic")
+function getSinglePost(id) {
+  fetch("/api/topic/" + id)
     .then((respone) => respone.json())
     .then((data) => {
-      data.message.forEach((element) => {
-        const weeks = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ];
-        const months = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ];
-        if (element._id === myStorage.topicId) {
-          let postDate = new Date(element.date);
-          let postDateFormat =
-            postDate.getDate() +
-            " " +
-            months[postDate.getMonth()] +
-            ", " +
-            postDate.getFullYear() +
-            " - " +
-            postDate.toLocaleTimeString();
-          let partner;
-          if (element.group.length != 0) {
-            partner = ", " + element.group[0].name;
-          } else {
-            partner = "";
-          }
-          let postHeader;
+      const weeks = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
 
-          // Differ between members and admin
-          if (myStorage.CurrentUserId === "5fc7646967708345bc3c5876") {
-            postHeader = `<div class="post__header" id="post-header">
+      let postDate = new Date(data.message.date);
+      let postDateFormat =
+        postDate.getDate() +
+        " " +
+        months[postDate.getMonth()] +
+        ", " +
+        postDate.getFullYear() +
+        " - " +
+        postDate.toLocaleTimeString();
+      let partner;
+      if (data.message.group.length != 0) {
+        partner = ", " + data.message.group[0].name;
+      } else {
+        partner = "";
+      }
+      let postHeader;
+
+      // Differ between members and admin
+      if (myStorage.CurrentUserId === "5fc7646967708345bc3c5876") {
+        postHeader = `<div class="post__header" id="post-header">
             <div class="blog-post__icon">
-              <a ><img src="../img/rejected.svg"></a>
-              <a href="#" ><img src="../img/accept.svg" class="blog-post__edit"></a>
+              <a onClick="rejectPost('${window.localStorage.topicId}')"><img src="../img/rejected.svg"></a>
+              <a onClick="acceptPost('${window.localStorage.topicId}')" ><img src="../img/accept.svg" class="blog-post__edit"></a>
             </div>
-            <div class="header__title">${element.name}</div>
+            <div class="header__title">${data.message.name}</div>
               <div class="header__author">
               <span>Author: </span>
-              <span>${element.author.name} ${partner}</span>
+              <span>${data.message.author.name} ${partner}</span>
             </div>
             <div class="header__date">
               <span>Date: </span>
@@ -257,7 +299,7 @@ function getSinglePost() {
             </div>
             <div class="blog-post__rate" id="blog-post__rate">
               <span>Rate: </span>
-              <span>${element.review[0]}</span>
+              <span>${data.message.review[0]}</span>
               <svg
                 width="1.1em"
                 height="1.1em"
@@ -272,16 +314,16 @@ function getSinglePost() {
               </svg>
             </div> 
           </div>`;
-          } else {
-            postHeader = `<div class="post__header" id="post-header">
+      } else {
+        postHeader = `<div class="post__header" id="post-header">
             <div class="blog-post__icon">
               <a ><img src="../img/delete.svg" onClick="deletePost('${myStorage.topicId}')"></a>  
               <a href="../CreatePost/CreatePost.html" ><img src="../img/edit.svg" class="blog-post__edit"></a>
             </div>
-            <div class="header__title">${element.name}</div>
+            <div class="header__title">${data.message.name}</div>
               <div class="header__author">
               <span>Author: </span>
-              <span>${element.author.name} ${partner}</span>
+              <span>${data.message.author.name} ${partner}</span>
             </div>
             <div class="header__date">
               <span>Date: </span>
@@ -289,7 +331,7 @@ function getSinglePost() {
             </div>
             <div class="blog-post__rate" id="blog-post__rate">
               <span>Rate: </span>
-              <span>${element.review[0]}</span>
+              <span>${data.message.review[0]}</span>
               <svg
                 width="1.1em"
                 height="1.1em"
@@ -304,30 +346,28 @@ function getSinglePost() {
               </svg>
             </div> 
           </div>`;
-          }
+      }
 
-          let postBody = `<div class="post__body">
-            <img src="${element.background}" />
+      let postBody = `<div class="post__body">
+            <img src="${data.message.background}" />
             <p>
-              ${element.detail}
+              ${data.message.detail}
             </p>
             <div class="alert alert-success" role="alert">
-              ${element.note}
+              ${data.message.note}
             </div>
           </div>`;
 
-          document
-            .getElementById("singlepost-wrapper")
-            .insertAdjacentHTML("afterbegin", postHeader);
-          document
-            .getElementById("post-header")
-            .insertAdjacentHTML("afterend", postBody);
+      document
+        .getElementById("singlepost-wrapper")
+        .insertAdjacentHTML("afterbegin", postHeader);
+      document
+        .getElementById("post-header")
+        .insertAdjacentHTML("afterend", postBody);
 
-          if (element.review[0] == null || element.review[0] == 0) {
-            document.getElementById("blog-post__rate").style.display = "none";
-          }
-        }
-      });
+      if (data.message.review[0] == null || data.message.review[0] == 0) {
+        document.getElementById("blog-post__rate").style.display = "none";
+      }
     })
     .catch((error) => console.log(error));
 }
@@ -387,10 +427,7 @@ function renderLoadmoreButton() {
 }
 /*----------------------------------------------------------*/
 
-
-
-
-getSinglePost();
+getSinglePost(myStorage.topicId);
 getReview();
 renderLoadmoreButton();
 renderComments();
