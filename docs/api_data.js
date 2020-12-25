@@ -291,7 +291,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/topic:numberPage",
+    "url": "/topic/page/:numberPage",
     "title": "3.  Get an accepted list topic at number page",
     "group": "Topic",
     "success": {
@@ -435,11 +435,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routesAPI/topic.js",
     "groupTitle": "Topic",
-    "name": "GetTopicNumberpage"
+    "name": "GetTopicPageNumberpage"
   },
   {
     "type": "get",
-    "url": "/topic/scheduler",
+    "url": "/topic/schedule",
     "title": "2.  Get an accepted list topic for schedule",
     "group": "Topic",
     "success": {
@@ -506,7 +506,7 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routesAPI/topic.js",
     "groupTitle": "Topic",
-    "name": "GetTopicScheduler"
+    "name": "GetTopicSchedule"
   },
   {
     "type": "get",

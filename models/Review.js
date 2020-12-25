@@ -19,7 +19,7 @@ const reviewSchema = Schema({
         ref: "Topic",
         required: true
     }
-});
+}, { timestamps: true });
 
 
 module.exports = mongoose.model('Review', reviewSchema);

@@ -5,7 +5,7 @@ const Topic = require("../models/Topic");
 async function getCountPageTopic(req, res) {
     const topicResponse = await Topic.countDocuments({ status: 1 });
     try {
-        (topicResponse) ? helper.setStatusSuccess(res, { countPage: Math.round(topicResponse / 4) }) : helper.setStatusFailure(res);
+        (topicResponse) ? helper.setStatusSuccess(res, { countPage: Math.ceil(topicResponse / 4) }) : helper.setStatusFailure(res);
     } catch (err) {
         helper.setStatusFailure(res);
     }
@@ -31,6 +31,7 @@ async function getListTopic(req, res) {
             throw helper.setStatusBadRequest(res, "The page number must be an integer");
         }
         const topicResponse = await Topic.find({ status: 1 }, { status: 0 })
+            .sort({ date: -1 })
             .skip((page - 1) * limit) //numberPgae from 0
             .limit(limit)
             .populate(populate);
@@ -89,12 +90,19 @@ async function getTopic(req, res) {
         },
         {
             path: "review",
-            select: "star reviewOfUser"
+            select: "star reviewOfUser updatedAt"
         }
     ];
 
     try {
-        const topicResponse = await Topic.findById(req.params.topicId, { status: 0 }).populate(populate);
+        const topicResponse = await Topic.findById(req.params.topicId, { status: 0 })
+            .populate(populate);
+
+        if (topicResponse.review) {
+            let reviewSort = topicResponse.review; //sort updatedAt of review
+            reviewSort.sort((el1, el2) => (el2.updatedAt - el1.updatedAt));
+            topicResponse.review = reviewSort;
+        }
 
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 

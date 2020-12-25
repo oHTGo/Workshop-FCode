@@ -20,7 +20,7 @@ router.get("/", middleware.checkUserLoggedIn, topicController.getCountPageTopic)
 
 
 /**
- * @api {get}             /topic/scheduler                     2.  Get an accepted list topic for schedule
+ * @api {get}             /topic/schedule                     2.  Get an accepted list topic for schedule
  * @apiGroup Topic
  * @apiSuccess (Success) {String}       status                 Status of request
  * @apiSuccess (Success) {Object[]}     message                Array of object request
@@ -34,7 +34,7 @@ router.get("/", middleware.checkUserLoggedIn, topicController.getCountPageTopic)
 router.get("/schedule", middleware.checkUserLoggedIn, topicController.getListTopicForSchedule);
 
 /**
- * @api {get}             /topic:numberPage                    3.  Get an accepted list topic at number page
+ * @api {get}             /topic/page/:numberPage                    3.  Get an accepted list topic at number page
  * @apiGroup Topic
  * @apiSuccess (Success) {String}       status                 Status of request
  * @apiSuccess (Success) {Object[]}     message                Array of object request
@@ -56,7 +56,7 @@ router.get("/schedule", middleware.checkUserLoggedIn, topicController.getListTop
  * @apiError   (Error)   {String}       status                 Status when complete
  * @apiError   (Error)   {String}       message                Message when complete
  */
-router.get("/:numberPage", middleware.checkUserLoggedIn, topicController.getListTopic);
+router.get("/page/:numberPage", middleware.checkUserLoggedIn, topicController.getListTopic);
 
 /**
  * @api {post}            /topic                            4. Create topic
