@@ -2,7 +2,18 @@ const helper = require("../helper");
 
 const Topic = require("../models/Topic");
 
+async function getCountPageTopic(req, res) {
+    const topicResponse = await Topic.countDocuments({ status: 1 });
+    try {
+        (topicResponse) ? helper.setStatusSuccess(res, { countPage: Math.round(topicResponse / 4) }) : helper.setStatusFailure(res);
+    } catch (err) {
+        helper.setStatusFailure(res);
+    }
+}
+
 async function getListTopic(req, res) {
+    const limit = 4;
+
     const populate = [
         {
             path: "author participants group",
@@ -15,7 +26,14 @@ async function getListTopic(req, res) {
     ];
 
     try {
-        const topicResponse = await Topic.find({status: 1}, {status: 0}).populate(populate);
+        let page = parseInt(req.params.numberPage);
+        if (isNaN(page) || page.toString() !== req.params.numberPage) {
+            throw helper.setStatusBadRequest(res, "The page number must be an integer");
+        }
+        const topicResponse = await Topic.find({ status: 1 }, { status: 0 })
+            .skip((page - 1) * limit) //numberPgae from 0
+            .limit(limit)
+            .populate(populate);
 
         for (let i = 0; i < topicResponse.length; i++) {
             let averageRate = 0;
@@ -27,6 +45,15 @@ async function getListTopic(req, res) {
         }
 
 
+        (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
+    } catch (err) {
+        if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
+    }
+}
+
+async function getListTopicForSchedule(req, res) {
+    const topicResponse = await Topic.find({ status: 1 }, { name: 1, date: 1 });
+    try {
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
     } catch (err) {
         helper.setStatusFailure(res);
@@ -67,7 +94,7 @@ async function getTopic(req, res) {
     ];
 
     try {
-        const topicResponse = await Topic.findById(req.params.topicId, {status: 0}).populate(populate);
+        const topicResponse = await Topic.findById(req.params.topicId, { status: 0 }).populate(populate);
 
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 
@@ -144,5 +171,7 @@ module.exports = {
     updateTopic,
     deleteTopic,
     joinTopic,
-    checkStatusParticipant
+    checkStatusParticipant,
+    getCountPageTopic,
+    getListTopicForSchedule
 }

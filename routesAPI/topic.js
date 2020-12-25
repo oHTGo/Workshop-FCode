@@ -7,7 +7,34 @@ const middleware = require("../middleware");
 const topicController = require("../controllers/topic");
 
 /**
- * @api {get}             /topic                               1.  Get an accepted list topic
+ * @api {get}             /topic                               1.  Get count page topic
+ * @apiGroup Topic
+ * @apiSuccess (Success) {String}       status                 Status of request
+ * @apiSuccess (Success) {Object[]}     message                Array of object request
+ * @apiSuccess (Success) {Number}       object.countPage       The number of pages
+ *
+ * @apiError   (Error)   {String}       status                 Status when complete
+ * @apiError   (Error)   {String}       message                Message when complete
+ */
+router.get("/", middleware.checkUserLoggedIn, topicController.getCountPageTopic);
+
+
+/**
+ * @api {get}             /topic/scheduler                     2.  Get an accepted list topic for schedule
+ * @apiGroup Topic
+ * @apiSuccess (Success) {String}       status                 Status of request
+ * @apiSuccess (Success) {Object[]}     message                Array of object request
+ * @apiSuccess (Success) {String}       object._id             ID of topic
+ * @apiSuccess (Success) {String}       object.name            Name of topic
+ * @apiSuccess (Success) {Date}         object.date            Date start of topic
+ *
+ * @apiError   (Error)   {String}       status                 Status when complete
+ * @apiError   (Error)   {String}       message                Message when complete
+ */
+router.get("/schedule", middleware.checkUserLoggedIn, topicController.getListTopicForSchedule);
+
+/**
+ * @api {get}             /topic:numberPage                    3.  Get an accepted list topic at number page
  * @apiGroup Topic
  * @apiSuccess (Success) {String}       status                 Status of request
  * @apiSuccess (Success) {Object[]}     message                Array of object request
@@ -29,10 +56,10 @@ const topicController = require("../controllers/topic");
  * @apiError   (Error)   {String}       status                 Status when complete
  * @apiError   (Error)   {String}       message                Message when complete
  */
-router.get("/", middleware.checkUserLoggedIn, topicController.getListTopic);
+router.get("/:numberPage", middleware.checkUserLoggedIn, topicController.getListTopic);
 
 /**
- * @api {post}            /topic                            2. Create topic
+ * @api {post}            /topic                            4. Create topic
  * @apiGroup Topic
  * @apiParam (Parameter) {String}     name                  Name of topic
  * @apiParam (Parameter) {String}     detail                Detail of topic
@@ -47,7 +74,7 @@ router.get("/", middleware.checkUserLoggedIn, topicController.getListTopic);
 router.post("/", middleware.checkUserLoggedIn, topicController.createTopic);
 
 /**
- * @api {get}            /topic/:topicId                           3. Get topic
+ * @api {get}            /topic/:topicId                           5. Get topic
  * @apiGroup Topic
  * @apiSuccess (Success) {String}     status                       Status of request
  * @apiSuccess (Success) {Object}     message                      Array of object request
@@ -76,7 +103,7 @@ router.post("/", middleware.checkUserLoggedIn, topicController.createTopic);
 router.get("/:topicId", middleware.checkUserLoggedIn, topicController.getTopic);
 
 /**
- * @api {put}             /topic/:topicId                   4. Update topic
+ * @api {put}             /topic/:topicId                   6. Update topic
  * @apiGroup Topic
  * @apiParam (Parameter) {String}     name                  Name of topic
  * @apiParam (Parameter) {String}     detail                Detail of topic
@@ -91,7 +118,7 @@ router.get("/:topicId", middleware.checkUserLoggedIn, topicController.getTopic);
 router.put("/:topicId", middleware.checkUserLoggedIn, topicController.updateTopic);
 
 /**
- * @api {delete}         /topic/:topicId            5. Delete topic
+ * @api {delete}         /topic/:topicId            7. Delete topic
  * @apiGroup Topic
  * 
  * @apiError (Response) {String}    status          Status when complete
@@ -100,7 +127,7 @@ router.put("/:topicId", middleware.checkUserLoggedIn, topicController.updateTopi
 router.delete("/:topicId", middleware.checkUserLoggedIn, topicController.deleteTopic);
 
 /**
- * @api {get}             /topic/:topicId/join                      6.  Get status of participant's topic
+ * @api {get}             /topic/:topicId/join                      8.  Get status of participant's topic
  * @apiGroup Topic
  * @apiSuccess (Success) {String}     status                        Status of request
  * @apiSuccess (Success) {Object}     message                       Object request
@@ -112,7 +139,7 @@ router.delete("/:topicId", middleware.checkUserLoggedIn, topicController.deleteT
 router.get("/:topicId/join", middleware.checkUserLoggedIn, topicController.checkStatusParticipant);
 
 /**
- * @api {post}            /topic/:topicId/join                      7.  Join topic
+ * @api {post}            /topic/:topicId/join                      9.  Join topic
  * @apiGroup Topic
  * @apiSuccess (Success) {String}     status                        Status of request
  * @apiSuccess (Success) {String}     message                       Message of request

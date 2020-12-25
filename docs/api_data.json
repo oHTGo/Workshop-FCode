@@ -205,7 +205,7 @@
   {
     "type": "delete",
     "url": "/topic/:topicId",
-    "title": "5. Delete topic",
+    "title": "7. Delete topic",
     "group": "Topic",
     "error": {
       "fields": {
@@ -235,7 +235,64 @@
   {
     "type": "get",
     "url": "/topic",
-    "title": "1.  Get an accepted list topic",
+    "title": "1.  Get count page topic",
+    "group": "Topic",
+    "success": {
+      "fields": {
+        "Success": [
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status of request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Object[]",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Array of object request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Number",
+            "optional": false,
+            "field": "object.countPage",
+            "description": "<p>The number of pages</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error": [
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status when complete</p>"
+          },
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message when complete</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routesAPI/topic.js",
+    "groupTitle": "Topic",
+    "name": "GetTopic"
+  },
+  {
+    "type": "get",
+    "url": "/topic:numberPage",
+    "title": "3.  Get an accepted list topic at number page",
     "group": "Topic",
     "success": {
       "fields": {
@@ -378,12 +435,83 @@
     "version": "0.0.0",
     "filename": "routesAPI/topic.js",
     "groupTitle": "Topic",
-    "name": "GetTopic"
+    "name": "GetTopicNumberpage"
+  },
+  {
+    "type": "get",
+    "url": "/topic/scheduler",
+    "title": "2.  Get an accepted list topic for schedule",
+    "group": "Topic",
+    "success": {
+      "fields": {
+        "Success": [
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status of request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Object[]",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Array of object request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object._id",
+            "description": "<p>ID of topic</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object.name",
+            "description": "<p>Name of topic</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Date",
+            "optional": false,
+            "field": "object.date",
+            "description": "<p>Date start of topic</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error": [
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status when complete</p>"
+          },
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message when complete</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routesAPI/topic.js",
+    "groupTitle": "Topic",
+    "name": "GetTopicScheduler"
   },
   {
     "type": "get",
     "url": "/topic/:topicId",
-    "title": "3. Get topic",
+    "title": "5. Get topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -559,7 +687,7 @@
   {
     "type": "get",
     "url": "/topic/:topicId/join",
-    "title": "6.  Get status of participant's topic",
+    "title": "8.  Get status of participant's topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -616,7 +744,7 @@
   {
     "type": "post",
     "url": "/topic",
-    "title": "2. Create topic",
+    "title": "4. Create topic",
     "group": "Topic",
     "parameter": {
       "fields": {
@@ -694,7 +822,7 @@
   {
     "type": "post",
     "url": "/topic/:topicId/join",
-    "title": "7.  Join topic",
+    "title": "9.  Join topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -744,7 +872,7 @@
   {
     "type": "put",
     "url": "/topic/:topicId",
-    "title": "4. Update topic",
+    "title": "6. Update topic",
     "group": "Topic",
     "parameter": {
       "fields": {
