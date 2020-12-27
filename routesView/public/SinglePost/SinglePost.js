@@ -13,6 +13,10 @@ function getCurrentUser() {
 getCurrentUser();
 console.log("Current topic id: " + window.localStorage.topicId);
 
+function resetTopicId() {
+  window.localStorage.setItem('topicId', '');
+}
+
 /* ------------- Manage Join status of users ------------*/
 let current_state,
   states = ["JOIN US", "JOINED"],
@@ -23,7 +27,10 @@ function getJoinStatus() {
     .then((res) => res.json())
     .then((data) => {
       let statusParticipant = data.message.statusParticipant;
-      console.log(statusParticipant);
+      console.log(
+        "🚀 ~ file: SinglePost.js ~ line 26 ~ .then ~ statusParticipant",
+        statusParticipant
+      );
       return statusParticipant;
     })
     .catch((error) => console.log(error));
@@ -69,6 +76,7 @@ async function changeState() {
   }`;
   document.getElementById("joinedButton").classList.toggle("disabledButton");
   joinTopic(window.localStorage.topicId);
+  window.location.reload();
   return current_state;
 }
 /*-----------------------------------------------------------------------------------*/
@@ -94,6 +102,7 @@ function getReview() {
     .then((res) => res.json())
     .then((data) => {
       if (data.status === "Successful") {
+        document.getElementById('deleteButton').style.display = 'block';
         document.getElementById("comment").innerHTML =
           data.message.reviewOfUser;
         let star = data.message.star;
@@ -157,6 +166,17 @@ function createReview() {
     });
 }
 
+function deleteReview() {
+  fetch("/api/review/" + window.localStorage.topicId, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      window.location.reload();
+    });
+}
+
 function review() {
   fetch("/api/review/" + currentTopic)
     .then((res) => {
@@ -176,7 +196,7 @@ function review() {
 /*--------------------- Admin action -------------------*/
 function rejectPost(id) {
   const rejectObj = {
-    action : "reject",
+    action: "reject",
   };
   console.log(rejectObj);
 
@@ -200,7 +220,7 @@ function rejectPost(id) {
 
 function acceptPost(id) {
   const acceptObj = {
-    action : "accept",
+    action: "accept",
   };
 
   fetch("/api/user/topic/" + id, {
@@ -237,18 +257,9 @@ function deletePost(id) {
 
 myStorage = window.localStorage;
 function getSinglePost(id) {
-  fetch("/api/topic/" + id)
+  return fetch("/api/topic/" + id)
     .then((respone) => respone.json())
     .then((data) => {
-      const weeks = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
       const months = [
         "January",
         "February",
@@ -316,7 +327,7 @@ function getSinglePost(id) {
           </div>`;
       } else {
         postHeader = `<div class="post__header" id="post-header">
-            <div class="blog-post__icon">
+            <div class="blog-post__icon" id="post-icon">
               <a ><img src="../img/delete.svg" onClick="deletePost('${myStorage.topicId}')"></a>  
               <a href="../CreatePost/CreatePost.html" ><img src="../img/edit.svg" class="blog-post__edit"></a>
             </div>
@@ -366,7 +377,22 @@ function getSinglePost(id) {
         .insertAdjacentHTML("afterend", postBody);
 
       if (data.message.review[0] == null || data.message.review[0] == 0) {
+        // if there is no comments, hide the section
         document.getElementById("blog-post__rate").style.display = "none";
+      }
+
+      if (
+        window.localStorage.CurrentUserId !== data.message.author._id &&
+        window.localStorage.CurrentUserId !== "5fc7646967708345bc3c5876"
+      ) {
+        // Post icon for only creators
+        document.getElementById("post-icon").style.display = "none";
+      }
+
+      let timeInterval = moment().diff(moment(data.message.date), 'minutes');      
+      if (window.localStorage.PostStatus === "1" && timeInterval < 0) {
+        // Posts which are accepted show the Join button and validate time interval
+        document.getElementById("joinedButton").style.display = "inline-block";
       }
     })
     .catch((error) => console.log(error));
@@ -425,9 +451,25 @@ function renderLoadmoreButton() {
     .getElementById("comment-wrapper")
     .insertAdjacentHTML("afterend", loadmoreButton);
 }
+
+async function renderFullTopic(id) {
+  await getSinglePost(myStorage.topicId);
+  Promise.all([
+    fetch("/api/topic/" + id + "/join").then((res) => res.json()),
+    fetch("/api/topic/" + id).then((res) => res.json()),
+  ])
+    .then((data) => {
+      let timeInterval = moment().diff(moment(data[1].message.date),'minutes');
+      if ((data[0].message.statusParticipant == true) && (timeInterval > 0)) {
+        document.getElementById("rateButton").style.display = "inline-block";
+      }
+    })
+    .catch((error) => console.log(error));
+}
+
 /*----------------------------------------------------------*/
 
-getSinglePost(myStorage.topicId);
+renderFullTopic(window.localStorage.topicId);
 getReview();
 renderLoadmoreButton();
 renderComments();

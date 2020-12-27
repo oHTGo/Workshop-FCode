@@ -1,7 +1,8 @@
 let myStorage = window.localStorage;
 
-function readPost(id) {
+function readPost(id, status) {
   myStorage.setItem("topicId", id);
+  myStorage.setItem('PostStatus', status);
 }
 
 function getCurrentUser() {
@@ -19,8 +20,9 @@ function resetTopicId() {
   window.localStorage.setItem('topicId', '');
 }
 
-getCurrentUser();
-fetch("/api/topic")
+
+function renderPosts(pageNumber) {
+fetch("/api/topic/page/" + pageNumber)
   .then((response) => response.json())
   .then((data) => {
     // console.log(data);
@@ -79,20 +81,21 @@ fetch("/api/topic")
               <span class="formatDate">${postDateFormat}</span>
             </div>
             
-            <h1 class="blog-post__title">${element.name}</h1>
+            <div class="blog-post__title" title="${element.name}">${element.name}</div>
             <div class="blog-post__description">${element.detail}</div>
             <a href="../SinglePost/SinglePost.html" class="blog-post__cta" id="readButton" onClick="readPost('${
-              element._id}')">Read more</a>
+              element._id}', 1)">Read more</a>
           </div>
         </div>`;
     });
 
-    document.getElementById("homepage__posts-wrapper").innerHTML = postsArray;
+    document.getElementById("homepage__posts-wrapper").innerHTML = postsArray.join("");
 
     for (var i = 0; i < postsArray.length; i++) {
       if (
         document.getElementsByClassName("starRate")[i].innerText == "null" ||
-        document.getElementsByClassName("starRate")[i].innerText == "0"
+        document.getElementsByClassName("starRate")[i].innerText == "0" ||
+        document.getElementsByClassName("starRate")[i].innerText == "NaN"
       ) {
         document.getElementsByClassName("blog-post__rate")[i].style.display =
           "none";
@@ -100,3 +103,8 @@ fetch("/api/topic")
     }
   })
   .catch((error) => console.log(error));
+}
+
+getCurrentUser();
+renderPosts(1);
+

@@ -99,12 +99,12 @@
 
   <main>
     <div class="create__form">
-      <div class="create__wrapper">
+      <form class="create__wrapper" onsubmit="post()">
         <h2>Fill following information to write new post</h2>
         <div class="form-group row">
           <label for="example-datetime-local-input" class="col-6 col-sm-2  col-form-label">Date and time</label>
           <div class="col-sm-3">
-            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+            <input class="form-control" type="datetime-local" value="2020-01-01T17:45:00" id="example-datetime-local-input">
           </div>
         </div>
         <div class="form-group row">
@@ -127,20 +127,20 @@
         <div class="form-group row">
           <label for="imageUpload" class="col-6 col-sm-2">Background image</label>
           <div class="col-sm-3">
-            <input type="text" class="form-control" id="imageUpload" placeholder="URL">
+            <input type="url" class="form-control" id="imageUpload" placeholder="URL">
           </div>
           
         </div>
         <div class="form-group">
           <label>Main content</label>
-          <textarea name="content" id="main-content" required></textarea>
+          <textarea name="content" id="main-content"></textarea>
         </div>
         <div class="form-group">
           <label for="post__note">Your note</label>
-          <textarea class="form-control col-12 col-sm-6" id="post__note" rows="2"></textarea>
+          <textarea class="form-control col-12 col-sm-6" id="post__note" rows="2" required></textarea>
         </div>
-        <button type="submit" class="btn btn-success col-sm-2" onclick="post()">Submit</button>
-      </div>
+        <button type="submit" class="btn btn-success col-sm-2">Submit</button>
+      </form>
     </div>
     
   </main>
@@ -178,7 +178,17 @@
     crossorigin="anonymous"></script>
   <script src="./CreatePost.js"></script>
   <script src="../ckeditor/ckeditor.js"></script>
-  <script type="text/javascript">CKEDITOR.replace('content')</script>
+  <script type="text/javascript">
+    var editor = CKEDITOR.replace( 'content', {
+      language: 'en',
+      extraPlugins: 'notification'
+    });
+
+    editor.on( 'required', function( evt ) {
+      editor.showNotification( 'This field is required.', 'warning' );
+      evt.cancel();
+    });
+    </script>
 </body>
 
 </html>

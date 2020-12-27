@@ -1,3 +1,7 @@
+function resetTopicId() {
+  window.localStorage.setItem('topicId', '');
+}
+
 /*----------------- INTERFACE INTERACTION------------------------*/
 function toggleButton(element) {
   document.getElementById("dropdownMenu2").innerHTML = `${element.innerHTML}`;
@@ -18,15 +22,14 @@ function getCurrentUser() {
 }
 getCurrentUser();
 
-function readPost(id) { 
+function readPost(id, status) {
   // this function is to navigate to the single post when user/admin click the link,
-  // the local storage will store the post's id
+  // the local storage will store the post's id and the post's status
   window.localStorage.setItem("topicId", id);
+  window.localStorage.setItem('PostStatus', status);
 }
 
 /*-----------------------------------------------------------------------*/
-
-
 
 /*------------------ RENDER POST LIST ---------------------*/
 function renderAllPosts() {
@@ -53,7 +56,7 @@ function renderAllPosts() {
           <td>${data.message.indexOf(element) + 1}</td>
           <td>
             <a href="../SinglePost/SinglePost.html" onClick="readPost('${
-              element._id}')">
+              element._id}', '${element.status}')">
               ${element.name}
             </a>
           </td>
@@ -62,7 +65,7 @@ function renderAllPosts() {
         </tr>`;
       });
 
-      document.getElementById("tableBodyAll").innerHTML = postList;
+      document.getElementById("tableBodyAll").innerHTML = postList.join("");
     })
     .catch((error) => console.log(error));
 }
@@ -89,16 +92,17 @@ async function renderWaitingPosts() {
           <td>${waitingPosts.indexOf(element) + 1}</td>
           <td>
             <a href="../SinglePost/SinglePost.html" onClick="readPost('${
-              element._id}')">
+              element._id
+            }')">
               ${element.name}
             </a>
           </td>
           <td>${element.createdAt}</td>
           <td class="alert alert-warning">Waiting</td>
         </tr>`;
-  })
+  });
 
-  document.getElementById('tableBodyWaiting').innerHTML = postList;
+  document.getElementById("tableBodyWaiting").innerHTML = postList.join("");
 }
 
 let acceptedPosts = [];
@@ -123,16 +127,17 @@ async function renderAcceptedPosts() {
           <td>${acceptedPosts.indexOf(element) + 1}</td>
           <td>
             <a href="../SinglePost/SinglePost.html" onClick="readPost('${
-              element._id}')">
+              element._id
+            }')">
               ${element.name}
             </a>
           </td>
           <td>${element.createdAt}</td>
           <td class="alert alert-success">Accepted</td>
         </tr>`;
-  })
+  });
 
-  document.getElementById('tableBodyAccepted').innerHTML = postList;
+  document.getElementById("tableBodyAccepted").innerHTML = postList.join("");
 }
 
 let rejectedPosts = [];
@@ -157,21 +162,25 @@ async function renderRejectedPosts() {
           <td>${rejectedPosts.indexOf(element) + 1}</td>
           <td>
             <a href="../SinglePost/SinglePost.html" onClick="readPost('${
-              element._id}')">
+              element._id
+            }')">
               ${element.name}
             </a>
           </td>
           <td>${element.createdAt}</td>
           <td class="alert alert-danger">Rejected</td>
         </tr>`;
-  })
+  });
 
-  document.getElementById('tableBodyRejected').innerHTML = postList;
+  document.getElementById("tableBodyRejected").innerHTML = postList.join("");
 }
 
 renderAllPosts();
 renderWaitingPosts();
 renderAcceptedPosts();
 renderRejectedPosts();
+
+
+
 
 /*---------------------------------------------------------*/

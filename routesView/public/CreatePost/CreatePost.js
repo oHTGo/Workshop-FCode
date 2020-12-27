@@ -59,8 +59,8 @@ async function post() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        // alert('Succsessfully post!');
-        window.location.reload();
+        alert('Post successfully!');
+        window.location.replace("../HomePage/HomePage.html");
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -76,8 +76,8 @@ async function post() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        alert('Succsessfully update!');
-        //window.location.reload();
+        alert('Update successfully!');
+        window.location.replace('../HomePage/HomePage.html');
       })
       .catch((error) => {
         console.error("Error:", error);

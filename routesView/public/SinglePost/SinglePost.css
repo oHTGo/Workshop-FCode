@@ -88,6 +88,11 @@
 
 .joinButton {
   margin-right: 2rem;
+  display: none;
+}
+
+.rateButton {
+  display: none;
 }
 
 .btn {
@@ -119,6 +124,10 @@
 
 .disabledButton:not(:disabled):not(.disabled):active:focus {
   box-shadow: none;
+}
+
+.deleteButton {
+  display: none;
 }
 
 /* Comment section */
