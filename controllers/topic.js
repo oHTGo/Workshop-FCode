@@ -1,6 +1,9 @@
+const { Types } = require("mongoose");
 const helper = require("../helper");
+const Review = require("../models/Review");
 
 const Topic = require("../models/Topic");
+const User = require("../models/User");
 
 async function getCountPageTopic(req, res) {
     const topicResponse = await Topic.countDocuments({ status: 1 });
@@ -12,49 +15,62 @@ async function getCountPageTopic(req, res) {
 }
 
 async function getListTopic(req, res) {
-    const limit = 4;
+    const limit = 3;
 
-    const populate = [
+    const queryAggregate = [
+        { $match: { status: 1 } }, //query match
         {
-            path: "author participants group",
-            select: "name"
+            $lookup: { //get review from userCollection
+                "from": Review.collection.name,
+                "localField": "review",
+                "foreignField": "_id",
+                "as": "review",
+            }
         },
         {
-            path: "review",
-            select: "star"
-        }
-    ];
+            $set: //add fields
+            {
+                averageRate: { //calc averageRate
+                    $cond: [
+                        { $eq: [{ $size: "$review" }, 0] }, // if
+                        0, //then
+                        { $avg: "$review.star" } //else
+                    ]
+                },
+                participantsCount: { $size: "$participants" } //calc participantsCount
+            }
+        },
+        {
+            $project: {
+                "name": 1, "detail": 1, "background": 1, "date": 1,
+                "averageRate": 1, "participantsCount": 1,
+                "createdAt": 1, "updatedAt": 1
+            }
+        },
+        { $sort: { date: -1 } } //sort
+    ]
 
     try {
         let page = parseInt(req.params.numberPage);
         if (isNaN(page) || page.toString() !== req.params.numberPage) {
             throw helper.setStatusBadRequest(res, "The page number must be an integer");
         }
-        const topicResponse = await Topic.find({ status: 1 }, { status: 0 })
-            .sort({ date: -1 })
+        const topicResponse = await Topic
+            .aggregate(queryAggregate)
             .skip((page - 1) * limit) //numberPgae from 0
-            .limit(limit)
-            .populate(populate);
-
-        for (let i = 0; i < topicResponse.length; i++) {
-            let averageRate = 0;
-            for (const review of topicResponse[i].review) {
-                averageRate += review.star / topicResponse[i].review.length;
-            }
-            topicResponse[i].review = averageRate;
-            topicResponse[i].participants = topicResponse[i].participants.length;
-        }
-
+            .limit(limit);
 
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
     } catch (err) {
-        if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
+        if (typeof (err) === "object") helper.setStatusBadRequest(res);
     }
 }
 
 async function getListTopicForSchedule(req, res) {
-    const topicResponse = await Topic.find({ status: 1 }, { name: 1, date: 1 });
     try {
+        const topicResponse = await Topic
+            .find({status :1}, {name: 1, date: 1})
+            .lean();
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
     } catch (err) {
         helper.setStatusFailure(res);
@@ -90,19 +106,15 @@ async function getTopic(req, res) {
         },
         {
             path: "review",
-            select: "star reviewOfUser updatedAt"
+            select: "star content",
+            options: { sort: { "updatedAt": -1 } }
         }
     ];
-
     try {
-        const topicResponse = await Topic.findById(req.params.topicId, { status: 0 })
-            .populate(populate);
-
-        if (topicResponse.review) {
-            let reviewSort = topicResponse.review; //sort updatedAt of review
-            reviewSort.sort((el1, el2) => (el2.updatedAt - el1.updatedAt));
-            topicResponse.review = reviewSort;
-        }
+        const topicResponse = await Topic
+            .findById(req.params.topicId)
+            .populate(populate)
+            .lean();
 
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 
@@ -172,6 +184,43 @@ async function checkStatusParticipant(req, res) {
     }
 }
 
+async function getRanking(req, res) {
+    const queryAggregate = [
+        {
+            $lookup: { //get review from userCollection
+                "from": Review.collection.name,
+                "localField": "review",
+                "foreignField": "_id",
+                "as": "review",
+            }
+        },
+        {
+            $set: //add fields
+            {
+                averageRate: { //calc averageRate
+                    $cond: [
+                        { $eq: [{ $size: "$review" }, 0] }, // if
+                        0, //then
+                        { $avg: "$review.star" } //else
+                    ]
+                }
+            }
+        },
+        {
+            $project: { //choose fields need to show
+                "name": 1, "averageRate": 1
+            }
+        },
+        { $sort: { averageRate: -1 } }
+    ]
+    try {
+        const topicResponse = await Topic.aggregate(queryAggregate);
+        (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
+    } catch (err) {
+        helper.setStatusFailure(res);
+    }
+}
+
 module.exports = {
     getListTopic,
     createTopic,
@@ -181,5 +230,6 @@ module.exports = {
     joinTopic,
     checkStatusParticipant,
     getCountPageTopic,
-    getListTopicForSchedule
+    getListTopicForSchedule,
+    getRanking
 }

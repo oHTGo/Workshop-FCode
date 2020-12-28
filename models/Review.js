@@ -13,13 +13,13 @@ const reviewSchema = Schema({
         max: 5,
         required: true
     },
-    reviewOfUser: String,
+    content: String,
     topic: {
         type: Schema.Types.ObjectId,
         ref: "Topic",
         required: true
     }
-}, { timestamps: true });
+}, { timestamps: true, versionKey: false });
 
 
 module.exports = mongoose.model('Review', reviewSchema);

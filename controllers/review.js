@@ -24,7 +24,7 @@ async function createReview(req, res) {
         const newReview = new Review({
             user: req.user._id,
             star: req.body.star,
-            reviewOfUser: req.body.reviewOfUser,
+            content: req.body.content,
             topic: req.params.topicId
         });
 
@@ -45,7 +45,7 @@ async function createReview(req, res) {
 async function updateReview(req, res) {
     const updateReview = {
         star: req.body.star,
-        reviewOfUser: req.body.reviewOfUser
+        content: req.body.content
     };
     const search = { user: req.user._id, topic: req.params.topicId };
     const options = { new: true, omitUndefined: true, runValidators: true };
@@ -64,10 +64,17 @@ async function updateReview(req, res) {
 
 async function deleteReview(req, res) {
     const search = { user: req.user._id, topic: req.params.topicId };
-
-    const reviewReponse = await Review.findOneAndRemove(search);
-
-    (reviewReponse) ? helper.setStatusSuccess(res, "Delete a review successfully.") : helper.setStatusFailure(res, "Delete review failed.");
+    try {
+        const reviewResponse = await Review.findOneAndRemove(search);
+        if (reviewResponse) {
+            await Topic.findByIdAndUpdate(reviewResponse.topic, { $pullAll: { review: [reviewResponse._id] } });
+            helper.setStatusSuccess(res, "Delete a review successfully.");
+        } else {
+            helper.setStatusFailure(res, "Delete review failed.");
+        }
+    } catch (err) {
+        if (typeof (err) === "object") helper.setStatusBadRequest(res, "Topic ID is not valid.");
+    }
 }
 module.exports = {
     getReview,

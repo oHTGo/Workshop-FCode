@@ -69,7 +69,7 @@
             "group": "Success",
             "type": "String",
             "optional": false,
-            "field": "object.reviewOfUser",
+            "field": "object.content",
             "description": "<p>Content of review</p>"
           }
         ]
@@ -120,7 +120,7 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "reviewOfUser",
+            "field": "content",
             "description": "<p>Content of review</p>"
           }
         ]
@@ -171,7 +171,7 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "reviewOfUser",
+            "field": "content",
             "description": "<p>Content of review</p>"
           }
         ]
@@ -205,7 +205,7 @@
   {
     "type": "delete",
     "url": "/topic/:topicId",
-    "title": "7. Delete topic",
+    "title": "3.6 Delete topic",
     "group": "Topic",
     "error": {
       "fields": {
@@ -235,7 +235,7 @@
   {
     "type": "get",
     "url": "/topic",
-    "title": "1.  Get count page topic",
+    "title": "3.1  Get count page topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -292,7 +292,7 @@
   {
     "type": "get",
     "url": "/topic/page/:numberPage",
-    "title": "3.  Get an accepted list topic at number page",
+    "title": "3.2  Get an accepted list topic at number page",
     "group": "Topic",
     "success": {
       "fields": {
@@ -336,13 +336,6 @@
             "group": "Success",
             "type": "String",
             "optional": false,
-            "field": "object.note",
-            "description": "<p>Note of topic</p>"
-          },
-          {
-            "group": "Success",
-            "type": "String",
-            "optional": false,
             "field": "object.background",
             "description": "<p>URL background of topic</p>"
           },
@@ -355,59 +348,17 @@
           },
           {
             "group": "Success",
-            "type": "Object[]",
+            "type": "Number",
             "optional": false,
-            "field": "object.group",
-            "description": "<p>List members of group topic</p>"
+            "field": "object.averageRate",
+            "description": "<p>Average rate of topic</p>"
           },
           {
             "group": "Success",
-            "type": "String",
+            "type": "Number",
             "optional": false,
-            "field": "object.group._id",
-            "description": "<p>ID of member's topic</p>"
-          },
-          {
-            "group": "Success",
-            "type": "String",
-            "optional": false,
-            "field": "object.group.name",
-            "description": "<p>Name of member's topic</p>"
-          },
-          {
-            "group": "Success",
-            "type": "Object",
-            "optional": false,
-            "field": "object.author",
-            "description": "<p>Information of author</p>"
-          },
-          {
-            "group": "Success",
-            "type": "String",
-            "optional": false,
-            "field": "object.author._id",
-            "description": "<p>ID of author's topic</p>"
-          },
-          {
-            "group": "Success",
-            "type": "String",
-            "optional": false,
-            "field": "object.author.name",
-            "description": "<p>Name of author's topic</p>"
-          },
-          {
-            "group": "Success",
-            "type": "Object[]",
-            "optional": false,
-            "field": "object.review",
-            "description": "<p>Object array have 1 element. It is a average rate of topic</p>"
-          },
-          {
-            "group": "Success",
-            "type": "Object[]",
-            "optional": false,
-            "field": "object.participants",
-            "description": "<p>Object array have 1 element. It is a total participants of topic.</p>"
+            "field": "object.participantsCount",
+            "description": "<p>Number of participants</p>"
           }
         ]
       }
@@ -439,8 +390,79 @@
   },
   {
     "type": "get",
+    "url": "/topic/ranking",
+    "title": "2.  Get ranking of list topic",
+    "group": "Topic",
+    "success": {
+      "fields": {
+        "Success": [
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status of request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Object[]",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Array of object request</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object._id",
+            "description": "<p>ID of topic</p>"
+          },
+          {
+            "group": "Success",
+            "type": "String",
+            "optional": false,
+            "field": "object.name",
+            "description": "<p>Name of topic</p>"
+          },
+          {
+            "group": "Success",
+            "type": "Number",
+            "optional": false,
+            "field": "object.averageRate",
+            "description": "<p>Average rate of topic</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error": [
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Status when complete</p>"
+          },
+          {
+            "group": "Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message when complete</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routesAPI/topic.js",
+    "groupTitle": "Topic",
+    "name": "GetTopicRanking"
+  },
+  {
+    "type": "get",
     "url": "/topic/schedule",
-    "title": "2.  Get an accepted list topic for schedule",
+    "title": "1.   Get an accepted list topic for schedule",
     "group": "Topic",
     "success": {
       "fields": {
@@ -511,7 +533,7 @@
   {
     "type": "get",
     "url": "/topic/:topicId",
-    "title": "5. Get topic",
+    "title": "3.4 Get topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -646,7 +668,7 @@
             "group": "Success",
             "type": "String",
             "optional": false,
-            "field": "object.review.reviewOfUser",
+            "field": "object.review.content",
             "description": "<p>Content of review</p>"
           },
           {
@@ -687,7 +709,7 @@
   {
     "type": "get",
     "url": "/topic/:topicId/join",
-    "title": "8.  Get status of participant's topic",
+    "title": "4.1  Get status of participant's topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -744,7 +766,7 @@
   {
     "type": "post",
     "url": "/topic",
-    "title": "4. Create topic",
+    "title": "3.3 Create topic",
     "group": "Topic",
     "parameter": {
       "fields": {
@@ -822,7 +844,7 @@
   {
     "type": "post",
     "url": "/topic/:topicId/join",
-    "title": "9.  Join topic",
+    "title": "4.2  Join topic",
     "group": "Topic",
     "success": {
       "fields": {
@@ -872,7 +894,7 @@
   {
     "type": "put",
     "url": "/topic/:topicId",
-    "title": "6. Update topic",
+    "title": "3.5 Update topic",
     "group": "Topic",
     "parameter": {
       "fields": {
