@@ -1,3 +1,4 @@
+const { response } = require('express');
 const mongoose = require('mongoose');
 const User = require('./User');
 const Schema = mongoose.Schema;
@@ -33,7 +34,14 @@ const topicSchema = Schema({
     min: -1,
     max: 1
   }
-}, { timestamps: true });
+}, { timestamps: true, toJSON: { virtuals: true }, id: false, versionKey: false });
 
+// topicSchema.virtual("averageRate").get(function () {
+//   let averageRate = 0;
+//   for (const review of this.review) {
+//     averageRate += review.star / this.review.length;
+//   }
+//   return averageRate;
+// });
 
 module.exports = mongoose.model('Topic', topicSchema);
