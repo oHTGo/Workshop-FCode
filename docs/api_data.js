@@ -659,6 +659,13 @@ define({ "api": [
           },
           {
             "group": "Success",
+            "type": "Number",
+            "optional": false,
+            "field": "object.averageRate",
+            "description": "<p>Star of review</p>"
+          },
+          {
+            "group": "Success",
             "type": "Object[]",
             "optional": false,
             "field": "object.review",

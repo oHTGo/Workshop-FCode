@@ -99,6 +99,7 @@ router.post("/", middleware.checkUserLoggedIn, topicController.createTopic);
  * @apiSuccess (Success) {Object}     object.author                Information of author
  * @apiSuccess (Success) {String}     object.author._id            ID of author's topic
  * @apiSuccess (Success) {String}     object.author.name           Name of author's topic
+ * @apiSuccess (Success) {Number}     object.averageRate           Star of review
  * @apiSuccess (Success) {Object[]}   object.review                Review of members
  * @apiSuccess (Success) {String}     object.review.content        Content of review
  * @apiSuccess (Success) {Number}     object.review.star           Star of review
