@@ -99,17 +99,6 @@ async function createTopic(req, res) {
 }
 
 async function getTopic(req, res) {
-    const populate = [
-        {
-            path: "author participants group",
-            select: "name"
-        },
-        {
-            path: "review",
-            select: "star content",
-            options: { sort: { "updatedAt": -1 } }
-        }
-    ];
     const aggregateQuery = [
         { $match: { _id: Types.ObjectId(req.params.topicId) } }, //search query
         {
@@ -177,12 +166,9 @@ async function getTopic(req, res) {
     ]
     try {
         const topicResponse = await Topic
-            // .findById(req.params.topicId)
-            // .populate(populate)
-            // .lean();
             .aggregate(aggregateQuery);
 
-        (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Topic doesn't exist.");
+        (topicResponse[0]) ? helper.setStatusSuccess(res, topicResponse[0]) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 
     } catch (err) {
         console.log(err);
