@@ -69,7 +69,7 @@ async function getListTopic(req, res) {
 async function getListTopicForSchedule(req, res) {
     try {
         const topicResponse = await Topic
-            .find({status :1}, {name: 1, date: 1})
+            .find({ status: 1 }, { name: 1, date: 1 })
             .lean();
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
     } catch (err) {
@@ -110,15 +110,82 @@ async function getTopic(req, res) {
             options: { sort: { "updatedAt": -1 } }
         }
     ];
+    const aggregateQuery = [
+        { $match: { _id: Types.ObjectId(req.params.topicId) } }, //search query
+        {
+            $lookup: { //get Review from User collection
+                from: Review.collection.name,
+                let: { review: "$review" },
+                pipeline: [
+                    { $match: { $expr: { $in: ["$_id", "$$review"] } } },
+                    { $sort: { "updatedAt": -1 } }, //sort review.updatedAt
+                    { $project: { _id: 0, star: 1, content: 1 } }
+                ],
+                as: "review"
+            }
+        },
+        {
+            $set: //add fields
+            {
+                averageRate: { //calc averageRate
+                    $cond: [
+                        { $eq: [{ $size: "$review" }, 0] }, // if
+                        0, //then
+                        { $avg: "$review.star" } //else
+                    ]
+                }
+            }
+        },
+        {
+            $lookup: { //get Group from userCollection
+                "from": User.collection.name,
+                "localField": "group",
+                "foreignField": "_id",
+                "as": "group",
+            }
+        },
+        {
+            $lookup: { //get Participants from userCollection
+                "from": User.collection.name,
+                "localField": "participants",
+                "foreignField": "_id",
+                "as": "participants",
+            }
+        },
+        {
+            $lookup: { //get Author from userCollection
+                "from": User.collection.name,
+                "localField": "author",
+                "foreignField": "_id",
+                "as": "author",
+            }
+        },
+        {$unwind: "$author"},
+        {
+            $project: {
+                group: {
+                    "isAdmin": 0, "googleId": 0, "refreshToken": 0
+                },
+                author: {
+                    "isAdmin": 0, "googleId": 0, "refreshToken": 0
+                },
+                participants: {
+                    "isAdmin": 0, "googleId": 0, "refreshToken": 0
+                }
+            }
+        }
+    ]
     try {
         const topicResponse = await Topic
-            .findById(req.params.topicId)
-            .populate(populate)
-            .lean();
+            // .findById(req.params.topicId)
+            // .populate(populate)
+            // .lean();
+            .aggregate(aggregateQuery);
 
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 
     } catch (err) {
+        console.log(err);
         helper.setStatusBadRequest(res, "Topic ID is not valid.");
     }
 }
