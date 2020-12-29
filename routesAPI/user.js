@@ -40,6 +40,7 @@ router.get("/current", middleware.checkUserLoggedIn, userController.getCurrentUs
  * @apiSuccess (Success) {Object[]}   message               Array of object request
  * @apiSuccess (Success) {String}     object._id            ID of topic
  * @apiSuccess (Success) {String}     object.name           Name of topic
+ * @apiSuccess (Success) {Date}       object.date           Date of topic
  * @apiSuccess (Success) {Object}     object.author         Information of author
  * @apiSuccess (Success) {String}     object.author._id     ID of author's topic
  * @apiSuccess (Success) {String}     object.author.name    Name of author's topic
