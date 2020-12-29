@@ -1149,6 +1149,13 @@ define({ "api": [
           },
           {
             "group": "Success",
+            "type": "Date",
+            "optional": false,
+            "field": "object.date",
+            "description": "<p>Date of topic</p>"
+          },
+          {
+            "group": "Success",
             "type": "Object",
             "optional": false,
             "field": "object.author",
