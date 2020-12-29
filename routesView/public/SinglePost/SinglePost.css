@@ -48,15 +48,19 @@
 }
 
 .blog-post__icon {
+  display: flex;
+  flex-direction: column;
   width: fit-content;
   position: absolute;
-  top: 40px;
+  top: 30px;
   right: 35px;
 }
 
 .blog-post__icon a {
   opacity: .5;
   transition: 300ms;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .blog-post__icon a:hover {
@@ -66,11 +70,7 @@
 .blog-post__icon img {
   width: 30px;
   height: 30px;
-  cursor: pointer;
-}
-
-.blog-post__edit {
-  margin: 0 20px;
+  margin-right: 10px; 
 }
 
 .post__body {
@@ -198,6 +198,10 @@
   .blog-post__icon {
     top: 5%;
     right: 5%;
+  }
+
+  .blog-post__icon a {
+    margin-bottom: 0;
   }
 
   .blog-post__icon img {

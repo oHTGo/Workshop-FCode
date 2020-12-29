@@ -4,6 +4,11 @@ function getCurrentUser() {
     .then((data) => {
       myStorage.setItem("CurrentUserId", data.message._id);
       myStorage.setItem("CurrentUsername", data.message.name);
+      if (data.message.isAdmin) {
+        myStorage.setItem("Role", "Admin");
+      } else {
+        myStorage.setItem("Role", "Member");
+      }
       document
         .getElementById("userAccount")
         .insertAdjacentHTML("beforeend", data.message.name);
@@ -14,7 +19,7 @@ getCurrentUser();
 console.log("Current topic id: " + window.localStorage.topicId);
 
 function resetTopicId() {
-  window.localStorage.setItem('topicId', '');
+  window.localStorage.setItem("topicId", "");
 }
 
 /* ------------- Manage Join status of users ------------*/
@@ -27,10 +32,6 @@ function getJoinStatus() {
     .then((res) => res.json())
     .then((data) => {
       let statusParticipant = data.message.statusParticipant;
-      console.log(
-        "🚀 ~ file: SinglePost.js ~ line 26 ~ .then ~ statusParticipant",
-        statusParticipant
-      );
       return statusParticipant;
     })
     .catch((error) => console.log(error));
@@ -102,9 +103,9 @@ function getReview() {
     .then((res) => res.json())
     .then((data) => {
       if (data.status === "Successful") {
-        document.getElementById('deleteButton').style.display = 'block';
+        document.getElementById("deleteButton").style.display = "block";
         document.getElementById("comment").innerHTML =
-          data.message.reviewOfUser;
+          data.message.content;
         let star = data.message.star;
         for (var i = 0; i < 5; i++) {
           if (i < star) {
@@ -121,7 +122,7 @@ function getReview() {
 function updateReview() {
   const reviewObj = {
     star: count,
-    reviewOfUser: document.getElementById("comment").value,
+    content: document.getElementById("comment").value,
   };
 
   fetch("/api/review/" + currentTopic, {
@@ -145,7 +146,7 @@ function updateReview() {
 function createReview() {
   const reviewObj = {
     star: count,
-    reviewOfUser: document.getElementById("comment").value,
+    content: document.getElementById("comment").value,
   };
 
   fetch("/api/review/" + currentTopic, {
@@ -293,11 +294,17 @@ function getSinglePost(id) {
       let postHeader;
 
       // Differ between members and admin
-      if (myStorage.CurrentUserId === "5fc7646967708345bc3c5876") {
+      if (myStorage.Role === 'Admin') {
         postHeader = `<div class="post__header" id="post-header">
-            <div class="blog-post__icon">
-              <a onClick="rejectPost('${window.localStorage.topicId}')"><img src="../img/rejected.svg"></a>
-              <a onClick="acceptPost('${window.localStorage.topicId}')" ><img src="../img/accept.svg" class="blog-post__edit"></a>
+            <div class="blog-post__icon dropdown">
+              <div class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Interact
+              </div>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept"><img src="../img/accept.svg"  title="Accept">Accept</a>
+              <a onClick="rejectPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__reject"><img src="../img/rejected.svg" title="Reject">Reject</a>
+              <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
+              </div>
             </div>
             <div class="header__title">${data.message.name}</div>
               <div class="header__author">
@@ -310,7 +317,7 @@ function getSinglePost(id) {
             </div>
             <div class="blog-post__rate" id="blog-post__rate">
               <span>Rate: </span>
-              <span>${data.message.review[0]}</span>
+              <span>${data.message.averageRate}</span>
               <svg
                 width="1.1em"
                 height="1.1em"
@@ -327,9 +334,14 @@ function getSinglePost(id) {
           </div>`;
       } else {
         postHeader = `<div class="post__header" id="post-header">
-            <div class="blog-post__icon" id="post-icon">
-              <a ><img src="../img/delete.svg" onClick="deletePost('${myStorage.topicId}')"></a>  
-              <a href="../CreatePost/CreatePost.html" ><img src="../img/edit.svg" class="blog-post__edit"></a>
+            <div class="blog-post__icon dropdown">
+              <div class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Interact
+              </div>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
+              <a href="../CreatePost/CreatePost.html" class="dropdown-item"><img src="../img/edit.svg">Edit</a>
+              </div>
             </div>
             <div class="header__title">${data.message.name}</div>
               <div class="header__author">
@@ -342,7 +354,7 @@ function getSinglePost(id) {
             </div>
             <div class="blog-post__rate" id="blog-post__rate">
               <span>Rate: </span>
-              <span>${data.message.review[0]}</span>
+              <span>${data.message.averageRate}</span>
               <svg
                 width="1.1em"
                 height="1.1em"
@@ -376,6 +388,12 @@ function getSinglePost(id) {
         .getElementById("post-header")
         .insertAdjacentHTML("afterend", postBody);
 
+      if (window.localStorage.PostStatus == 1) {
+        $(".blog-post__accept").css("display", "none");
+      } else if (window.localStorage.PostStatus == -1) {
+        $(".blog-post__reject").css("display", "none");
+      }
+
       if (data.message.review[0] == null || data.message.review[0] == 0) {
         // if there is no comments, hide the section
         document.getElementById("blog-post__rate").style.display = "none";
@@ -389,7 +407,7 @@ function getSinglePost(id) {
         document.getElementById("post-icon").style.display = "none";
       }
 
-      let timeInterval = moment().diff(moment(data.message.date), 'minutes');      
+      let timeInterval = moment().diff(moment(data.message.date), "minutes");
       if (window.localStorage.PostStatus === "1" && timeInterval < 0) {
         // Posts which are accepted show the Join button and validate time interval
         document.getElementById("joinedButton").style.display = "inline-block";
@@ -400,13 +418,14 @@ function getSinglePost(id) {
 
 var renderCommentsArray = [];
 function loadComments() {
-  return fetch("/api/topic/" + currentTopic)
+  return fetch("/api/topic/" + window.localStorage.topicId)
     .then((response) => response.json())
     .then((data) => {
       renderCommentsArray = data.message.review.map((element) => {
+        
         return `
       <div class="comment__box">
-      <div class="comment__text">${element.reviewOfUser}</div>
+      <div class="comment__text">${element.content}</div>
       <div class="blog-post__rate comment__rate">
         <span>${element.star}</span>
         <svg
@@ -432,7 +451,7 @@ function loadComments() {
 let currentIndex = 0;
 async function renderComments() {
   await loadComments();
-  const maxEachTurn = 1;
+  const maxEachTurn = 4;
   for (var i = 0; i < maxEachTurn; i++) {
     if (currentIndex >= renderCommentsArray.length) {
       $("#loadmore-button").hide();
@@ -459,18 +478,39 @@ async function renderFullTopic(id) {
     fetch("/api/topic/" + id).then((res) => res.json()),
   ])
     .then((data) => {
-      let timeInterval = moment().diff(moment(data[1].message.date),'minutes');
-      if ((data[0].message.statusParticipant == true) && (timeInterval > 0)) {
+      let timeInterval = moment().diff(moment(data[1].message.date), "minutes");
+      if (data[0].message.statusParticipant == true && timeInterval > 0) {
         document.getElementById("rateButton").style.display = "inline-block";
       }
     })
     .catch((error) => console.log(error));
 }
-
 /*----------------------------------------------------------*/
+
+/*------------------- Ranking board -------------------*/
+function readTopicId(id) {
+  console.log("Function read topicId actived");
+  myStorage.setItem("topicId", id);
+}
+
+function renderRankingBoard() {
+  fetch("/api/topic/ranking")
+    .then((res) => res.json())
+    .then((data) => {
+      for (var i = 0; i < 5; i++) {
+        document.getElementById('rank'+(i+1)).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`
+        document.getElementById('rate'+(i+1)).innerHTML = data.message[i].averageRate;
+      }
+    })
+    .catch((error) => console.log(error));
+}
+/*----------------------------------------------------------------------------------*/
+
 
 renderFullTopic(window.localStorage.topicId);
 getReview();
 renderLoadmoreButton();
 renderComments();
 renderInitialJoinButton();
+renderRankingBoard();
+
