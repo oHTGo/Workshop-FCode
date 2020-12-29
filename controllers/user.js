@@ -30,7 +30,10 @@ async function getListTopicOfUser(req, res) {
     (req.user.isAdmin) ? search = {} : search = { author: req.user._id };
 
     try {
-        const topicResponse = await Topic.find(search, { name: 1, createdAt: 1, updatedAt: 1, author: 1, status: 1 }).populate(populate);
+        const topicResponse = await Topic
+            .find(search, { name: 1, date: 1, createdAt: 1, updatedAt: 1, author: 1, status: 1 })
+            .populate(populate)
+            .sort({ date: -1 });
         (topicResponse) ? helper.setStatusSuccess(res, topicResponse) : helper.setStatusNotFound(res, "Don't have any topic.");
     } catch (err) {
         helper.setStatusFailure(res);
