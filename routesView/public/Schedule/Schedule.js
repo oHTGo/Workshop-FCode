@@ -72,75 +72,87 @@ function calendar(month, year) {
     return result;
 }
 
-//var schedule = document.querySelector("#calendar");
-//schedule.insertAdjacentHTML("beforeend", '<div class="day">${calendar(month, year)}</div>')
 document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
 
-// function updateCalendar(monthS, yearS) {
-//     console.log(calendar(monthS + 1, yearS));
-//     let i = 0;
-//     for (const day of calendar(monthS + 1, yearS)) {
-//         document.getElementById(i).innerHTML = "";
-//         if (day != 0) {
-//             document.getElementById(i).innerHTML = day;
-//         }
-//         i++;
-//     }
-// }
-// updateCalendar(month, year);
+const data = {
+    topic: "How to use Git & Github?",
+    date: new Date()
+}
+
+function updateCalendar(monthS, yearS) {
+    console.log(calendar(monthS + 1, yearS));
+    let i = 0;
+    for (const day of calendar(monthS + 1, yearS)) {
+        document.getElementById(i).innerHTML = "";
+        if (day != 0) {
+            document.getElementById(i).innerHTML = day;
+        }
+        i++;
+    }
+}
+updateCalendar(month, year);
+
+function showEvent(data, month, year) {
+    yearE = data.date.getFullYear(); //2020
+    monthE = data.date.getMonth(); //11
+    dayE = data.date.getDate(); 
+    
+    if(yearE == year && monthE == month) {
+        let i = 100;
+        for (const day of calendar(month + 1, year)) {
+            if (dayE == day) {
+                document.getElementById(i).innerHTML = data.topic;
+            }
+            i++;
+        }
+    }
+}
+showEvent(data, month, year);
 
 document.getElementById("increase").onclick = onClickIncrease;
 function onClickIncrease() {
-    for (let i = 11; i > -1; i--) {
-        if (monthShow == monthName[11]) {
-            year += 1;
-            monthShow = monthName[0];
-            month = 0;
-            document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
-            updateCalendar(month, year);
-        }
-        else {
+    if (monthShow == monthName[11]) {
+        year += 1;
+        monthShow = monthName[0];
+        month = 0;
+        document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
+        updateCalendar(month, year);
+        // showEvent(data, month, year);
+    }
+    else {
+        for (let i = 11; i > -1; i--) {
             if (monthShow == monthName[i]) {
                 monthShow = monthName[i + 1];
                 month += 1;
                 document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
                 updateCalendar(month, year);
+                // showEvent(data, month, year);
             }
         }
     }
+    
 }
 
 document.getElementById("decrease").onclick = onClickDecrease;
 function onClickDecrease() {
-    for (let i = 0; i < 12; i++) {
-        if (monthShow == monthName[0]) {
-            year -= 1;
-            monthShow = monthName[11];
-            month = 11;
-            document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
-            updateCalendar(month, year);
-        }
-        else {
+    if (monthShow == monthName[0]) {
+        year -= 1;
+        monthShow = monthName[11];
+        month = 11;
+        document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
+        updateCalendar(month, year);
+        // showEvent(data, month, year);
+    }
+    else {
+        for (let i = 0; i < 12; i++) {
             if (monthShow == monthName[i]) {
                 monthShow = monthName[i - 1];
                 month -= 1;
                 document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
                 updateCalendar(month, year);
+                // showEvent(data, month, year);
             }
         }
     }
+    
 }
-
-let myStorage = window.localStorage;
-function getCurrentUser() {
-    fetch("/api/user/current")
-      .then((res) => res.json())
-      .then((data) => {
-        myStorage.setItem("CurrentUserId", data.message._id);
-        myStorage.setItem("CurrentUsername", data.message.name);
-        document.getElementById('userAccount').insertAdjacentHTML("beforeend", data.message.name);
-      })
-      .catch((error) => console.log(error));
-}
-getCurrentUser();
-

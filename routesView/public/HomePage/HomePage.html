@@ -102,19 +102,19 @@
         <div class="homepage__posts-wrapper" id="homepage__posts-wrapper"></div>
         <nav aria-label="Page navigation example">
           <ul class="pagination">
-            <li class="page-item">
+            <li class="page-item" id="previousButton" onclick="movePreviousPage()">
               <a class="page-link" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
               </a>
             </li>
-
-            <li class="page-item"><a class="page-link" href="#" onclick="renderPosts(this.innerText)">1</a></li>
+            
+            <!-- <li class="page-item"><a class="page-link" href="#" onclick="renderPosts(this.innerText)">1</a></li>
             <li class="page-item"><a class="page-link" href="#" onclick="renderPosts(this.innerText)">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
 
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+            <li class="page-item" id="nextButton">
+              <a class="page-link" href="#" aria-label="Next" onclick="moveNextPage()">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
               </a>
@@ -151,9 +151,9 @@
 
             <tr>
               <td><img src="../img/goldmedal.svg"></td>
-              <td><a href="../SinglePost/SinglePost.html">How to use Git and Github</a></td>
+              <td id="rank1"></td>
               <td>
-                <span>4.5</span>
+                <span id="rate1"></span>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -164,9 +164,9 @@
 
             <tr>
               <td><img src="../img/silvermedal.svg"></td>
-              <td><a href="#">How a website work?</a></td>
+              <td id="rank2"></td>
               <td>
-                <span>4.5</span>
+                <span id="rate2"></span>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -177,9 +177,9 @@
 
             <tr>
               <td><img src="../img/bronzemedal.svg"></td>
-              <td><a href="#">Crawling data and tips on Instagram</a></td>
+              <td id="rank3"></td>
               <td>
-                <span>4.5</span>
+                <span id="rate3"></span>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -190,9 +190,9 @@
 
             <tr>
               <td>4</td>
-              <td><a href="#">How to use Git and Github</a></td>
+              <td id="rank4"></td>
               <td>
-                <span>4.5</span>
+                <span id="rate4"></span>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -203,9 +203,9 @@
 
             <tr>
               <td>5</td>
-              <td><a href="#">How to use Git and Github</a></td>
+              <td id="rank5"></td>
               <td>
-                <span>4.5</span>
+                <span id="rate5"></span>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
                   <path

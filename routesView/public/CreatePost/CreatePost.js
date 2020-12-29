@@ -120,6 +120,11 @@ function getCurrentUser() {
     .then((data) => {
       myStorage.setItem("CurrentUserId", data.message._id);
       myStorage.setItem("CurrentUsername", data.message.name);
+      if (data.message.isAdmin) {
+        myStorage.setItem("Role", "Admin");
+      } else {
+        myStorage.setItem("Role", "Member");
+      }
       document
         .getElementById("userAccount")
         .insertAdjacentHTML("beforeend", data.message.name);

@@ -1,5 +1,5 @@
 function resetTopicId() {
-  window.localStorage.setItem('topicId', '');
+  window.localStorage.setItem("topicId", "");
 }
 
 /*----------------- INTERFACE INTERACTION------------------------*/
@@ -14,6 +14,11 @@ function getCurrentUser() {
     .then((data) => {
       myStorage.setItem("CurrentUserId", data.message._id);
       myStorage.setItem("CurrentUsername", data.message.name);
+      if (data.message.isAdmin) {
+        myStorage.setItem("Role", "Admin");
+      } else {
+        myStorage.setItem("Role", "Member");
+      }
       document
         .getElementById("userAccount")
         .insertAdjacentHTML("beforeend", data.message.name);
@@ -26,14 +31,14 @@ function readPost(id, status) {
   // this function is to navigate to the single post when user/admin click the link,
   // the local storage will store the post's id and the post's status
   window.localStorage.setItem("topicId", id);
-  window.localStorage.setItem('PostStatus', status);
+  window.localStorage.setItem("PostStatus", status);
 }
 
 /*-----------------------------------------------------------------------*/
 
 /*------------------ RENDER POST LIST ---------------------*/
 function renderAllPosts() {
-  fetch("/api/user/topic")
+  return fetch("/api/user/topic")
     .then((res) => res.json())
     .then((data) => {
       let postList = data.message.map((element) => {
@@ -56,7 +61,8 @@ function renderAllPosts() {
           <td>${data.message.indexOf(element) + 1}</td>
           <td>
             <a href="../SinglePost/SinglePost.html" onClick="readPost('${
-              element._id}', '${element.status}')">
+              element._id
+            }', '${element.status}')">
               ${element.name}
             </a>
           </td>
@@ -175,12 +181,19 @@ async function renderRejectedPosts() {
   document.getElementById("tableBodyRejected").innerHTML = postList.join("");
 }
 
-renderAllPosts();
-renderWaitingPosts();
-renderAcceptedPosts();
-renderRejectedPosts();
+function renderPage() {
+  Promise.all([
+    renderAllPosts(),
+    renderWaitingPosts(),
+    renderAcceptedPosts(),
+    renderRejectedPosts(),
+  ])
+    .then(() => {
+      $(".mydatatable").DataTable();
+    })
+    .catch((error) => console.log(error));
+}
 
-
-
+renderPage();
 
 /*---------------------------------------------------------*/

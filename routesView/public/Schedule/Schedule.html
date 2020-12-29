@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="Schedule.css">
-  <link rel="stylesheet" href="../HomePage/HomePage.css">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
@@ -33,7 +32,7 @@
             </a>
           </li>
           <li class="nav-item bg-white">
-            <a class="nav-link" href="../CreatePost/CreatePost.html">
+            <a class="nav-link active" href="../CreatePost/CreatePost.html">
               <i class="far fa-calendar-plus"></i>
               Create</a>
           </li>
@@ -43,10 +42,10 @@
               Schedule</a>
           </li>
           <li class="nav-item dropdown bg-white">
-            <a class="nav-link dropdown-toggle" href="#" id="userAccount" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-user"></i>
-              
+              Le Hoang Khoi (K15 HCM)
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../UserPosts/UserPosts.html">
@@ -80,7 +79,7 @@
         <li class="nav-item dropdown bg-white">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            
+            Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="../UserPosts/UserPosts.html">User status</a>
@@ -143,63 +142,174 @@
       <div class="schedule__wrapper">
         <div style="padding-bottom: 2%; padding-left: 2%; padding-right: 2%;">
           <div id="calendar">
-            <div id="0" class="day"></div>
-            <div id="1" class="day"></div>
-            <div id="2" class="day"></div>
-            <div id="3" class="day">
-              1
-              <a class="event" href="../SinglePost/SinglePost.html">How to use Git and Github</a>
+            <div class="day">
+              <p id="0"></p>
+              <a id="100" class="event"></a>
             </div>
-            <div id="4" class="day">2</div>
-            <div id="5" class="day">3</div>
-            <div id="6" class="day">4</div>
-            <div id="7" class="day">5</div>
-            <div id="8" class="day">
-              6
-              <a class="event" href="#">How a website work?</a>
+            <div class="day">
+              <p id="1" ></p>
+              <a id="101" class="event"></a>
             </div>
-            <div id="9" class="day">7</div>
-            <div id="10" class="day">8</div>
-            <div id="11" class="day">9</div>
-            <div id="12" class="day">10</div>
-            <div id="13" class="day">11</div>
-            <div id="14" class="day">11</div>
-            <div id="15" class="day">12</div>
-            <div id="16" class="day">13</div>
-            <div id="17" class="day">14</div>
-            <div id="18" class="day">15</div>
-            <div id="19" class="day">
-              16
-              <a class="event" href="#">Crawling data and tips on Instagram</a>
+            <div class="day">
+              <p id="2"></p>
+              <a id="102" class="event"></a>
             </div>
-            <div id="20" class="day">17</div>
-            <div id="21" class="day">18</div>
-            <div id="22" class="day">19</div>
-            <div id="23" class="day">
-              20
-              <a class="event" href="../SinglePost/SinglePost.html">How to use Git and Github</a>
+            <div class="day">
+              <p id="3"></p>
+              <a id="103" class="event"></a>
             </div>
-            <div id="24" class="day">21</div>
-            <div id="25" class="day">22</div>
-            <div id="26" class="day">23</div>
-            <div id="27" class="day">24</div>
-            <div id="28" class="day">25</div>
-            <div id="29" class="day">26</div>
-            <div id="30" class="day">27</div>
-            <div id="31" class="day">28</div>
-            <div id="32" class="day">
-              29
-              <a class="event" href="#">How a website work?</a>
+            <div class="day">
+              <p id="4"></p>
+              <a id="104" class="event"></a>
             </div>
-            <div id="33" class="day">30</div>
-            <div id="34" class="day">31</div>
-            <div id="35" class="day"></div>
-            <div id="36" class="day"></div>
-            <div id="37" class="day"></div>
-            <div id="38" class="day"></div>
-            <div id="39" class="day"></div>
-            <div id="40" class="day"></div>
-            <div id="41" class="day"></div>
+            <div class="day">
+              <p id="5"></p>
+              <a id="105" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="6"></p>
+              <a id="106" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="7"></p>
+              <a id="107" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="8"></p>
+              <a id="108" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="9"></p>
+              <a id="109" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="10"></p>
+              <a id="110" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="11"></p>
+              <a id="111" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="12"></p>
+              <a id="112" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="13"></p>
+              <a id="113" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="14"></p>
+              <a id="114" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="15"></p>
+              <a id="115" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="16"></p>
+              <a id="116" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="17"></p>
+              <a id="117" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="18"></p>
+              <a id="118" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="19"></p>
+              <a id="119" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="20"></p>
+              <a id="120" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="21"></p>
+              <a id="121" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="22"></p>
+              <a id="122" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="23"></p>
+              <a id="123" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="24"></p>
+              <a id="124" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="25"></p>
+              <a id="125" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="26"></p>
+              <a id="126" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="27"></p>
+              <a id="127" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="28"></p>
+              <a id="128" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="29"></p>
+              <a id="129" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="30"></p>
+              <a id="130" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="31"></p>
+              <a id="131" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="32"></p>
+              <a id="132" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="33"></p>
+              <a id="133" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="34"></p>
+              <a id="134" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="35"></p>
+              <a id="135" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="36"></p>
+              <a id="136" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="37"></p>
+              <a id="137" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="38"></p>
+              <a id="138" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="39"></p>
+              <a id="139" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="40"></p>
+              <a id="140" class="event"></a>
+            </div>
+            <div class="day">
+              <p id="41"></p>
+              <a id="141" class="event"></a>
+            </div>
           </div>
         </div>
         
@@ -220,25 +330,5 @@
     crossorigin="anonymous"></script>
   <script src="Schedule.js"></script>
 </body>
-
-<footer>
-  <div class="footer__title col-lg-4 ">
-    <h3>F-Code Workshop</h3>
-    <img src="../img/rsz_logo_2000x2000 (1).png">
-  </div>
-  <div class="footer__description col-lg-4 ">
-    <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, qui! Animi neque corporis cumque
-      aliquam saepe? Voluptate laborum</P>
-  </div>
-  <div class="footer__contact col-lg-4 ">
-    <h3>Contact</h3>
-    <div class="contact__icons">
-      <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
-      <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
-    </div>
-  </div>
-
-  <div class="footer__copyright">© F-Code Club 2020</div>
-</footer>
 
 </html>
