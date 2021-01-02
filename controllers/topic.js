@@ -17,40 +17,40 @@ async function getCountPageTopic(req, res) {
 async function getListTopic(req, res) {
     const limit = 3;
 
-    const queryAggregate = [
-        { $match: { status: 1 } }, //query match
-        {
-            $lookup: { //get review from userCollection
-                "from": Review.collection.name,
-                "localField": "review",
-                "foreignField": "_id",
-                "as": "review",
-            }
-        },
-        {
-            $set: //add fields
-            {
-                averageRate: { //calc averageRate
-                    $cond: [
-                        { $eq: [{ $size: "$review" }, 0] }, // if
-                        0, //then
-                        { $avg: "$review.star" } //else
-                    ]
-                },
-                participantsCount: { $size: "$participants" } //calc participantsCount
-            }
-        },
-        {
-            $project: {
-                "name": 1, "detail": 1, "background": 1, "date": 1,
-                "averageRate": 1, "participantsCount": 1,
-                "createdAt": 1, "updatedAt": 1
-            }
-        },
-        { $sort: { date: -1 } } //sort
-    ]
-
     try {
+        const queryAggregate = [
+            { $match: { status: 1 } }, //query match
+            {
+                $lookup: { //get review from userCollection
+                    "from": Review.collection.name,
+                    "localField": "review",
+                    "foreignField": "_id",
+                    "as": "review",
+                }
+            },
+            {
+                $set: //add fields
+                {
+                    averageRate: { //calc averageRate
+                        $cond: [
+                            { $eq: [{ $size: "$review" }, 0] }, // if
+                            0, //then
+                            { $avg: "$review.star" } //else
+                        ]
+                    },
+                    participantsCount: { $size: "$participants" } //calc participantsCount
+                }
+            },
+            {
+                $project: {
+                    "name": 1, "detail": 1, "background": 1, "date": 1,
+                    "averageRate": 1, "participantsCount": 1,
+                    "createdAt": 1, "updatedAt": 1
+                }
+            },
+            { $sort: { date: -1 } } //sort
+        ]
+
         let page = parseInt(req.params.numberPage);
         if (isNaN(page) || page.toString() !== req.params.numberPage) {
             throw helper.setStatusBadRequest(res, "The page number must be an integer");
@@ -99,79 +99,78 @@ async function createTopic(req, res) {
 }
 
 async function getTopic(req, res) {
-    const aggregateQuery = [
-        { $match: { _id: Types.ObjectId(req.params.topicId) } }, //search query
-        {
-            $lookup: { //get Review from User collection
-                from: Review.collection.name,
-                let: { review: "$review" },
-                pipeline: [
-                    { $match: { $expr: { $in: ["$_id", "$$review"] } } },
-                    { $sort: { "updatedAt": -1 } }, //sort review.updatedAt
-                    { $project: { _id: 0, star: 1, content: 1 } }
-                ],
-                as: "review"
-            }
-        },
-        {
-            $set: //add fields
-            {
-                averageRate: { //calc averageRate
-                    $cond: [
-                        { $eq: [{ $size: "$review" }, 0] }, // if
-                        0, //then
-                        { $avg: "$review.star" } //else
-                    ]
-                }
-            }
-        },
-        {
-            $lookup: { //get Group from userCollection
-                "from": User.collection.name,
-                "localField": "group",
-                "foreignField": "_id",
-                "as": "group",
-            }
-        },
-        {
-            $lookup: { //get Participants from userCollection
-                "from": User.collection.name,
-                "localField": "participants",
-                "foreignField": "_id",
-                "as": "participants",
-            }
-        },
-        {
-            $lookup: { //get Author from userCollection
-                "from": User.collection.name,
-                "localField": "author",
-                "foreignField": "_id",
-                "as": "author",
-            }
-        },
-        {$unwind: "$author"},
-        {
-            $project: {
-                group: {
-                    "isAdmin": 0, "googleId": 0, "refreshToken": 0
-                },
-                author: {
-                    "isAdmin": 0, "googleId": 0, "refreshToken": 0
-                },
-                participants: {
-                    "isAdmin": 0, "googleId": 0, "refreshToken": 0
-                }
-            }
-        }
-    ]
     try {
+        const aggregateQuery = [
+            { $match: { _id: Types.ObjectId(req.params.topicId) } }, //search query
+            {
+                $lookup: { //get Review from User collection
+                    from: Review.collection.name,
+                    let: { review: "$review" },
+                    pipeline: [
+                        { $match: { $expr: { $in: ["$_id", "$$review"] } } },
+                        { $sort: { "updatedAt": -1 } }, //sort review.updatedAt
+                        { $project: { _id: 0, star: 1, content: 1 } }
+                    ],
+                    as: "review"
+                }
+            },
+            {
+                $set: //add fields
+                {
+                    averageRate: { //calc averageRate
+                        $cond: [
+                            { $eq: [{ $size: "$review" }, 0] }, // if
+                            0, //then
+                            { $avg: "$review.star" } //else
+                        ]
+                    }
+                }
+            },
+            {
+                $lookup: { //get Group from userCollection
+                    "from": User.collection.name,
+                    "localField": "group",
+                    "foreignField": "_id",
+                    "as": "group",
+                }
+            },
+            {
+                $lookup: { //get Participants from userCollection
+                    "from": User.collection.name,
+                    "localField": "participants",
+                    "foreignField": "_id",
+                    "as": "participants",
+                }
+            },
+            {
+                $lookup: { //get Author from userCollection
+                    "from": User.collection.name,
+                    "localField": "author",
+                    "foreignField": "_id",
+                    "as": "author",
+                }
+            },
+            { $unwind: "$author" },
+            {
+                $project: {
+                    group: {
+                        "isAdmin": 0, "googleId": 0, "refreshToken": 0
+                    },
+                    author: {
+                        "isAdmin": 0, "googleId": 0, "refreshToken": 0
+                    },
+                    participants: {
+                        "isAdmin": 0, "googleId": 0, "refreshToken": 0
+                    }
+                }
+            }
+        ]
         const topicResponse = await Topic
             .aggregate(aggregateQuery);
 
         (topicResponse[0]) ? helper.setStatusSuccess(res, topicResponse[0]) : helper.setStatusNotFound(res, "Topic doesn't exist.");
 
     } catch (err) {
-        console.log(err);
         helper.setStatusBadRequest(res, "Topic ID is not valid.");
     }
 }
@@ -198,7 +197,10 @@ async function updateTopic(req, res) {
 }
 
 async function deleteTopic(req, res) {
-    const search = { _id: req.params.topicId, author: req.user._id };
+    let search;
+    (req.user.isAdmin)
+        ? search = { _id: req.params.topicId }
+        : search = { _id: req.params.topicId, author: req.user._id };
     try {
         const topicResponse = await Topic.findOneAndRemove(search);
         (topicResponse) ? helper.setStatusSuccess(res, "Delete a topic successfully.") : helper.setStatusFailure(res, "Delete a topic failed.");
