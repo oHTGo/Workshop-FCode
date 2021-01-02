@@ -36,12 +36,4 @@ const topicSchema = Schema({
   }
 }, { timestamps: true, toJSON: { virtuals: true }, id: false, versionKey: false });
 
-// topicSchema.virtual("averageRate").get(function () {
-//   let averageRate = 0;
-//   for (const review of this.review) {
-//     averageRate += review.star / this.review.length;
-//   }
-//   return averageRate;
-// });
-
 module.exports = mongoose.model('Topic', topicSchema);
