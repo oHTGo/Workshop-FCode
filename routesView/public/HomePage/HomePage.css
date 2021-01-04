@@ -30,6 +30,7 @@
 }
 
 .blog-post {
+  position: relative;
   width: 100%;
   /* height: 20rem; */
   height: fit-content;
@@ -43,6 +44,7 @@
 }
 
 .blog-post__info {
+  position: unset;
   background-color: #fff;
   transform: translateX(-3rem);
   /* display: flex; */
@@ -52,7 +54,9 @@
 
 .blog-post__rate {
   display: block;
-  float: right;
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
   font-size: 1.1em;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -72,7 +76,6 @@
 .blog-post__img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
   border-radius: 10px;
 }
@@ -92,7 +95,7 @@
   background-color: #fff;
 }
 
-.blot-post__title {
+.blog-post__title {
   font-size: 1.2rem;
   margin: 1rem 0 1.2rem;
   text-transform: uppercase;
@@ -100,6 +103,10 @@
   font-weight: 650;
   background-color: #fff;
   cursor: default;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 
 .blog-post__description {
@@ -113,6 +120,13 @@
   overflow: hidden;
 }
 
+.blog-post__description p {
+  -webkit-line-clamp: 4;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
 .blog-post__cta {
   display: inline-block;
   width: fit-content;
@@ -121,8 +135,8 @@
   text-transform: uppercase;
   font-size: 0.8rem;
   color: #fff;
-  background-color: #00b712;
-  background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
+  background-color: #4caf50;
+  /* background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%); */
   text-decoration: none;
   font-weight: 700;
   transition: 500ms;
@@ -269,9 +283,11 @@ footer {
 
 .footer__description {
   color: #fff;
-  line-height: 1.5rem;
+  /* line-height: 1.5rem; */
   letter-spacing: 1px;
-  font-size: 1rem;
+  font-size: 1.6rem;
+  text-align: center;
+  margin: auto 0;
 }
 
 .footer__contact {
@@ -332,11 +348,18 @@ footer {
     width: 100%;
   }
 
+  .blog-post__rate {
+    left: 25%;
+    right: 0;
+    top: 45%;
+  }
+
   .blog-post__info {
     transform: none;
   }
 
-  .blot-post__title {
+  .blog-post__title {
+    margin-top: 1.8rem;
     font-size: 0.9rem;
   }
 

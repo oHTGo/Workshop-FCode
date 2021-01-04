@@ -1,17 +1,23 @@
 * {
-    box-sizing: border-box;
-   
+    box-sizing: border-box;   
+}
+
+body {
+    overflow: hidden;
 }
 
 .main {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0% 1%;
     overflow: hidden;
+    position: relative;
 }
 
 .main__information {
     font-family: 'Arsenal';
     font-size: 30px;
-    padding: 10% 2% 0 2%;
+    padding: 15% 6% 0 6%;
     height: max-content;
 }
 
@@ -29,9 +35,7 @@
     margin-top: 50px;
 }
 
-.main--padding {
-    padding: 3% 1%;
-}
+
 .main__imagine {
     height: 550px;
     width: 700px;
@@ -47,17 +51,66 @@ h1 {
 
 p {
     cursor: default;
-    margin: 10px 0;
+    margin: 10px 0 ;
     color: #3d3a3a;
-    padding-top: 5%;
-    padding-bottom: 10%;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    font-size: 2rem;
 }
 
-a:hover {
-    color: black;
-    background-color: #f0f0f0;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 5px 0px, rgba(0, 0, 0, 0.12) 0px 2px 10px 0px; 
+.login {
+    font-size: large;
 }
+
+  .login h3 {
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #3d3a3a;
+  }
+  
+  .google-btn {
+    width: 190px;
+    height: 42px;
+    background-color: #4285f4;
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+  
+  .google-btn:hover {
+    box-shadow: 0 0 6px #4285f4;
+  }
+  
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: white;
+  }
+  
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .btn-text {
+    font-family: Roboto,arial,sans-serif;
+    float: right;
+    margin: 11px 11px 0 0;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
 
 @media only screen and (max-width: 1024px) {
     .main {
@@ -66,6 +119,7 @@ a:hover {
 
     h1 {
         font-size: 55px;
+        text-align: center;
     }
 
     p {
@@ -92,6 +146,15 @@ a:hover {
         text-align: center;
     }
 
+    .login h3 {
+        text-align: center;
+    }
+
+    .google-btn {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
 
 }
 
@@ -99,7 +162,6 @@ a:hover {
 
     .main {
         padding-left: 3%;
-
     }
 
     .main__information {
@@ -108,10 +170,12 @@ a:hover {
 
     h1 {
         font-size: 45px;
+        text-align: center;
     }
 
     p {
         font-size: 25px;
+        text-align: center;
     }
 
     .main__img-responsive {
@@ -133,6 +197,15 @@ a:hover {
 
     .main--center {
         text-align: center;
+    }
+
+    .login h3 {
+        text-align: center;
+    }
+
+    .google-btn {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
