@@ -7,6 +7,7 @@
   <title>Schedule</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../HomePage/HomePage.css">
   <link rel="stylesheet" href="Schedule.css">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
@@ -32,7 +33,7 @@
             </a>
           </li>
           <li class="nav-item bg-white">
-            <a class="nav-link active" href="../CreatePost/CreatePost.html">
+            <a class="nav-link" href="../CreatePost/CreatePost.html">
               <i class="far fa-calendar-plus"></i>
               Create</a>
           </li>
@@ -109,7 +110,7 @@
           <div class="collapse navbar-collapse  bg-white" id="navbarSchedule">
             <ul class="navbar-nav mr-auto ">
               <li class="nav-item bg-white">
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Today</button>
+                <button class="btn btn-success my-2 my-sm-0" onclick="updateTodayCalendar()">Today</button>
               </li>
               <li class="nav-item bg-white">
                 <button id="decrease" class="btn btn-outline-success my-2 my-sm-0">
@@ -144,79 +145,79 @@
           <div id="calendar">
             <div class="day">
               <p id="0"></p>
-              <a id="100" class="event"></a>
+              <div id="100" class="event"></div>
             </div>
             <div class="day">
               <p id="1" ></p>
-              <a id="101" class="event"></a>
+              <div id="101" class="event"></div>
             </div>
             <div class="day">
               <p id="2"></p>
-              <a id="102" class="event"></a>
+              <div id="102" class="event"></div>
             </div>
             <div class="day">
               <p id="3"></p>
-              <a id="103" class="event"></a>
+              <div id="103" class="event"></div>
             </div>
             <div class="day">
               <p id="4"></p>
-              <a id="104" class="event"></a>
+              <div id="104" class="event"></div>
             </div>
             <div class="day">
               <p id="5"></p>
-              <a id="105" class="event"></a>
+              <div id="105" class="event"></div>
             </div>
             <div class="day">
               <p id="6"></p>
-              <a id="106" class="event"></a>
+              <div id="106" class="event"></div>
             </div>
             <div class="day">
               <p id="7"></p>
-              <a id="107" class="event"></a>
+              <div id="107" class="event"></div>
             </div>
             <div class="day">
               <p id="8"></p>
-              <a id="108" class="event"></a>
+              <div id="108" class="event"></div>
             </div>
             <div class="day">
               <p id="9"></p>
-              <a id="109" class="event"></a>
+              <div id="109" class="event"></div>
             </div>
             <div class="day">
               <p id="10"></p>
-              <a id="110" class="event"></a>
+              <div id="110" class="event"></div>
             </div>
             <div class="day">
               <p id="11"></p>
-              <a id="111" class="event"></a>
+              <div id="111" class="event"></div>
             </div>
             <div class="day">
               <p id="12"></p>
-              <a id="112" class="event"></a>
+              <div id="112" class="event"></div>
             </div>
             <div class="day">
               <p id="13"></p>
-              <a id="113" class="event"></a>
+              <div id="113" class="event"></div>
             </div>
             <div class="day">
               <p id="14"></p>
-              <a id="114" class="event"></a>
+              <div id="114" class="event"></div>
             </div>
             <div class="day">
               <p id="15"></p>
-              <a id="115" class="event"></a>
+              <div id="115" class="event"></div>
             </div>
             <div class="day">
               <p id="16"></p>
-              <a id="116" class="event"></a>
+              <div id="116" class="event"></div>
             </div>
             <div class="day">
               <p id="17"></p>
-              <a id="117" class="event"></a>
+              <div id="117" class="event"></div>
             </div>
             <div class="day">
               <p id="18"></p>
-              <a id="118" class="event"></a>
+              <div id="118" class="event"></div>
             </div>
             <div class="day">
               <p id="19"></p>
@@ -224,7 +225,7 @@
             </div>
             <div class="day">
               <p id="20"></p>
-              <a id="120" class="event"></a>
+              <div id="120" class="event"></div>
             </div>
             <div class="day">
               <p id="21"></p>
@@ -232,83 +233,83 @@
             </div>
             <div class="day">
               <p id="22"></p>
-              <a id="122" class="event"></a>
+              <div id="122" class="event"></div>
             </div>
             <div class="day">
               <p id="23"></p>
-              <a id="123" class="event"></a>
+              <div id="123" class="event"></div>
             </div>
             <div class="day">
               <p id="24"></p>
-              <a id="124" class="event"></a>
+              <div id="124" class="event"></div>
             </div>
             <div class="day">
               <p id="25"></p>
-              <a id="125" class="event"></a>
+              <div id="125" class="event"></div>
             </div>
             <div class="day">
               <p id="26"></p>
-              <a id="126" class="event"></a>
+              <div id="126" class="event"></div>
             </div>
             <div class="day">
               <p id="27"></p>
-              <a id="127" class="event"></a>
+              <div id="127" class="event"></div>
             </div>
             <div class="day">
               <p id="28"></p>
-              <a id="128" class="event"></a>
+              <div id="128" class="event"></div>
             </div>
             <div class="day">
               <p id="29"></p>
-              <a id="129" class="event"></a>
+              <div id="129" class="event"></div>
             </div>
             <div class="day">
               <p id="30"></p>
-              <a id="130" class="event"></a>
+              <div id="130" class="event"></div>
             </div>
             <div class="day">
               <p id="31"></p>
-              <a id="131" class="event"></a>
+              <div id="131" class="event"></div>
             </div>
             <div class="day">
               <p id="32"></p>
-              <a id="132" class="event"></a>
+              <div id="132" class="event"></div>
             </div>
             <div class="day">
               <p id="33"></p>
-              <a id="133" class="event"></a>
+              <div id="133" class="event"></div>
             </div>
             <div class="day">
               <p id="34"></p>
-              <a id="134" class="event"></a>
+              <div id="134" class="event"></div>
             </div>
             <div class="day">
               <p id="35"></p>
-              <a id="135" class="event"></a>
+              <div id="135" class="event"></div>
             </div>
             <div class="day">
               <p id="36"></p>
-              <a id="136" class="event"></a>
+              <div id="136" class="event"></div>
             </div>
             <div class="day">
               <p id="37"></p>
-              <a id="137" class="event"></a>
+              <div id="137" class="event"></div>
             </div>
             <div class="day">
               <p id="38"></p>
-              <a id="138" class="event"></a>
+              <div id="138" class="event"></div>
             </div>
             <div class="day">
               <p id="39"></p>
-              <a id="139" class="event"></a>
+              <div id="139" class="event"></div>
             </div>
             <div class="day">
               <p id="40"></p>
-              <a id="140" class="event"></a>
+              <div id="140" class="event"></div>
             </div>
             <div class="day">
               <p id="41"></p>
-              <a id="141" class="event"></a>
+              <div id="141" class="event"></div>
             </div>
           </div>
         </div>
@@ -317,6 +318,25 @@
       </div>
     </div>
   </main>
+
+  <footer>
+    <div class="footer__title col-lg-3 ">
+      <h3>F-Code Workshop</h3>
+      <img src="../img/rsz_logo_2000x2000 (1).png">
+    </div>
+    <div class="footer__description col-lg-6 ">
+      <P>Knowledge shared is knowledge squared</P>
+    </div>
+    <div class="footer__contact col-lg-3 ">
+      <h3>Contact</h3>
+      <div class="contact__icons">
+        <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
+        <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
+      </div>
+    </div>
+
+    <div class="footer__copyright">© F-Code Club 2020</div>
+  </footer>
 
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

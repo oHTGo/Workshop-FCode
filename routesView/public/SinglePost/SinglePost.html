@@ -122,7 +122,60 @@
               JOIN US
             </button>
 
-            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-primary showlistButton"
+              data-toggle="modal"
+              data-target="#listModal"
+              id="showlistButton"
+            >
+              List
+            </button>
+            <div
+              class="modal fade"
+              id="listModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      List of members joined this topic
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">    
+                    <ul class="list-group" id="memberList">
+                      <li class="list-group-item">Cras justo odio</li>
+                      <li class="list-group-item">Dapibus ac facilisis in</li>
+                      <li class="list-group-item">Morbi leo risus</li>
+                      <li class="list-group-item">Porta ac consectetur ac</li>
+                      <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>                
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <button
               type="button"
               class="btn btn-primary rateButton"
@@ -214,8 +267,7 @@
                     >
                       Close
                     </button>
-                    <button
-                      
+                    <button             
                       type="button"
                       class="btn btn-primary btn-danger deleteButton"
                       id="deleteButton"
@@ -340,29 +392,21 @@
     </main>
 
     <footer>
-      <div class="footer__title col-lg-4">
+      <div class="footer__title col-lg-3 ">
         <h3>F-Code Workshop</h3>
-        <img src="../img/rsz_logo_2000x2000 (1).png" />
+        <img src="../img/rsz_logo_2000x2000 (1).png">
       </div>
-      <div class="footer__description col-lg-4">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Reprehenderit, qui! Animi neque corporis cumque aliquam saepe?
-          Voluptate laborum
-        </p>
+      <div class="footer__description col-lg-6 ">
+        <P>Knowledge shared is knowledge squared</P>
       </div>
-      <div class="footer__contact col-lg-4">
+      <div class="footer__contact col-lg-3 ">
         <h3>Contact</h3>
         <div class="contact__icons">
-          <a href="https://www.facebook.com/fcodefpt" target="_blank"
-            ><img src="../img/facebook.svg"
-          /></a>
-          <a href="mailto: fcode.fptuhcm@gmail.com"
-            ><img src="../img/gmail.svg"
-          /></a>
+          <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
+          <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
         </div>
       </div>
-
+  
       <div class="footer__copyright">© F-Code Club 2020</div>
     </footer>
 

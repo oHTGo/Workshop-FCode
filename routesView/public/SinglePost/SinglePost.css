@@ -14,15 +14,15 @@
   margin-right: 1rem;
 }
 
-
-
 .header__title {
+  width: fit-content;
+  max-width: 85%;
   font-size: 2.3em;
   text-align: center;
   font-weight: 650;
   color: #16720a;
   cursor: default;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem auto;
 }
 
 .header__author span:first-child,
@@ -52,8 +52,8 @@
   flex-direction: column;
   width: fit-content;
   position: absolute;
-  top: 30px;
-  right: 35px;
+  top: 2.5%;
+  right: 2%;
 }
 
 .blog-post__icon a {
@@ -88,6 +88,10 @@
 
 .joinButton {
   margin-right: 2rem;
+  display: none;
+}
+
+.showlistButton {
   display: none;
 }
 
@@ -192,12 +196,22 @@
   }
 
   .header__title {
-    font-size: 1.7em;
+    font-size: 1.4em;
+    max-width: 70%;
   }
 
   .blog-post__icon {
-    top: 5%;
+    top: 3%;
     right: 5%;
+  }
+
+  .interactMenu {
+    min-width: 7rem;
+    left: -1.7rem !important;
+  }
+
+  .interactMenu .dropdown-item {
+    width: 70%;
   }
 
   .blog-post__icon a {

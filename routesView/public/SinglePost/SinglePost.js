@@ -16,7 +16,6 @@ function getCurrentUser() {
     .catch((error) => console.log(error));
 }
 getCurrentUser();
-console.log("Current topic id: " + window.localStorage.topicId);
 
 function resetTopicId() {
   window.localStorage.setItem("topicId", "");
@@ -42,7 +41,6 @@ function joinTopic(topicId) {
   participantObj = {
     statusParticipant: current_state,
   };
-  console.log(participantObj);
 
   fetch("/api/topic/" + topicId + "/join", {
     method: "POST",
@@ -104,8 +102,7 @@ function getReview() {
     .then((data) => {
       if (data.status === "Successful") {
         document.getElementById("deleteButton").style.display = "block";
-        document.getElementById("comment").innerHTML =
-          data.message.content;
+        document.getElementById("comment").innerHTML = data.message.content;
         let star = data.message.star;
         for (var i = 0; i < 5; i++) {
           if (i < star) {
@@ -173,7 +170,7 @@ function deleteReview() {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
+      
       window.location.reload();
     });
 }
@@ -182,7 +179,7 @@ function review() {
   fetch("/api/review/" + currentTopic)
     .then((res) => {
       res.json();
-      console.log(res.status);
+      
       if (res.status == 404) {
         createReview();
       } else {
@@ -199,8 +196,7 @@ function rejectPost(id) {
   const rejectObj = {
     action: "reject",
   };
-  console.log(rejectObj);
-
+  
   fetch("/api/user/topic/" + id, {
     method: "POST",
     headers: {
@@ -294,19 +290,19 @@ function getSinglePost(id) {
       let postHeader;
 
       // Differ between members and admin
-      if (myStorage.Role === 'Admin') {
+      if (myStorage.Role === "Admin") {
         postHeader = `<div class="post__header" id="post-header">
-            <div class="blog-post__icon dropdown">
-              <div class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Interact
+            <div class="blog-post__icon dropdown" id="post-icons">
+              <div class="btn btn-primary dropdown-toggle interactButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                
               </div>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept"><img src="../img/accept.svg"  title="Accept">Accept</a>
-              <a onClick="rejectPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__reject"><img src="../img/rejected.svg" title="Reject">Reject</a>
-              <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
+              <div class="dropdown-menu interactMenu" aria-labelledby="dropdownMenuButton">
+                <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept"><img src="../img/accept.svg"  title="Accept">Accept</a>
+                <a onClick="rejectPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__reject"><img src="../img/rejected.svg" title="Reject">Reject</a>
+                <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
               </div>
             </div>
-            <div class="header__title">${data.message.name}</div>
+            <div class="header__title" title="${data.message.name}">${data.message.name}</div>
               <div class="header__author">
               <span>Author: </span>
               <span>${data.message.author.name} ${partner}</span>
@@ -334,16 +330,16 @@ function getSinglePost(id) {
           </div>`;
       } else {
         postHeader = `<div class="post__header" id="post-header">
-            <div class="blog-post__icon dropdown">
-              <div class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Interact
+            <div class="blog-post__icon dropdown" id="post-icons">
+              <div class="btn btn-primary dropdown-toggle interactButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                
               </div>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
               <a href="../CreatePost/CreatePost.html" class="dropdown-item"><img src="../img/edit.svg">Edit</a>
               </div>
             </div>
-            <div class="header__title">${data.message.name}</div>
+            <div class="header__title" title="${data.message.name}">${data.message.name}</div>
               <div class="header__author">
               <span>Author: </span>
               <span>${data.message.author.name} ${partner}</span>
@@ -401,10 +397,13 @@ function getSinglePost(id) {
 
       if (
         window.localStorage.CurrentUserId !== data.message.author._id &&
-        window.localStorage.CurrentUserId !== "5fc7646967708345bc3c5876"
+        window.localStorage.Role !== "Admin"
       ) {
         // Post icon for only creators
-        document.getElementById("post-icon").style.display = "none";
+        document.getElementById("post-icons").style.display = "none";
+      } else {
+        // Show list of members joined the workshop
+        document.getElementById("showlistButton").style.display = "inline-block";
       }
 
       let timeInterval = moment().diff(moment(data.message.date), "minutes");
@@ -416,13 +415,25 @@ function getSinglePost(id) {
     .catch((error) => console.log(error));
 }
 
+function getJoinList(id) {
+  fetch("/api/topic/" + id)
+    .then((res) => res.json())
+    .then((data) => {
+      let list = [];
+      data.message.participants.map((element) => {
+        list.push(`<li class="list-group-item">${element.name}</li>`);
+      })
+      document.getElementById('memberList').innerHTML = list.join("");
+    })
+    .catch((error) => console.log(error));
+}
+
 var renderCommentsArray = [];
 function loadComments() {
   return fetch("/api/topic/" + window.localStorage.topicId)
     .then((response) => response.json())
     .then((data) => {
       renderCommentsArray = data.message.review.map((element) => {
-        
         return `
       <div class="comment__box">
       <div class="comment__text">${element.content}</div>
@@ -498,19 +509,21 @@ function renderRankingBoard() {
     .then((res) => res.json())
     .then((data) => {
       for (var i = 0; i < 5; i++) {
-        document.getElementById('rank'+(i+1)).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`
-        document.getElementById('rate'+(i+1)).innerHTML = data.message[i].averageRate;
+        document.getElementById(
+          "rank" + (i + 1)
+        ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`;
+        document.getElementById("rate" + (i + 1)).innerHTML =
+          data.message[i].averageRate;
       }
     })
     .catch((error) => console.log(error));
 }
 /*----------------------------------------------------------------------------------*/
 
-
 renderFullTopic(window.localStorage.topicId);
+getJoinList(window.localStorage.topicId);
 getReview();
 renderLoadmoreButton();
 renderComments();
 renderInitialJoinButton();
 renderRankingBoard();
-

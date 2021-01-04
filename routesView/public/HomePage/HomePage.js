@@ -6,7 +6,6 @@ function readPost(id, status) {
 }
 
 function readTopicId(id) {
-  console.log("Function read topicId actived");
   myStorage.setItem("topicId", id);
 }
 
@@ -40,7 +39,7 @@ function renderPosts(pageNumber) {
   fetch("/api/topic/page/" + pageNumber)
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data);
+      
       // myStorage.setItem('CurrentUserID', data.message.author.name);
       let postsArray = data.message.map((element) => {
         const weeks = [

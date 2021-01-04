@@ -54,7 +54,8 @@ p {
     margin: 10px 0 ;
     color: #3d3a3a;
     padding-top: 1rem;
-    padding-bottom: 2rem%;
+    padding-bottom: 2rem;
+    font-size: 2rem;
 }
 
 .login {

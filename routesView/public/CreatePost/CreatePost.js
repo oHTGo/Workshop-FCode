@@ -1,4 +1,3 @@
-console.log(window.localStorage);
 function loadUserList() {
   return fetch("/api/user")
     .then((response) => response.json())
@@ -46,7 +45,6 @@ async function post() {
       group: groupAuthor,
     };
   }
-  console.log(postObj);
 
   if (window.localStorage.topicId === "") {
     fetch("/api/topic", {
@@ -90,7 +88,7 @@ function renderEditPost(id) {
     fetch("/api/topic/" + id)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        
         let time = new Date(data.message.date).toTimeString().slice(0, 8);
         let date = new Date(data.message.date).toISOString().slice(0, 11);
         let datetime = date.concat(time);

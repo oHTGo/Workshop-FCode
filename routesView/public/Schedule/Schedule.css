@@ -80,16 +80,23 @@ td, th {
   left: 2%;
   color: black;
   font-family: Roboto,Arial,sans-serif;
-  /* background: #dadce0; */
   border-radius: 2px;
   border: none;
   padding: 1px 5px;
   width: 98%;
-  /* overflow-x: hidden; */
+  
 }
 
 .even:hover {
   border: none;
   background: #dadce0;
   border-radius: 8px;
+}
+
+.event a {
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  font-weight: 600;
 }
