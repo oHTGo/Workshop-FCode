@@ -5,18 +5,18 @@ const Review = require("../models/Review");
 const Topic = require("../models/Topic");
 const User = require("../models/User");
 
+const limit = 3;
+
 async function getCountPageTopic(req, res) {
     const topicResponse = await Topic.countDocuments({ status: 1 });
     try {
-        (topicResponse) ? helper.setStatusSuccess(res, { countPage: Math.ceil(topicResponse / 4) }) : helper.setStatusFailure(res);
+        (topicResponse) ? helper.setStatusSuccess(res, { countPage: Math.ceil(topicResponse / limit) }) : helper.setStatusFailure(res);
     } catch (err) {
         helper.setStatusFailure(res);
     }
 }
 
 async function getListTopic(req, res) {
-    const limit = 3;
-
     try {
         const queryAggregate = [
             { $match: { status: 1 } }, //query match
