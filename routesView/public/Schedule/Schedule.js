@@ -1,3 +1,21 @@
+function getCurrentUser() {
+  fetch("/api/user/current")
+    .then((res) => res.json())
+    .then((data) => {
+      window.localStorage.setItem("CurrentUserId", data.message._id);
+      window.localStorage.setItem("CurrentUsername", data.message.name);
+      if (data.message.isAdmin) {
+        window.localStorage.setItem("Role", "Admin");
+      } else {
+        window.localStorage.setItem("Role", "Member");
+      }
+      document
+        .getElementById("userAccount")
+        .insertAdjacentHTML("beforeend", data.message.name);
+    })
+    .catch((error) => console.log(error));
+}
+
 var monthName = [
   "January",
   "February",
@@ -214,6 +232,6 @@ function onClickDecrease() {
   }
 }
 /*------------------------------------------------------*/
-
+getCurrentUser();
 updateCalendar(month, year);
 showEvent(month, year);
