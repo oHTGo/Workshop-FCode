@@ -422,6 +422,18 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script>
+      function checkLogin() {
+        fetch('/api/user/current').then((res) => {
+          if (res.status == 401) {
+            location.replace('../index.html');
+          }
+        }).catch(error => console.log(error))
+      } 
+      checkLogin();
+      
+    
+    </script>
     <script src="SinglePost.js"></script>
     <script src="../lib/moment.js"></script>
   </body>

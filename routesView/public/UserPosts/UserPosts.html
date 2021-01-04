@@ -383,7 +383,19 @@
     <!--Custom JS-->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    <!-- <script>$('.mydatatable').DataTable();</script> -->
+    
+    <script>
+        function checkLogin() {
+          fetch('/api/user/current').then((res) => {
+            if (res.status == 401) {
+              location.replace('../index.html');
+            }
+          }).catch(error => console.log(error))
+        } 
+        checkLogin();
+        
+      
+      </script>
     <script src="./UserPosts.js"></script>
 
 </body>
