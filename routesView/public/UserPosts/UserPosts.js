@@ -55,6 +55,8 @@ function renderAllPosts() {
           status = statusArray[2];
           alertColor = alertColorsArr[2];
         }
+        let createDate = new Date(element.createdAt).toISOString().slice(0,10).concat(' ' + new Date(element.createdAt).toLocaleTimeString());
+        
 
         return `
         <tr>
@@ -66,7 +68,7 @@ function renderAllPosts() {
               ${element.name}
             </a>
           </td>
-          <td>${element.createdAt}</td>
+          <td>${createDate}</td>
           <td class="alert alert-${alertColor}">${status}</td>
         </tr>`;
       });
