@@ -20,7 +20,11 @@ router.get('/logout', (req, res) => {
 //Login Google
 router.get("/auth/google", passport.authenticate("google", { scope: ['profile', 'email'], hd: "fpt.edu.vn", accessType: 'offline', prompt: 'consent' }));
 router.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: '/failed' }), (req, res) => {
-    res.redirect(process.env.REDIRECT_LOGIN);
+    if (process.env.NODE_ENV) {
+        res.redirect("http://" + req.headers.host + process.env.REDIRECT_LOGIN);
+    } else {
+        res.redirect("https://" + req.headers.host + process.env.REDIRECT_LOGIN);
+    }
 });
 
 module.exports = router;
