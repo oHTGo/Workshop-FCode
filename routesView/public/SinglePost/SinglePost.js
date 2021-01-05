@@ -299,6 +299,7 @@ function getSinglePost(id) {
               <div class="dropdown-menu interactMenu" aria-labelledby="dropdownMenuButton">
                 <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept"><img src="../img/accept.svg"  title="Accept">Accept</a>
                 <a onClick="rejectPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__reject"><img src="../img/rejected.svg" title="Reject">Reject</a>
+                <a href="../CreatePost/CreatePost.html" class="dropdown-item"><img src="../img/edit.svg">Edit</a>
                 <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
               </div>
             </div>
