@@ -1,3 +1,21 @@
+function getCurrentUser() {
+  fetch("/api/user/current")
+    .then((res) => res.json())
+    .then((data) => {
+      window.localStorage.setItem("CurrentUserId", data.message._id);
+      window.localStorage.setItem("CurrentUsername", data.message.name);
+      if (data.message.isAdmin) {
+        window.localStorage.setItem("Role", "Admin");
+      } else {
+        window.localStorage.setItem("Role", "Member");
+      }
+      document
+        .getElementById("userAccount")
+        .insertAdjacentHTML("beforeend", data.message.name);
+    })
+    .catch((error) => console.log(error));
+}
+
 var monthName = [
   "January",
   "February",
@@ -84,9 +102,6 @@ async function showEvent(month, year) {
   try {
     const res = await fetch("/api/topic/schedule");
     const data = await res.json();
-    // data.message.map((element) => {
-    //   dataArray.push(element);
-    // })
     data.message.map((topic) => {
       yearE = new Date(topic.date).getFullYear();
       monthE = new Date(topic.date).getMonth();
@@ -129,9 +144,12 @@ function updateCalendar(monthS, yearS) {
 }
 
 function updateTodayCalendar() {
+  month = new Date().getMonth();
+  year = new Date().getFullYear();
   clearDataCalendar();
   updateCalendar(new Date().getMonth(), new Date().getFullYear());
-  document.getElementById("monthYearShow").innerHTML = monthName[new Date().getMonth()] + " " + year;
+  document.getElementById("monthYearShow").innerHTML = monthName[new Date().getMonth()] + " " + new Date().getFullYear();
+  
   showEvent(new Date().getMonth(), new Date().getFullYear());
 }
 
@@ -142,30 +160,9 @@ function clearDataCalendar() {
   }
 }
 
-// async function showEvent(month, year) {
-//   await loadData();
-//   dataArray.map((topic) => {
-//     console.log(topic);
-//     yearE = new Date(topic.date).getFullYear();
-//     monthE = new Date(topic.date).getMonth();
-//     dayE = new Date(topic.date).getDate();
-//     if (yearE == year && monthE == month) {
-//       let i = 100;
-//       for (const day of calendar(month + 1, year)) {
-//         if (dayE == day) {
-//           document.getElementById(
-//             i
-//           ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${topic._id}')">${topic.name}</a>`;
-//         }
-//         i++;
-//       }
-//     }
-//   });
-// }
 
-document.getElementById("increase").onclick = onClickIncrease;
 function onClickIncrease() {
-  if (monthShow == monthName[11]) {
+  if (month == 11) {
     year += 1;
     monthShow = monthName[0];
     month = 0;
@@ -176,7 +173,7 @@ function onClickIncrease() {
     showEvent(month, year);
   } else {
     for (let i = 11; i > -1; i--) {
-      if (monthShow == monthName[i]) {
+      if (month == i) {
         monthShow = monthName[i + 1];
         month += 1;
         document.getElementById("monthYearShow").innerHTML =
@@ -189,9 +186,9 @@ function onClickIncrease() {
   }
 }
 
-document.getElementById("decrease").onclick = onClickDecrease;
+
 function onClickDecrease() {
-  if (monthShow == monthName[0]) {
+  if (month == 0) {
     year -= 1;
     monthShow = monthName[11];
     month = 11;
@@ -201,7 +198,7 @@ function onClickDecrease() {
     showEvent(month, year);
   } else {
     for (let i = 0; i < 12; i++) {
-      if (monthShow == monthName[i]) {
+      if (month == i) {
         monthShow = monthName[i - 1];
         month -= 1;
         document.getElementById("monthYearShow").innerHTML =
@@ -214,6 +211,6 @@ function onClickDecrease() {
   }
 }
 /*------------------------------------------------------*/
-
+getCurrentUser();
 updateCalendar(month, year);
 showEvent(month, year);

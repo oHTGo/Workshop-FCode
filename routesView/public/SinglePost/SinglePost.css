@@ -155,6 +155,10 @@
   
 }
 
+.comment__text {
+  display: unset;
+}
+
 .comment__rate {
   margin-left: auto;
   display: flex;
