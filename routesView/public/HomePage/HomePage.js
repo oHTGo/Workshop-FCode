@@ -67,13 +67,13 @@ function renderPosts(pageNumber) {
         ];
         let postDate = new Date(element.date);
         let postDateFormat =
-          postDate.getDate() +
+          postDate.getUTCDate() +
           " " +
           months[postDate.getMonth()] +
           ", " +
-          postDate.getFullYear() +
+          postDate.getUTCFullYear() +
           " - " +
-          postDate.toLocaleTimeString();
+          postDate.getUTCHours() + ":" + postDate.getMinutes();
         let postRate = Math.round(element.averageRate * 100) / 100;
 
         return `
@@ -91,7 +91,7 @@ function renderPosts(pageNumber) {
           </div>
           <div class="blog-post__info">
             <div class="blog-post__date">
-              <span class="weekDay">${weeks[postDate.getDay()]}</span>
+              <span class="weekDay">${weeks[postDate.getUTCDay()]}</span>
               <span class="formatDate">${postDateFormat}</span>
             </div>
             
