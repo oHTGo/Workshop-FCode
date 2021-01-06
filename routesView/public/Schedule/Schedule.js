@@ -37,7 +37,7 @@ function readTopicId(id) {
 
 var currentTime = new Date();
 var month = new Date().getMonth();
-var year = new Date().getFullYear(); 
+var year = new Date().getFullYear();
 var today = new Date().getDate();
 
 //doi thang tu so sang ten
@@ -97,7 +97,16 @@ function calendar(month, year) {
 
 document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
 
-const dataArray = [];
+const postsArray = [];
+function loadPosts() {
+  fetch("/api/topic/schedule")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => console.log(error));
+}
+
 async function showEvent(month, year) {
   try {
     const res = await fetch("/api/topic/schedule");
@@ -148,8 +157,9 @@ function updateTodayCalendar() {
   year = new Date().getFullYear();
   clearDataCalendar();
   updateCalendar(new Date().getMonth(), new Date().getFullYear());
-  document.getElementById("monthYearShow").innerHTML = monthName[new Date().getMonth()] + " " + new Date().getFullYear();
-  
+  document.getElementById("monthYearShow").innerHTML =
+    monthName[new Date().getMonth()] + " " + new Date().getFullYear();
+
   showEvent(new Date().getMonth(), new Date().getFullYear());
 }
 
@@ -159,7 +169,6 @@ function clearDataCalendar() {
     document.getElementsByClassName("day")[i].style.backgroundColor = "#fff";
   }
 }
-
 
 function onClickIncrease() {
   if (month == 11) {
@@ -186,7 +195,6 @@ function onClickIncrease() {
   }
 }
 
-
 function onClickDecrease() {
   if (month == 0) {
     year -= 1;
@@ -211,6 +219,9 @@ function onClickDecrease() {
   }
 }
 /*------------------------------------------------------*/
+loadPosts();
 getCurrentUser();
 updateCalendar(month, year);
 showEvent(month, year);
+
+

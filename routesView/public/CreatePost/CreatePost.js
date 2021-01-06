@@ -16,71 +16,78 @@ function loadUserList() {
     .catch((error) => console.log(error));
 }
 
-async function post() {
-  await loadUserList();
-  let partner = document.getElementById("partnerSelection");
-  let groupAuthor = [
-    {
-      _id: document.getElementById("partnerSelection").value,
-      // name: partner.options[partner.selectedIndex].text,
-    },
-  ];
-
-  let postObj = {};
-  if (groupAuthor[0]._id === "0") {
-    postObj = {
-      name: document.getElementById("title-input").value,
-      date: document.getElementById("example-datetime-local-input").value,
-      detail: CKEDITOR.instances["main-content"].getData(),
-      note: document.getElementById("post__note").value,
-      background: document.getElementById("imageUpload").value,
-    };
-  } else {
-    postObj = {
-      name: document.getElementById("title-input").value,
-      date: document.getElementById("example-datetime-local-input").value,
-      detail: CKEDITOR.instances["main-content"].getData(),
-      note: document.getElementById("post__note").value,
-      background: document.getElementById("imageUpload").value,
-      group: groupAuthor,
-    };
-  }
-
-  if (window.localStorage.topicId === "") {
-    fetch("/api/topic", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+async function post(e) {
+  e.preventDefault();
+    await loadUserList();
+    // let partner = document.getElementById("partnerSelection");
+    let groupAuthor = [
+      {
+        _id: document.getElementById("partnerSelection").value,
       },
-      body: JSON.stringify(postObj),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        alert('Post successfully!');
-        window.location.replace("../HomePage/HomePage.html");
+    ];
+  
+    let postObj = {};
+    if (groupAuthor[0]._id === "0") {
+      postObj = {
+        name: document.getElementById("title-input").value,
+        date: document.getElementById("example-datetime-local-input").value,
+        detail: CKEDITOR.instances["main-content"].getData(),
+        note: document.getElementById("post__note").value,
+        background: document.getElementById("imageUpload").value,
+      };
+    } else {
+      postObj = {
+        name: document.getElementById("title-input").value,
+        date: document.getElementById("example-datetime-local-input").value,
+        detail: CKEDITOR.instances["main-content"].getData(),
+        note: document.getElementById("post__note").value,
+        background: document.getElementById("imageUpload").value,
+        group: groupAuthor,
+      };
+    }
+  
+    if (window.localStorage.topicId === "") {
+      fetch("/api/topic", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(postObj),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  } else {
-    fetch("/api/topic/" + window.localStorage.topicId, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postObj),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        alert('Update successfully!');
-        window.location.replace('../HomePage/HomePage.html');
+        .then((response) => {
+          return response.json();
+          
+        })
+        .then((data) => {
+          console.log("Success:", data);//dòng này cũng kh vô 
+          alert("Post successfully!"); // từ dòng này ko chạy mà vẫn gửi dc data
+          window.location.replace("../HomePage/HomePage.html");
+        })
+        .catch((error) => {
+          console.error("Error: ", error);
+        });
+    } else {
+      fetch("/api/topic/" + window.localStorage.topicId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(postObj),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log("Success:", data);
+          alert("Update successfully!");
+          window.location.replace("../HomePage/HomePage.html");
+        })
+        .catch((error) => {
+          console.error("Error: ", error);
+        });
+    }
 }
 
 function renderEditPost(id) {
@@ -88,7 +95,6 @@ function renderEditPost(id) {
     fetch("/api/topic/" + id)
       .then((res) => res.json())
       .then((data) => {
-        
         let time = new Date(data.message.date).toTimeString().slice(0, 8);
         let date = new Date(data.message.date).toISOString().slice(0, 11);
         let datetime = date.concat(time);
@@ -133,3 +139,5 @@ function getCurrentUser() {
 loadUserList();
 getCurrentUser();
 renderEditPost(window.localStorage.topicId);
+let createPostForm = document.getElementById("createPostForm");
+createPostForm.addEventListener("submit", post, true);
