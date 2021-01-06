@@ -170,7 +170,6 @@ function deleteReview() {
   })
     .then((res) => res.json())
     .then((res) => {
-      
       window.location.reload();
     });
 }
@@ -179,7 +178,7 @@ function review() {
   fetch("/api/review/" + currentTopic)
     .then((res) => {
       res.json();
-      
+
       if (res.status == 404) {
         createReview();
       } else {
@@ -196,7 +195,7 @@ function rejectPost(id) {
   const rejectObj = {
     action: "reject",
   };
-  
+
   fetch("/api/user/topic/" + id, {
     method: "POST",
     headers: {
@@ -257,6 +256,7 @@ function getSinglePost(id) {
   return fetch("/api/topic/" + id)
     .then((respone) => respone.json())
     .then((data) => {
+      console.log(data);
       const months = [
         "January",
         "February",
@@ -272,15 +272,14 @@ function getSinglePost(id) {
         "December",
       ];
 
-      let postDate = new Date(data.message.date);
+      let postDate = new Date(data.message.date).toISOString(); //YYYY-MM-ddThh:mm:ss.000Z
       let postDateFormat =
-        postDate.getDate() +
+        postDate.slice(8, 10) +
         " " +
-        months[postDate.getMonth()] +
+        months[parseInt(postDate.slice(5, 7)) - 1] +
         ", " +
-        postDate.getFullYear() +
-        " - " +
-        postDate.toLocaleTimeString();
+        postDate.slice(0, 4) +
+        " - " + postDate.slice(11,16);
       let partner;
       if (data.message.group.length != 0) {
         partner = ", " + data.message.group[0].name;
@@ -404,7 +403,8 @@ function getSinglePost(id) {
         document.getElementById("post-icons").style.display = "none";
       } else {
         // Show list of members joined the workshop
-        document.getElementById("showlistButton").style.display = "inline-block";
+        document.getElementById("showlistButton").style.display =
+          "inline-block";
       }
 
       let timeInterval = moment().diff(moment(data.message.date), "minutes");
@@ -423,8 +423,8 @@ function getJoinList(id) {
       let list = [];
       data.message.participants.map((element) => {
         list.push(`<li class="list-group-item">${element.name}</li>`);
-      })
-      document.getElementById('memberList').innerHTML = list.join("");
+      });
+      document.getElementById("memberList").innerHTML = list.join("");
     })
     .catch((error) => console.log(error));
 }
@@ -510,13 +510,16 @@ function renderRankingBoard() {
     .then((res) => res.json())
     .then((data) => {
       for (var i = 0; i < data.message.length && i < 5; i++) {
-        document.getElementById('rank'+(i+1)).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`
-        document.getElementById('rate'+(i+1)).innerHTML = data.message[i].averageRate;
+        document.getElementById(
+          "rank" + (i + 1)
+        ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`;
+        document.getElementById("rate" + (i + 1)).innerHTML =
+          data.message[i].averageRate;
       }
 
       if (data.message.length < 5) {
         for (var i = data.message.length + 1; i <= 6; i++) {
-          document.getElementsByTagName("TR")[i].style.display = 'none';
+          document.getElementsByTagName("TR")[i].style.display = "none";
         }
       }
     })
