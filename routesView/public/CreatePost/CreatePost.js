@@ -1,3 +1,5 @@
+document.getElementById('example-datetime-local-input').value = moment().format('yyyy-MM-DDThh:mm')
+
 function loadUserList() {
   return fetch("/api/user")
     .then((response) => response.json())
@@ -19,18 +21,18 @@ function loadUserList() {
 async function post(e) {
   e.preventDefault();
     await loadUserList();
-    // let partner = document.getElementById("partnerSelection");
     let groupAuthor = [
       {
         _id: document.getElementById("partnerSelection").value,
       },
     ];
-  
+    let postDate = moment.utc(document.getElementById('example-datetime-local-input').value).format();
+
     let postObj = {};
     if (groupAuthor[0]._id === "0") {
       postObj = {
         name: document.getElementById("title-input").value,
-        date: document.getElementById("example-datetime-local-input").value,
+        date: postDate,
         detail: CKEDITOR.instances["main-content"].getData(),
         note: document.getElementById("post__note").value,
         background: document.getElementById("imageUpload").value,
@@ -38,7 +40,7 @@ async function post(e) {
     } else {
       postObj = {
         name: document.getElementById("title-input").value,
-        date: document.getElementById("example-datetime-local-input").value,
+        date: postDate,
         detail: CKEDITOR.instances["main-content"].getData(),
         note: document.getElementById("post__note").value,
         background: document.getElementById("imageUpload").value,
@@ -57,11 +59,10 @@ async function post(e) {
       })
         .then((response) => {
           return response.json();
-          
         })
         .then((data) => {
-          console.log("Success:", data);//dòng này cũng kh vô 
-          alert("Post successfully!"); // từ dòng này ko chạy mà vẫn gửi dc data
+          console.log("Success:", data);
+          alert("Post successfully!"); 
           window.location.replace("../HomePage/HomePage.html");
         })
         .catch((error) => {
