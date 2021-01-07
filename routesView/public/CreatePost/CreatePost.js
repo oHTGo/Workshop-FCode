@@ -1,4 +1,6 @@
-document.getElementById('example-datetime-local-input').value = moment().format('yyyy-MM-DDThh:mm')
+if (window.localStorage.topicId == "") {
+  document.getElementById('example-datetime-local-input').value = moment().format('yyyy-MM-DDThh:mm');
+}
 
 function loadUserList() {
   return fetch("/api/user")
@@ -96,19 +98,14 @@ function renderEditPost(id) {
     fetch("/api/topic/" + id)
       .then((res) => res.json())
       .then((data) => {
-        let time = new Date(data.message.date).toTimeString().slice(0, 8);
-        let date = new Date(data.message.date).toISOString().slice(0, 11);
-        let datetime = date.concat(time);
-
+        let datetime = new Date(data.message.date).toISOString().slice(0,16);
         if (data.message.group.length !== 0) {
           // check if there is partner or not
           document
             .getElementById(data.message.group[0]._id)
             .setAttribute("selected", "true");
         }
-        document.getElementById(
-          "example-datetime-local-input"
-        ).value = datetime;
+        document.getElementById('example-datetime-local-input').value = datetime;
         document.getElementById("title-input").value = data.message.name;
         document.getElementById("imageUpload").value = data.message.background;
         document.getElementById("main-content").innerHTML = data.message.detail;
