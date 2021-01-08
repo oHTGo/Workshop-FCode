@@ -41,6 +41,11 @@
   align-items: center;
   border-radius: 5px;
   margin-bottom: 2rem;
+  transition: 600ms;
+}
+
+.blog-post:hover {
+  transform: scale(1.05);
 }
 
 .blog-post__info {
@@ -222,7 +227,6 @@
 
 td,
 th {
-  /* border: 1px solid #dddddddd; */
   text-align: center;
   padding: 5px;
   cursor: default;
@@ -233,10 +237,6 @@ th {
 td img {
   width: 25px;
   height: 25px;
-}
-
-td a:hover {
-  text-decoration: none;
 }
 
 tr:nth-child(even) {

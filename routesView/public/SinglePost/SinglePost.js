@@ -42,7 +42,7 @@ function joinTopic(topicId) {
     statusParticipant: current_state,
   };
 
-  fetch("/api/topic/" + topicId + "/join", {
+  return fetch("/api/topic/" + topicId + "/join", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,6 +52,7 @@ function joinTopic(topicId) {
     .then((response) => response.json())
     .then((data) => {
       console.log("Success:", data);
+      alert(data.message);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -70,11 +71,11 @@ async function renderInitialJoinButton() {
 
 async function changeState() {
   (current_state = await getJoinStatus()), (current_state = !current_state);
-  document.getElementById("joinedButton").innerHTML = `${
-    states[current_state ? 1 : 0]
-  }`;
-  document.getElementById("joinedButton").classList.toggle("disabledButton");
-  joinTopic(window.localStorage.topicId);
+  // document.getElementById("joinedButton").innerHTML = `${
+  //   states[current_state ? 1 : 0]
+  // }`;
+  // document.getElementById("joinedButton").classList.toggle("disabledButton");
+  await joinTopic(window.localStorage.topicId);
   window.location.reload();
   return current_state;
 }
@@ -256,7 +257,6 @@ function getSinglePost(id) {
   return fetch("/api/topic/" + id)
     .then((respone) => respone.json())
     .then((data) => {
-      console.log(data);
       const months = [
         "January",
         "February",
@@ -298,36 +298,36 @@ function getSinglePost(id) {
               <div class="dropdown-menu interactMenu" aria-labelledby="dropdownMenuButton">
                 <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept"><img src="../img/accept.svg"  title="Accept">Accept</a>
                 <a onClick="rejectPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__reject"><img src="../img/rejected.svg" title="Reject">Reject</a>
-                <a href="../CreatePost/CreatePost.html" class="dropdown-item"><img src="../img/edit.svg">Edit</a>
+                <a href="../CreatePost/CreatePost.html" class="dropdown-item" id="blog-post__edit"><img src="../img/edit.svg">Edit</a>
                 <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
               </div>
             </div>
             <div class="header__title" title="${data.message.name}">${data.message.name}</div>
+              <div class="header__date">
+                <span>Date: </span>
+                <span>${postDateFormat}</span>
+              </div>
               <div class="header__author">
-              <span>Author: </span>
-              <span>${data.message.author.name} ${partner}</span>
-            </div>
-            <div class="header__date">
-              <span>Date: </span>
-              <span>${postDateFormat}</span>
-            </div>
-            <div class="blog-post__rate" id="blog-post__rate">
-              <span>Rate: </span>
-              <span>${data.message.averageRate}</span>
-              <svg
-                width="1.1em"
-                height="1.1em"
-                viewBox="0 0 16 16"
-                class="bi bi-star-fill"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-            </div> 
-          </div>`;
+                <span>Author: </span>
+                <span>${data.message.author.name} ${partner}</span>
+              </div>
+              <div class="blog-post__rate" id="blog-post__rate">
+                <span>Rate: </span>
+                <span>${data.message.averageRate}</span>
+                <svg
+                  width="1.1em"
+                  height="1.1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-star-fill"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                  />
+                </svg>
+              </div> 
+            </div>`;
       } else {
         postHeader = `<div class="post__header" id="post-header">
             <div class="blog-post__icon dropdown" id="post-icons">
@@ -336,7 +336,7 @@ function getSinglePost(id) {
               </div>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
-              <a href="../CreatePost/CreatePost.html" class="dropdown-item"><img src="../img/edit.svg">Edit</a>
+              <a href="../CreatePost/CreatePost.html" class="dropdown-item" id="blog-post__edit"><img src="../img/edit.svg">Edit</a>
               </div>
             </div>
             <div class="header__title" title="${data.message.name}">${data.message.name}</div>
@@ -401,8 +401,12 @@ function getSinglePost(id) {
       ) {
         // Post icon for only creators
         document.getElementById("post-icons").style.display = "none";
-      } else {
-        // Show list of members joined the workshop
+      } else if (window.localStorage.CurrentUserId == data.message.author._id) {
+        document.getElementById('blog-post__edit').style.display ='block';
+      }
+      if (window.localStorage.CurrentUserId == data.message.author._id ||
+        window.localStorage.Role == "Admin")  {
+        // Show list of members joined the workshop for only author and admins
         document.getElementById("showlistButton").style.display =
           "inline-block";
       }

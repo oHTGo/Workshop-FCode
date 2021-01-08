@@ -99,37 +99,59 @@ document.getElementById("monthYearShow").innerHTML = monthShow + " " + year;
 
 const postsArray = [];
 function loadPosts() {
-  fetch("/api/topic/schedule")
+  return fetch("/api/topic/schedule")
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      data.message.map((element) => {
+        postsArray.push(element);
+      });
     })
     .catch((error) => console.log(error));
 }
 
+// async function showEvent(month, year) {
+//   try {
+//     const res = await fetch("/api/topic/schedule");
+//     const data = await res.json();
+//     data.message.map((topic) => {
+//       yearE = new Date(topic.date).getFullYear();
+//       monthE = new Date(topic.date).getMonth();
+//       dayE = new Date(topic.date).getDate();
+//       if (yearE == year && monthE == month) {
+//         let i = 100;
+//         for (const day of calendar(month + 1, year)) {
+//           if (dayE == day) {
+//             document.getElementById(
+//               i
+//             ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${topic._id}')" title="${topic.name}">${topic.name}</a>`;
+//           }
+//           i++;
+//         }
+//       }
+//     });
+//   } catch (error) {
+//     return console.log(error);
+//   }
+// }
+
 async function showEvent(month, year) {
-  try {
-    const res = await fetch("/api/topic/schedule");
-    const data = await res.json();
-    data.message.map((topic) => {
-      yearE = new Date(topic.date).getFullYear();
-      monthE = new Date(topic.date).getMonth();
-      dayE = new Date(topic.date).getDate();
-      if (yearE == year && monthE == month) {
-        let i = 100;
-        for (const day of calendar(month + 1, year)) {
-          if (dayE == day) {
-            document.getElementById(
-              i
-            ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${topic._id}')" title="${topic.name}">${topic.name}</a>`;
-          }
-          i++;
+  //await loadPosts();
+  postsArray.map((topic) => {
+    yearE = new Date(topic.date).getFullYear();
+    monthE = new Date(topic.date).getMonth();
+    dayE = new Date(topic.date).getDate();
+    if (yearE == year && monthE == month) {
+      let i = 100;
+      for (const day of calendar(month + 1, year)) {
+        if (dayE == day) {
+          document.getElementById(
+            i
+          ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${topic._id}')" title="${topic.name}">${topic.name}</a>`;
         }
+        i++;
       }
-    });
-  } catch (error) {
-    return console.log(error);
-  }
+    }
+  });
 }
 
 function updateCalendar(monthS, yearS) {
@@ -219,9 +241,13 @@ function onClickDecrease() {
   }
 }
 /*------------------------------------------------------*/
-loadPosts();
+async function initialLoading() {
+  await loadPosts();
+  updateCalendar(month, year);
+  showEvent(month, year);
+  const loader = document.querySelector(".loader");
+  loader.className += " hidden"; // class "loader hidden"
+}
+initialLoading();
 getCurrentUser();
-updateCalendar(month, year);
-showEvent(month, year);
-
 
