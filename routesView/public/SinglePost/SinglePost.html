@@ -20,6 +20,36 @@
       src="https://kit.fontawesome.com/9ba09bf17b.js"
       crossorigin="anonymous"
     ></script>
+    <style>
+      .loader {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loader > img {
+    width: 100px;
+  }
+  
+  .loader.hidden {
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+  }
+  </style>
     
   </head>
 
@@ -109,6 +139,9 @@
     </header>
 
     <main>
+      <div class="loader">
+        <img src="../img/loading.gif" alt="Loading..." />
+      </div>
       <div class="singlepost__content">
         <div class="singlepost__wrapper col-lg-7 col-xs-12" id="singlepost-wrapper">
           
@@ -430,11 +463,17 @@
           }
         }).catch(error => console.log(error))
       } 
-      checkLogin();
-      
-    
+      checkLogin(); 
+    </script>
+    <script>
+      window.addEventListener('load', function () {
+        const loader = document.querySelector(".loader");
+      loader.className += " hidden"; // class "loader hidden"
+      })
     </script>
     <script src="SinglePost.js"></script>
+    
     <script src="../lib/moment.js"></script>
+    
   </body>
 </html>

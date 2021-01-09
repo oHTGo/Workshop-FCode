@@ -7,7 +7,6 @@
 .singlepost__wrapper {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid rgba(0, 0, 0, .5); */
   padding: 1.2rem 1rem;
   background-color: #fff;
   border-radius: 5px;
@@ -38,7 +37,8 @@
 .blog-post__rate span:nth-child(2) {
   font-size: 1.1em;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.5);
+  /* color: rgba(0, 0, 0, 0.5); */
+  color: #84817a;
 }
 
 .blog-post__rate {
@@ -52,7 +52,7 @@
   flex-direction: column;
   width: fit-content;
   position: absolute;
-  top: 2.5%;
+  top: 3.5%;
   right: 2%;
 }
 
@@ -71,6 +71,10 @@
   width: 30px;
   height: 30px;
   margin-right: 10px; 
+}
+
+#blog-post__edit {
+  display: none;
 }
 
 .post__body {
