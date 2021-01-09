@@ -93,7 +93,8 @@
 
 .blog-post__date span {
   display: block;
-  color: rgba(0, 0, 0, 0.5);
+  /* color: rgba(0, 0, 0, 0.5); */
+  color: #84817a;
   font-size: 0.9rem;
   font-weight: 600;
   margin: 0.2rem 0;

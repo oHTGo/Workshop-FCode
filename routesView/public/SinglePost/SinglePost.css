@@ -37,7 +37,8 @@
 .blog-post__rate span:nth-child(2) {
   font-size: 1.1em;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.5);
+  /* color: rgba(0, 0, 0, 0.5); */
+  color: #84817a;
 }
 
 .blog-post__rate {
