@@ -128,7 +128,7 @@ function renderPagination() {
       let pageArray = [];
       for (var i = 0; i < data.message.countPage; i++) {
         pageArray.push(
-          `<li class="page-item"><a class="page-link" href="#" onclick="renderPosts(this.innerText)">${
+          `<li class="page-item"><a class="page-link" onclick="renderPosts(this.innerText)">${
             i + 1
           }</a></li>`
         );
