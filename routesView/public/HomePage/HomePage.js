@@ -77,7 +77,7 @@ function renderPosts(pageNumber) {
         let postRate = Math.round(element.averageRate * 100) / 100;
 
         return `
-        <div class="blog-post">
+        <a class="blog-post" href="../SinglePost/SinglePost.html" onClick="readPost('${element._id}', 1)">
           <div class="blog-post__img">
             <img src="${element.background}" alt="">
           </div>
@@ -95,15 +95,10 @@ function renderPosts(pageNumber) {
               <span class="formatDate">${postDateFormat}</span>
             </div>
             
-            <div class="blog-post__title" title="${element.name}">${
-          element.name
-        }</div>
+            <div class="blog-post__title" title="${element.name}">${element.name}</div>
             <div class="blog-post__description">${element.detail}</div>
-            <a href="../SinglePost/SinglePost.html" class="blog-post__cta" id="readButton" onClick="readPost('${
-              element._id
-            }', 1)">Read more</a>
           </div>
-        </div>`;
+        </a>`;
       });
 
       document.getElementById(
@@ -153,9 +148,9 @@ function moveNextPage() {
       let currentPage = parseInt(window.localStorage.CurrentPage);
       if (currentPage < data.message.countPage) {
         currentPage += 1;
+        
         renderPosts(currentPage);
       }
-      
     })
     .catch((error) => console.log(error));
 }

@@ -1,88 +1,96 @@
 main {
-    background-color: rgba(var(--b3f,250,250,250),1);
-    padding: 2rem;
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+  padding: 2rem;
 }
 
 .userPosts__container {
-    display: flex;
-    padding: 3.5rem 1.5rem 3.5rem 1.5rem;
-    background-color: #fff;
-    border-radius: 5px;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-    align-items: center;
+  position: relative;
+  display: flex;
+  padding: 2rem 1.5rem 3.5rem 1.5rem;
+  background-color: #fff;
+  border-radius: 5px;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
 }
 
 .userPosts__wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 50vh;
+}
+
+.userPosts__title {
+  text-align: center;
+  padding: 0.5rem;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  cursor: default;
+  font-weight: 550;
 }
 
 .dropdownButton__wrapper {
-    display: flex;
-    height: fit-content;
-    width: fit-content;
-    align-self: flex-start;
-    margin-bottom: 2rem;
-    margin-left: 15px;
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  align-self: flex-start;
+  margin-bottom: 2rem;
+  margin-left: 15px;
 }
 
 .selectButton {
-    width: 10rem;
+  width: 10rem;
 }
 
-
 .table {
-    border-collapse: collapse;
-    border-radius: 5px;
+  border-collapse: collapse;
+  border-radius: 5px;
 }
 
 .alert {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 tr {
-    padding: 2px;
+  padding: 2px;
 }
 
 .pagination {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 /*--------------------- SMALL DEVICE --------------------*/
 @media (max-width: 991.98px) {
+  main {
+    padding: 2rem 1rem 2rem 1rem;
+  }
 
-    main {
-        padding: 2rem 1rem 2rem 1rem;
-    }
+  .userPosts__container {
+    padding: 1rem 0.5rem 3rem 0.5rem;
+  }
 
-    .userPosts__container {
-        padding: 3rem .5rem 3rem .5rem;
-    }
+  .userPosts__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 
-    .dropdownButton__wrapper {
-        align-self: center;
-    }
+  .dropdownButton__wrapper {
+    align-self: center;
+  }
 
-    .dataTables_length, .dataTables_filter {
-        text-align: left !important;
-    }
+  .dataTables_length,
+  .dataTables_filter {
+    text-align: left !important;
+  }
 
-    .table thead th {
-        font-size: .7rem;
-    }
+  .table thead th {
+    font-size: 0.7rem;
+  }
 
-    .table tbody td {
-        font-size: .6rem;
-        padding: .5rem;
-    }
-
+  .table tbody td {
+    font-size: 0.6rem;
+    padding: 0.5rem;
+  }
 }
-
-
-
-
-

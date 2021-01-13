@@ -37,6 +37,9 @@ function getJoinStatus() {
 }
 
 function joinTopic(topicId) {
+  setInterval(function () {
+    document.querySelector(".loader").className = "loader";
+  }, 300);
   // this function is to post the join status to server
   participantObj = {
     statusParticipant: current_state,
@@ -372,7 +375,7 @@ function getSinglePost(id) {
             <p>
               ${data.message.detail}
             </p>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success" role="alert" id="postnote">
               ${data.message.note}
             </div>
           </div>`;
@@ -383,6 +386,10 @@ function getSinglePost(id) {
       document
         .getElementById("post-header")
         .insertAdjacentHTML("afterend", postBody);
+
+      if (data.message.note.toString().trim() === "") {
+        document.getElementById('postnote').style.display = 'none';
+      }
 
       if (window.localStorage.PostStatus == 1) {
         $(".blog-post__accept").css("display", "none");
