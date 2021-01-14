@@ -12,36 +12,6 @@
     <link rel="stylesheet" href="../HomePage/HomePage.css">
     <link rel="stylesheet" href="./UserPosts.css">
     <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
-    <style>
-        .loader {
-      position: fixed;
-      z-index: 99;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .loader > img {
-      width: 100px;
-    }
-    
-    .loader.hidden {
-      animation: fadeOut 1s;
-      animation-fill-mode: forwards;
-    }
-    
-    @keyframes fadeOut {
-      100% {
-          opacity: 0;
-          visibility: hidden;
-      }
-    }
-      </style>
 </head>
 
 <body>
@@ -64,7 +34,7 @@
                 </a>
               </li>
               <li class="nav-item bg-white">
-                <a class="nav-link" href="../CreatePost/CreatePost.html" onclick="resetTopicId()">
+                <a class="nav-link" href="../CreatePost/CreatePost.html">
                   <i class="far fa-calendar-plus"></i>
                   Create</a>
               </li>
@@ -74,17 +44,17 @@
                   Schedule</a>
               </li>
               <li class="nav-item dropdown bg-white">
-                <a class="nav-link dropdown-toggle" href="#" id="userAccount" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-user"></i>
-                  
+                  Le Hoang Khoi (K15 HCM)
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item active" href="../UserPosts/UserPosts.html">
                     <i class="fas fa-chart-bar"></i>
                     User status</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/logout">
+                  <a class="dropdown-item" href="#">
                     <i class="fas fa-sign-out-alt"></i>
                     Logout</a>
                 </div>
@@ -103,7 +73,7 @@
               <a class="nav-link" href="../HomePage/HomePage.html">Home <span class="sr-only"></span></a>
             </li>
             <li class="nav-item bg-white">
-              <a class="nav-link" href="../CreatePost/CreatePost.html" onclick="resetTopicId()">Create</a>
+              <a class="nav-link" href="../CreatePost/CreatePost.html">Create</a>
             </li>
             <li class="nav-item bg-white">
               <a class="nav-link" href="../Schedule/Schedule.html">Schedule</a>
@@ -117,7 +87,7 @@
                 <a class="dropdown-item active" href="../UserPosts/UserPosts.html">User status</a>
                 <div class="dropdown-divider"></div>
     
-                <a class="dropdown-item" href="/logout">Logout</a>
+                <a class="dropdown-item" href="#">Logout</a>
               </div>
             </li>
           </ul>
@@ -127,15 +97,11 @@
           </form>
         </div>
         </nav>
-    </header>
+      </header>
 
     <main>
-        <div class="loader">
-            <img src="../img/loading.gif" alt="Loading..." />
-        </div>
         <div class="userPosts__container">
             <div class="userPosts__wrapper">
-              <h2 class="userPosts__title">Posts status</h2>
                 <div class="dropdownButton__wrapper">
                     <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -154,9 +120,6 @@
                             <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#waitedList"
                                 role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                 onclick="toggleButton(this)">Waiting</a>
-                            <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#rejectedList"
-                                role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                onclick="toggleButton(this)">Rejected</a>
                         </div>
                     </div>
                 </div>
@@ -177,7 +140,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody id="tableBodyAccepted">
+                                <tbody>
                                     <tr>
                                         <td>1</td>
                                         <td>How to use Git and Github</td>
@@ -229,63 +192,12 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Posts</th>
-                                        <th>Create date</th>
+                                        <th>Upload date</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
 
-                                <tbody id="tableBodyWaiting">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>How to use Git and Github</td>
-                                        <td>17/10/2020 17:45</td>
-                                        <td class="alert alert-danger">Waiting</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Crawling data and tips on Instagram</td>
-                                        <td>17/10/2020 17:45</td>
-                                        <td class="alert alert-danger">Waiting</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>How to use Git and Github</td>
-                                        <td>17/10/2020 17:45</td>
-                                        <td class="alert alert-danger">Waiting</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>How to use Git and Github</td>
-                                        <td>17/10/2020 17:45</td>
-                                        <td class="alert alert-danger">Waiting</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>How to use Git and Github</td>
-                                        <td>17/10/2020 17:45</td>
-                                        <td class="alert alert-danger">Waiting</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                        <!--RejectedList-->
-                        <div class="tab-pane fade bg-white" id="rejectedList" role="tabpanel"
-                            aria-labelledby="v-pills-changePassword-tab">
-
-
-                            <table class="table table-striped table-bordered mydatatable">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Posts</th>
-                                        <th>Create date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody id="tableBodyRejected">
+                                <tbody>
                                     <tr>
                                         <td>1</td>
                                         <td>How to use Git and Github</td>
@@ -323,19 +235,54 @@
 
                         <!--All-->
                         <div class="tab-pane fade show active bg-white" id="allList" role="tabpanel"
-                            >
-                            <table class="table table-striped table-bordered mydatatable" id="tableAll">
+                            aria-labelledby="v-pills-changePassword-tab">
+                            <table class="table table-striped table-bordered mydatatable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Posts</th>
-                                        <th>Create date</th>
+                                        <th>Upload date</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
 
-                                <tbody id="tableBodyAll">
-                                    
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><a href="../SinglePost/SinglePost.html">How to use Git and Github</a></td>
+                                        <td>17/10/2020 17:45</td>
+                                        <td class="alert alert-success">Accepted</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Crawling data and tips on Instagram</td>
+                                        <td>17/10/2020 17:45</td>
+                                        <td class="alert alert-success">Accepted</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>How to use Git and Github</td>
+                                        <td>17/10/2020 17:45</td>
+                                        <td class="alert alert-success">Accepted</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>How to use Git and Github</td>
+                                        <td>17/10/2020 17:45</td>
+                                        <td class="alert alert-success">Accepted</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>How to use Git and Github</td>
+                                        <td>17/10/2020 17:45</td>
+                                        <td class="alert alert-danger">Waiting</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>How to use Git and Github</td>
+                                        <td>17/10/2020 17:45</td>
+                                        <td class="alert alert-danger">Waiting</td>
+                                    </tr>
                                 </tbody>
                                 <tfoot></tfoot>
                             </table>
@@ -349,21 +296,22 @@
     </main>
 
     <footer>
-        <div class="footer__title col-lg-3 ">
-          <h3>F-Code Workshop</h3>
-          <img src="../img/rsz_logo_2000x2000 (1).png">
+        <div class="footer__title col-lg-4 ">
+            <h3>F-Code Workshop</h3>
+            <img src="../img/rsz_logo_2000x2000 (1).png">
         </div>
-        <div class="footer__description col-lg-6 ">
-          <P>Knowledge shared is knowledge squared</P>
+        <div class="footer__description col-lg-4 ">
+            <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, qui! Animi neque corporis cumque
+                aliquam saepe? Voluptate laborum</P>
         </div>
-        <div class="footer__contact col-lg-3 ">
-          <h3>Contact</h3>
-          <div class="contact__icons">
-            <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
-            <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
-          </div>
+        <div class="footer__contact col-lg-4 ">
+            <h3>Contact</h3>
+            <div class="contact__icons">
+                <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
+                <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
+            </div>
         </div>
-    
+
         <div class="footer__copyright">© F-Code Club 2020</div>
     </footer>
 
@@ -382,24 +330,8 @@
     <!--Custom JS-->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    
-    <script>
-        function checkLogin() {
-          fetch('/api/user/current').then((res) => {
-            if (res.status == 401) {
-              location.replace('../index.html');
-            }
-          }).catch(error => console.log(error))
-        } 
-        checkLogin();
-    </script>
+    <script>$('.mydatatable').DataTable();</script>
     <script src="./UserPosts.js"></script>
-    <script>
-        window.addEventListener('load', function () {
-          const loader = document.querySelector(".loader");
-        loader.className += " hidden"; // class "loader hidden"
-        })
-    </script>
 
 </body>
 

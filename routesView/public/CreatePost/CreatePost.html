@@ -10,36 +10,6 @@
   <link rel="stylesheet" href="../HomePage/HomePage.css">
   <link rel="stylesheet" href="./CreatePost.css">
   <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
-  <style>
-    .loader {
-  position: fixed;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loader > img {
-  width: 100px;
-}
-
-.loader.hidden {
-  animation: fadeOut 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeOut {
-  100% {
-      opacity: 0;
-      visibility: hidden;
-  }
-}
-  </style>
 </head>
 
 <body>
@@ -72,17 +42,17 @@
               Schedule</a>
           </li>
           <li class="nav-item dropdown bg-white">
-            <a class="nav-link dropdown-toggle" href="#" id="userAccount" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-user"></i>
-              
+              Le Hoang Khoi (K15 HCM)
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../UserPosts/UserPosts.html">
                 <i class="fas fa-chart-bar"></i>
                 User status</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/logout">
+              <a class="dropdown-item" href="#">
                 <i class="fas fa-sign-out-alt"></i>
                 Logout</a>
             </div>
@@ -109,13 +79,13 @@
         <li class="nav-item dropdown bg-white">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            
+            Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="../UserPosts/UserPosts.html">User status</a>
             <div class="dropdown-divider"></div>
 
-            <a class="dropdown-item" href="/logout">Logout</a>
+            <a class="dropdown-item" href="#">Logout</a>
           </div>
         </li>
       </ul>
@@ -128,65 +98,48 @@
   </header>
 
   <main>
-    <div class="loader">
-      <img src="../img/loading.gif" alt="Loading..." />
-    </div>
     <div class="create__form">
-      <form class="create__wrapper" id="createPostForm" onsubmit="return post()">
-        <h2>Workshop's Information</h2>
+      <div class="create__wrapper">
+        <h2>Fill following information to write new post</h2>
         <div class="form-group row">
           <label for="example-datetime-local-input" class="col-6 col-sm-2  col-form-label">Date and time</label>
           <div class="col-sm-3">
-            <input class="form-control" type="datetime-local" value="" id="example-datetime-local-input">
+            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
           </div>
         </div>
-        <div class="form-group row">
-          <label for="partner-selection" class="col-6 col-sm-2  col-form-label">Choose your partner</label>
-          <div class="col-sm-3">
-            <div class="input-group">
-              <select class="custom-select" id="partnerSelection">
-                <option id="defaultOption" value="0" selected>None</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        
         <div class="form-group row">
           <label for="title-input" class="col-6 col-sm-2 col-form-label">Title</label>
           <div class="col-sm-3">
-            <input name="title-input" class="form-control" type="text" placeholder="Your title" id="title-input" required>
+            <input class="form-control" type="text" placeholder="Your title" id="titll-input">
           </div>
         </div>
-        <div class="form-group row">
-          <label for="imageUpload" class="col-6 col-sm-2">Background image</label>
-          <div class="col-sm-3">
-            <input type="url" class="form-control" id="imageUpload" placeholder="URL">
-          </div>
-          
+        <div class="form-group">
+          <label for="imageUpload">Image</label>
+          <input type="file" class="form-control-file" id="imageUpload">
         </div>
         <div class="form-group">
           <label>Main content</label>
-          <textarea name="content" id="main-content"></textarea>
+          <textarea name="content"></textarea>
         </div>
         <div class="form-group">
           <label for="post__note">Your note</label>
-          <textarea class="form-control col-12 col-sm-6" id="post__note" rows="2" required></textarea>
+          <textarea class="form-control col-12 col-sm-6" id="post__note" rows="2"></textarea>
         </div>
-        <button type="submit" class="btn btn-success col-sm-2" id="submitButton">Submit</button>
-      </form>
+        <button type="submit" class="btn btn-success col-sm-2">Submit</button>
+      </div>
     </div>
     
   </main>
 
   <footer>
-    <div class="footer__title col-lg-3 ">
+    <div class="footer__title col-lg-4 ">
       <h3>F-Code Workshop</h3>
       <img src="../img/rsz_logo_2000x2000 (1).png">
     </div>
-    <div class="footer__description col-lg-6 ">
-      <P>Knowledge shared is knowledge squared</P>
+    <div class="footer__description col-lg-4 ">
+      <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, qui! Animi neque corporis cumque aliquam saepe? Voluptate laborum</P>
     </div>
-    <div class="footer__contact col-lg-3 ">
+    <div class="footer__contact col-lg-4 ">
       <h3>Contact</h3>
       <div class="contact__icons">
         <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
@@ -209,39 +162,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  <script>
-      function checkLogin() {
-        fetch('/api/user/current').then((res) => {
-          if (res.status == 401) {
-            location.replace('../index.html');
-          }
-        }).catch(error => console.log(error))
-      } 
-      checkLogin();
-      
-  </script>
-  <script src="../lib/moment.js"></script>
-  <script src="./CreatePost.js"></script>
-  
   <script src="../ckeditor/ckeditor.js"></script>
-  <script type="text/javascript">
-    var editor = CKEDITOR.replace( 'content', {
-      language: 'en',
-      extraPlugins: 'notification'
-    });
-
-    editor.on( 'required', function( evt ) {
-      editor.showNotification( 'This field is required.', 'warning' );
-      evt.cancel();
-    });
-    </script>
-  
-  <script>
-    window.addEventListener('load', function () {
-      const loader = document.querySelector(".loader");
-    loader.className += " hidden"; // class "loader hidden"
-    })
-  </script>
+  <script>CKEDITOR.replace('content')</script>
 </body>
 
 </html>

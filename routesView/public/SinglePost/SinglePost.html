@@ -20,37 +20,7 @@
       src="https://kit.fontawesome.com/9ba09bf17b.js"
       crossorigin="anonymous"
     ></script>
-    <style>
-      .loader {
-    position: fixed;
-    z-index: 99;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .loader > img {
-    width: 100px;
-  }
-  
-  .loader.hidden {
-    animation: fadeOut 1s;
-    animation-fill-mode: forwards;
-  }
-  
-  @keyframes fadeOut {
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-  }
-  </style>
-    
+    <script src="SinglePost.js"></script>
   </head>
 
   <body>
@@ -73,7 +43,7 @@
               </a>
             </li>
             <li class="nav-item bg-white">
-              <a class="nav-link" href="../CreatePost/CreatePost.html" onclick="resetTopicId()">
+              <a class="nav-link" href="../CreatePost/CreatePost.html">
                 <i class="far fa-calendar-plus"></i>
                 Create</a>
             </li>
@@ -83,17 +53,17 @@
                 Schedule</a>
             </li>
             <li class="nav-item dropdown bg-white">
-              <a class="nav-link dropdown-toggle" href="#" id="userAccount" role="button" data-toggle="dropdown"
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user"></i>
-                
+                Le Hoang Khoi (K15 HCM)
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="../UserPosts/UserPosts.html">
                   <i class="fas fa-chart-bar"></i>
                   User status</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout">
+                <a class="dropdown-item" href="#">
                   <i class="fas fa-sign-out-alt"></i>
                   Logout</a>
               </div>
@@ -112,7 +82,7 @@
             <a class="nav-link" href="../HomePage/HomePage.html">Home <span class="sr-only"></span></a>
           </li>
           <li class="nav-item bg-white">
-            <a class="nav-link" href="../CreatePost/CreatePost.html" onclick="resetTopicId()">Create</a>
+            <a class="nav-link" href="../CreatePost/CreatePost.html">Create</a>
           </li>
           <li class="nav-item bg-white">
             <a class="nav-link" href="../Schedule/Schedule.html">Schedule</a>
@@ -120,13 +90,13 @@
           <li class="nav-item dropdown bg-white">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              
+              Account
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../UserPosts/UserPosts.html">User status</a>
               <div class="dropdown-divider"></div>
   
-              <a class="dropdown-item" href="/logout">Logout</a>
+              <a class="dropdown-item" href="#">Logout</a>
             </div>
           </li>
         </ul>
@@ -139,12 +109,58 @@
     </header>
 
     <main>
-      <div class="loader">
-        <img src="../img/loading.gif" alt="Loading..." />
-      </div>
       <div class="singlepost__content">
-        <div class="singlepost__wrapper col-lg-7 col-xs-12" id="singlepost-wrapper">
-          
+        <div class="singlepost__wrapper col-lg-7 col-xs-12">
+          <div class="post__header">
+            <div class="blog-post__edit">
+              <a href="../CreatePost/CreatePost.html"><img src="../img/edit.svg"></a>
+            </div>
+            <div class="header__title">How to use Git and Github</div>
+
+            <div class="header__author">
+              <span>Author: </span>
+              <span>Trần Trung Kiên</span>
+            </div>
+            <div class="header__date">
+              <span>Date: </span>
+              <span>17/10/2020 17:45 PM</span>
+            </div>
+            <div class="blog-post__rate">
+              <span>Rate: </span>
+              <span>3</span>
+              <svg
+                width="1.1em"
+                height="1.1em"
+                viewBox="0 0 16 16"
+                class="bi bi-star-fill"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+            </div> 
+          </div>
+          <div class="post__body">
+            <img src="../img/5.png" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
+              iure, minima, placeat dolor veniam amet natus culpa a soluta
+              maxime nulla eaque ipsam impedit consequatur, excepturi ea quod
+              quasi libero. Lorem ipsum, dolor sit amet consectetur adipisicing
+              elit. Dolores quidem laudantium laboriosam veritatis excepturi
+              impedit eos sunt possimus quo iure doloribus, minima ipsam,
+              consectetur aperiam culpa illum error voluptates nostrum! Lorem
+              ipsum, dolor sit amet consectetur adipisicing elit. Est nam, iure
+              quibusdam fugiat maxime vero excepturi eveniet cum repellat
+              aliquid ullam accusantium voluptatibus blanditiis molestias
+              distinctio qui veniam fuga eligendi!
+            </p>
+            <div class="alert alert-success" role="alert">
+              Remember to download Git and create account on Github
+            </div>
+          </div>
           <div class="post__footer">
             <button
               type="button"
@@ -155,62 +171,12 @@
               JOIN US
             </button>
 
-            <button
-              type="button"
-              class="btn btn-primary showlistButton"
-              data-toggle="modal"
-              data-target="#listModal"
-              id="showlistButton"
-            >
-              List
-            </button>
-            <div
-              class="modal fade"
-              id="listModal"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                      List of members joined this topic
-                    </h5>
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">    
-                    <ul class="list-group" id="memberList">
-                      
-                    </ul>                
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <!-- Button trigger modal -->
             <button
               type="button"
               class="btn btn-primary rateButton"
               data-toggle="modal"
               data-target="#exampleModal"
-              id="rateButton"
             >
               RATE THIS POST
             </button>
@@ -286,7 +252,6 @@
                       rows="3"
                       id="comment"
                       placeholder="Enter your review"
-                      maxlength="200"
                     ></textarea>
                   </div>
                   <div class="modal-footer">
@@ -297,16 +262,8 @@
                     >
                       Close
                     </button>
-                    <button             
-                      type="button"
-                      class="btn btn-primary btn-danger deleteButton"
-                      id="deleteButton"
-                      onclick="deleteReview()"
-                    >
-                      Delete
-                    </button>
                     <button
-                      onclick="review()"
+                      onclick="result()"
                       type="button"
                       class="btn btn-primary btn-success"
                     >
@@ -315,13 +272,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- Comment section -->
-          <div class="comment__section">
-            <h4>Comments</h4>
-            <div class="comment__wrapper" id="comment-wrapper">
-              
             </div>
           </div>
         </div>
@@ -342,7 +292,7 @@
             </div>
           </div>
           <div class="homepage__ranking">
-            <img src="../img/rocket.svg" class="ranking__icon">
+            <img src="../img/rocket.svg" class="ranking__icon" />
             <h3>Most popular</h3>
             <table class="ranking_table">
               <tr>
@@ -350,68 +300,103 @@
                 <th>Post</th>
                 <th>Rate</th>
               </tr>
-  
+
               <tr>
-                <td><img src="../img/goldmedal.svg"></td>
-                <td id="rank1"></td>
+                <td><img src="../img/goldmedal.svg" /></td>
+                <td><a href="#">How to use Git and Github</a></td>
                 <td>
-                  <span id="rate1"></span>
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
+                  <span>4.5</span>
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-star-fill"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                    />
                   </svg>
                 </td>
               </tr>
-  
+
               <tr>
-                <td><img src="../img/silvermedal.svg"></td>
-                <td id="rank2"></td>
+                <td><img src="../img/silvermedal.svg" /></td>
+                <td><a href="#">How a website work?</a></td>
                 <td>
-                  <span id="rate2"></span>
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
+                  <span>4.5</span>
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-star-fill"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                    />
                   </svg>
                 </td>
               </tr>
-  
+
               <tr>
-                <td><img src="../img/bronzemedal.svg"></td>
-                <td id="rank3"></td>
+                <td><img src="../img/bronzemedal.svg" /></td>
+                <td><a href="#">Crawling data and tips on Instagram</a></td>
                 <td>
-                  <span id="rate3"></span>
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
+                  <span>4.5</span>
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-star-fill"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                    />
                   </svg>
                 </td>
               </tr>
-  
+
               <tr>
                 <td>4</td>
-                <td id="rank4"></td>
+                <td><a href="#">How to use Git and Github</a></td>
                 <td>
-                  <span id="rate4"></span>
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
+                  <span>4.5</span>
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-star-fill"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                    />
                   </svg>
                 </td>
               </tr>
-  
+
               <tr>
                 <td>5</td>
-                <td id="rank5"></td>
+                <td><a href="#">How to use Git and Github</a></td>
                 <td>
-                  <span id="rate5"></span>
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
+                  <span>4.5</span>
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-star-fill"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                    />
                   </svg>
                 </td>
               </tr>
@@ -422,21 +407,29 @@
     </main>
 
     <footer>
-      <div class="footer__title col-lg-3 ">
+      <div class="footer__title col-lg-4">
         <h3>F-Code Workshop</h3>
-        <img src="../img/rsz_logo_2000x2000 (1).png">
+        <img src="../img/rsz_logo_2000x2000 (1).png" />
       </div>
-      <div class="footer__description col-lg-6 ">
-        <P>Knowledge shared is knowledge squared</P>
+      <div class="footer__description col-lg-4">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Reprehenderit, qui! Animi neque corporis cumque aliquam saepe?
+          Voluptate laborum
+        </p>
       </div>
-      <div class="footer__contact col-lg-3 ">
+      <div class="footer__contact col-lg-4">
         <h3>Contact</h3>
         <div class="contact__icons">
-          <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
-          <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
+          <a href="https://www.facebook.com/fcodefpt" target="_blank"
+            ><img src="../img/facebook.svg"
+          /></a>
+          <a href="mailto: fcode.fptuhcm@gmail.com"
+            ><img src="../img/gmail.svg"
+          /></a>
         </div>
       </div>
-  
+
       <div class="footer__copyright">© F-Code Club 2020</div>
     </footer>
 
@@ -455,25 +448,5 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script>
-      function checkLogin() {
-        fetch('/api/user/current').then((res) => {
-          if (res.status == 401) {
-            location.replace('../index.html');
-          }
-        }).catch(error => console.log(error))
-      } 
-      checkLogin(); 
-    </script>
-    <script>
-      window.addEventListener('load', function () {
-        const loader = document.querySelector(".loader");
-      loader.className += " hidden"; // class "loader hidden"
-      })
-    </script>
-    <script src="SinglePost.js"></script>
-    
-    <script src="../lib/moment.js"></script>
-    
   </body>
 </html>
