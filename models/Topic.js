@@ -1,4 +1,6 @@
+const { response } = require('express');
 const mongoose = require('mongoose');
+const User = require('./User');
 const Schema = mongoose.Schema;
 
 const topicSchema = Schema({
@@ -8,11 +10,16 @@ const topicSchema = Schema({
   },
   detail: String,
   note: String,
+  background: String,
   group: [{
     type: Schema.Types.ObjectId,
     ref: "User"
   }],
   date: Schema.Types.Date,
+  participants: [{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }],
   review: [{
     type: Schema.Types.ObjectId,
     ref: "Review"
@@ -20,8 +27,13 @@ const topicSchema = Schema({
   author: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  status: {
+    type: Number,
+    default: 0,
+    min: -1,
+    max: 1
   }
-}, { timestamps: true });
-
+}, { timestamps: true, toJSON: { virtuals: true }, id: false, versionKey: false });
 
 module.exports = mongoose.model('Topic', topicSchema);
