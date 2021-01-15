@@ -1,5 +1,7 @@
 if (window.localStorage.topicId == "") {
-  document.getElementById('example-datetime-local-input').value = moment().format('yyyy-MM-DDThh:mm');
+  document.getElementById(
+    "example-datetime-local-input"
+  ).value = moment().format("yyyy-MM-DDThh:mm");
 }
 
 function loadUserList() {
@@ -22,75 +24,82 @@ function loadUserList() {
 
 async function post(e) {
   e.preventDefault();
-    await loadUserList();
-    let groupAuthor = [
-      {
-        _id: document.getElementById("partnerSelection").value,
-      },
-    ];
-    let postDate = moment.utc(document.getElementById('example-datetime-local-input').value).format();
+  document.querySelector("#submitButton").setAttribute("disabled", "true");
+  setInterval(function () {
+    document.querySelector(".loader").className = "loader";
+  }, 1000);
 
-    let postObj = {};
-    if (groupAuthor[0]._id === "0") {
-      postObj = {
-        name: document.getElementById("title-input").value,
-        date: postDate,
-        detail: CKEDITOR.instances["main-content"].getData(),
-        note: document.getElementById("post__note").value,
-        background: document.getElementById("imageUpload").value,
-      };
-    } else {
-      postObj = {
-        name: document.getElementById("title-input").value,
-        date: postDate,
-        detail: CKEDITOR.instances["main-content"].getData(),
-        note: document.getElementById("post__note").value,
-        background: document.getElementById("imageUpload").value,
-        group: groupAuthor,
-      };
-    }
-  
-    if (window.localStorage.topicId === "") {
-      fetch("/api/topic", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(postObj),
+  await loadUserList();
+  let groupAuthor = [
+    {
+      _id: document.getElementById("partnerSelection").value,
+    },
+  ];
+  let postDate = moment
+    .utc(document.getElementById("example-datetime-local-input").value)
+    .format();
+
+  let postObj = {};
+  if (groupAuthor[0]._id === "0") {
+    postObj = {
+      name: document.getElementById("title-input").value,
+      date: postDate,
+      detail: CKEDITOR.instances["main-content"].getData(),
+      note: document.getElementById("post__note").value,
+      background: document.getElementById("imageUpload").value,
+    };
+  } else {
+    postObj = {
+      name: document.getElementById("title-input").value,
+      date: postDate,
+      detail: CKEDITOR.instances["main-content"].getData(),
+      note: document.getElementById("post__note").value,
+      background: document.getElementById("imageUpload").value,
+      group: groupAuthor,
+    };
+  }
+
+  if (window.localStorage.topicId === "") {
+    fetch("/api/topic", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(postObj),
+    })
+      .then((response) => {
+        return response.json();
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Success:", data);
-          alert("Post successfully!"); 
-          window.location.replace("../HomePage/HomePage.html");
-        })
-        .catch((error) => {
-          console.error("Error: ", error);
-        });
-    } else {
-      fetch("/api/topic/" + window.localStorage.topicId, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(postObj),
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Post successfully!");
+        window.location.replace("../HomePage/HomePage.html");
       })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log("Success:", data);
-          alert("Update successfully!");
-          window.location.replace("../HomePage/HomePage.html");
-        })
-        .catch((error) => {
-          console.error("Error: ", error);
-        });
-    }
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  } else {
+    fetch("/api/topic/" + window.localStorage.topicId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(postObj),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Update successfully!");
+        window.location.replace("../HomePage/HomePage.html");
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  }
 }
 
 function renderEditPost(id) {
@@ -98,14 +107,16 @@ function renderEditPost(id) {
     fetch("/api/topic/" + id)
       .then((res) => res.json())
       .then((data) => {
-        let datetime = new Date(data.message.date).toISOString().slice(0,16);
+        let datetime = new Date(data.message.date).toISOString().slice(0, 16);
         if (data.message.group.length !== 0) {
           // check if there is partner or not
           document
             .getElementById(data.message.group[0]._id)
             .setAttribute("selected", "true");
         }
-        document.getElementById('example-datetime-local-input').value = datetime;
+        document.getElementById(
+          "example-datetime-local-input"
+        ).value = datetime;
         document.getElementById("title-input").value = data.message.name;
         document.getElementById("imageUpload").value = data.message.background;
         document.getElementById("main-content").innerHTML = data.message.detail;

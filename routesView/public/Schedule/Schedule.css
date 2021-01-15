@@ -43,6 +43,12 @@ main {
   padding-left: 5px;
 }
 
+#monthYearShow {
+  width: 300px;
+  padding-left: 4px;
+  padding-top: 2%;
+}
+
 td, th {
   text-align: center;
 }
@@ -69,6 +75,16 @@ td, th {
   border-right: 0.5px solid rgb(170, 164, 164);
   border-bottom: 0.5px solid rgb(170, 164, 164);
   position: relative;
+  cursor: default;
+}
+
+.day p {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .event {
@@ -83,14 +99,14 @@ td, th {
   border-radius: 2px;
   border: none;
   padding: 1px 5px;
-  width: 98%;
-  
+  width: 98%; 
 }
 
-.even:hover {
-  border: none;
-  background: #dadce0;
-  border-radius: 8px;
+.day:hover {
+  border-left: 1px solid #4CAF50;
+  border-top: 1px solid #4CAF50;
+  border-right: 2px solid #4CAF50;
+  border-bottom: 2px solid #4CAF50;
 }
 
 .event a {
