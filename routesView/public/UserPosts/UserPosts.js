@@ -57,7 +57,6 @@ function renderAllPosts() {
         }
         let createDate = new Date(element.createdAt).toISOString().slice(0,10).concat(' ' + new Date(element.createdAt).toLocaleTimeString());
         
-
         return `
         <tr>
           <td>${data.message.indexOf(element) + 1}</td>
@@ -95,6 +94,7 @@ function loadWaitingPosts() {
 async function renderWaitingPosts() {
   await loadWaitingPosts();
   let postList = waitingPosts.map((element) => {
+    let createDate = new Date(element.createdAt).toISOString().slice(0,10).concat(' ' + new Date(element.createdAt).toLocaleTimeString());
     return `
         <tr>
           <td>${waitingPosts.indexOf(element) + 1}</td>
@@ -105,7 +105,7 @@ async function renderWaitingPosts() {
               ${element.name}
             </a>
           </td>
-          <td>${element.createdAt}</td>
+          <td>${createDate}</td>
           <td class="alert alert-warning">Waiting</td>
         </tr>`;
   });
@@ -130,6 +130,7 @@ function loadAcceptedPosts() {
 async function renderAcceptedPosts() {
   await loadAcceptedPosts();
   let postList = acceptedPosts.map((element) => {
+    let createDate = new Date(element.createdAt).toISOString().slice(0,10).concat(' ' + new Date(element.createdAt).toLocaleTimeString());
     return `
         <tr>
           <td>${acceptedPosts.indexOf(element) + 1}</td>
@@ -140,7 +141,7 @@ async function renderAcceptedPosts() {
               ${element.name}
             </a>
           </td>
-          <td>${element.createdAt}</td>
+          <td>${createDate}</td>
           <td class="alert alert-success">Accepted</td>
         </tr>`;
   });
@@ -165,6 +166,8 @@ function loadRejectedPosts() {
 async function renderRejectedPosts() {
   await loadRejectedPosts();
   let postList = rejectedPosts.map((element) => {
+    let createDate = new Date(element.createdAt).toISOString().slice(0,10).concat(' ' + new Date(element.createdAt).toLocaleTimeString());
+
     return `
         <tr>
           <td>${rejectedPosts.indexOf(element) + 1}</td>
@@ -175,7 +178,7 @@ async function renderRejectedPosts() {
               ${element.name}
             </a>
           </td>
-          <td>${element.createdAt}</td>
+          <td>${createDate}</td>
           <td class="alert alert-danger">Rejected</td>
         </tr>`;
   });
