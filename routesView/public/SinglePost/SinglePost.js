@@ -196,6 +196,9 @@ function review() {
 
 /*--------------------- Admin action -------------------*/
 function rejectPost(id) {
+  $(".dropdown-item").click(function(e) {
+    e.preventDefault();
+  });
   const rejectObj = {
     action: "reject",
   };
@@ -219,6 +222,9 @@ function rejectPost(id) {
 }
 
 function acceptPost(id) {
+  $(".dropdown-item").click(function(e) {
+    e.preventDefault();
+  });
   const acceptObj = {
     action: "accept",
   };
@@ -245,6 +251,9 @@ function acceptPost(id) {
 
 /*-------------------- Manage posts action ---------------------*/
 function deletePost(id) {
+  $(".dropdown-item").click(function(e) {
+    e.preventDefault();
+  });
   fetch("/api/topic/" + id, {
     method: "DELETE",
   })
@@ -299,7 +308,7 @@ function getSinglePost(id) {
                 
               </div>
               <div class="dropdown-menu interactMenu" aria-labelledby="dropdownMenuButton">
-                <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept"><img src="../img/accept.svg"  title="Accept">Accept</a>
+                <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept "><img src="../img/accept.svg"  title="Accept">Accept</a>
                 <a onClick="rejectPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__reject"><img src="../img/rejected.svg" title="Reject">Reject</a>
                 <a href="../CreatePost/CreatePost.html" class="dropdown-item" id="blog-post__edit"><img src="../img/edit.svg">Edit</a>
                 <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
