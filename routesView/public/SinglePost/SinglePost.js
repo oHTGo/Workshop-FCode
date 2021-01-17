@@ -379,6 +379,8 @@ function getSinglePost(id) {
           </div>`;
       }
       let note = data.message.note;
+      note = note.replaceAll('<', '&lt');
+      note = note.replaceAll('>', '&gt');
       let postBody = `<div class="post__body">
             <img src="${data.message.background}" />
             <p>
@@ -394,7 +396,7 @@ function getSinglePost(id) {
         .insertAdjacentHTML("afterbegin", postHeader);
       document
         .getElementById("post-header")
-        .insertAdjacentHTML("afterend", postBody);
+        .insertAdjacentHTML("beforeend", postBody);
 
       if (data.message.note.toString().trim() === "") {
         document.getElementById('postnote').style.display = 'none';

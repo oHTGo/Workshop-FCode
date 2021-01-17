@@ -61,7 +61,7 @@ function renderAllPosts() {
         <tr>
           <td>${data.message.indexOf(element) + 1}</td>
           <td>
-            <a href="../SinglePost/SinglePost.html" onClick="readPost('${
+            <a href="../SinglePost" onClick="readPost('${
               element._id
             }', '${element.status}')">
               ${element.name}
@@ -99,7 +99,7 @@ async function renderWaitingPosts() {
         <tr>
           <td>${waitingPosts.indexOf(element) + 1}</td>
           <td>
-            <a href="../SinglePost/SinglePost.html" onClick="readPost('${
+            <a href="../SinglePost" onClick="readPost('${
               element._id
             }')">
               ${element.name}
@@ -135,7 +135,7 @@ async function renderAcceptedPosts() {
         <tr>
           <td>${acceptedPosts.indexOf(element) + 1}</td>
           <td>
-            <a href="../SinglePost/SinglePost.html" onClick="readPost('${
+            <a href="../SinglePost" onClick="readPost('${
               element._id
             }')">
               ${element.name}
@@ -172,7 +172,7 @@ async function renderRejectedPosts() {
         <tr>
           <td>${rejectedPosts.indexOf(element) + 1}</td>
           <td>
-            <a href="../SinglePost/SinglePost.html" onClick="readPost('${
+            <a href="../SinglePost" onClick="readPost('${
               element._id
             }')">
               ${element.name}

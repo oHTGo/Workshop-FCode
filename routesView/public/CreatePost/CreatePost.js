@@ -38,6 +38,9 @@ async function post(e) {
   let postDate = moment
     .utc(document.getElementById("example-datetime-local-input").value)
     .format();
+  
+  let imageUrl = document.getElementById('imageUpload').value;
+  imageUrl = 'https://drive.google.com/uc?export=view&id=' + imageUrl.slice(imageUrl.indexOf('/d/')+3, imageUrl.indexOf('/view'));
 
   let postObj = {};
   if (groupAuthor[0]._id === "0") {
@@ -46,7 +49,7 @@ async function post(e) {
       date: postDate,
       detail: CKEDITOR.instances["main-content"].getData(),
       note: document.getElementById("post__note").value,
-      background: document.getElementById("imageUpload").value,
+      background: imageUrl,
     };
   } else {
     postObj = {
@@ -54,7 +57,7 @@ async function post(e) {
       date: postDate,
       detail: CKEDITOR.instances["main-content"].getData(),
       note: document.getElementById("post__note").value,
-      background: document.getElementById("imageUpload").value,
+      background: imageUrl,
       group: groupAuthor,
     };
   }
