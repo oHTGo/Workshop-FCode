@@ -10,6 +10,10 @@ dotenv.config({ path: './config/config.env' });
 const cors = require("cors");
 app.use(cors());
 
+//Init Metmet
+const helmet = require("helmet");
+app.use(helmet.xssFilter());
+
 //Init Hepler
 const helper = require("./helper");
 
