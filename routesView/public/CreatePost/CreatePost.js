@@ -74,7 +74,7 @@ async function post(e) {
       .then((data) => {
         console.log("Success:", data);
         alert("Post successfully!");
-        window.location.replace("../HomePage/HomePage.html");
+        window.location.replace("../HomePage");
       })
       .catch((error) => {
         console.error("Error: ", error);
@@ -94,7 +94,7 @@ async function post(e) {
       .then((data) => {
         console.log("Success:", data);
         alert("Update successfully!");
-        window.location.replace("../HomePage/HomePage.html");
+        window.location.replace("../HomePage");
       })
       .catch((error) => {
         console.error("Error: ", error);

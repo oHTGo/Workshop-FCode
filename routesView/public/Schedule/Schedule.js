@@ -146,7 +146,7 @@ async function showEvent(month, year) {
         if (dayE == day) {
           document.getElementById(
             i
-          ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${topic._id}')" title="${topic.name}">${topic.name}</a>`;
+          ).innerHTML = `<a href="../SinglePost" onclick="readTopicId('${topic._id}')" title="${topic.name}">${topic.name}</a>`;
         }
         i++;
       }
