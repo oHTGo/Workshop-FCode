@@ -145,6 +145,7 @@
   height: max-content;
   border-radius: 5px;
   margin-bottom: 5rem;
+  display: none;
 }
 
 .homepage__browse h3 {

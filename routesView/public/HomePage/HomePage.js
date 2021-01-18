@@ -77,7 +77,7 @@ function renderPosts(pageNumber) {
         let postRate = Math.round(element.averageRate * 100) / 100;
 
         return `
-        <a class="blog-post" href="../SinglePost/SinglePost.html" onClick="readPost('${element._id}', 1)">
+        <a class="blog-post" href="../SinglePost/" onClick="readPost('${element._id}', 1)">
           <div class="blog-post__img">
             <img src="${element.background}" alt="">
           </div>
@@ -174,7 +174,7 @@ function renderRankingBoard() {
     .then((res) => res.json())
     .then((data) => {
       for (var i = 0; i < data.message.length && i < 5; i++) {
-        document.getElementById('rank'+(i+1)).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`
+        document.getElementById('rank'+(i+1)).innerHTML = `<a href="../SinglePost" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`
         document.getElementById('rate'+(i+1)).innerHTML = data.message[i].averageRate;
       }
 

@@ -196,6 +196,9 @@ function review() {
 
 /*--------------------- Admin action -------------------*/
 function rejectPost(id) {
+  $(".dropdown-item").click(function(e) {
+    e.preventDefault();
+  });
   const rejectObj = {
     action: "reject",
   };
@@ -211,7 +214,7 @@ function rejectPost(id) {
     .then((data) => {
       console.log("Success:", data);
       alert("Successfully reject!");
-      window.location.replace("../HomePage/HomePage.html");
+      window.location.replace("../HomePage/");
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -219,6 +222,9 @@ function rejectPost(id) {
 }
 
 function acceptPost(id) {
+  $(".dropdown-item").click(function(e) {
+    e.preventDefault();
+  });
   const acceptObj = {
     action: "accept",
   };
@@ -234,7 +240,7 @@ function acceptPost(id) {
     .then((data) => {
       console.log("Success:", data);
       alert("Successfully acceept!");
-      window.location.replace("../HomePage/HomePage.html");
+      window.location.replace("../HomePage/");
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -245,13 +251,16 @@ function acceptPost(id) {
 
 /*-------------------- Manage posts action ---------------------*/
 function deletePost(id) {
+  $(".dropdown-item").click(function(e) {
+    e.preventDefault();
+  });
   fetch("/api/topic/" + id, {
     method: "DELETE",
   })
     .then((res) => res.json())
     .then((res) => {
       console.log(res);
-      window.location.replace("../HomePage/HomePage.html");
+      window.location.replace("../HomePage/");
     });
 }
 
@@ -299,9 +308,9 @@ function getSinglePost(id) {
                 
               </div>
               <div class="dropdown-menu interactMenu" aria-labelledby="dropdownMenuButton">
-                <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept"><img src="../img/accept.svg"  title="Accept">Accept</a>
+                <a onClick="acceptPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__accept "><img src="../img/accept.svg"  title="Accept">Accept</a>
                 <a onClick="rejectPost('${window.localStorage.topicId}')" class="dropdown-item blog-post__reject"><img src="../img/rejected.svg" title="Reject">Reject</a>
-                <a href="../CreatePost/CreatePost.html" class="dropdown-item" id="blog-post__edit"><img src="../img/edit.svg">Edit</a>
+                <a href="../CreatePost/" class="dropdown-item" id="blog-post__edit"><img src="../img/edit.svg">Edit</a>
                 <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
               </div>
             </div>
@@ -339,7 +348,7 @@ function getSinglePost(id) {
               </div>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a onClick="deletePost('${myStorage.topicId}')" class="dropdown-item"><img src="../img/delete.svg" title="Delete">Delete</a>  
-              <a href="../CreatePost/CreatePost.html" class="dropdown-item" id="blog-post__edit"><img src="../img/edit.svg">Edit</a>
+              <a href="../CreatePost/" class="dropdown-item" id="blog-post__edit"><img src="../img/edit.svg">Edit</a>
               </div>
             </div>
             <div class="header__title" title="${data.message.name}">${data.message.name}</div>
@@ -369,14 +378,16 @@ function getSinglePost(id) {
             </div> 
           </div>`;
       }
-
+      let note = data.message.note;
+      note = note.replaceAll('<', '&lt');
+      note = note.replaceAll('>', '&gt');
       let postBody = `<div class="post__body">
             <img src="${data.message.background}" />
             <p>
               ${data.message.detail}
             </p>
             <div class="alert alert-success" role="alert" id="postnote">
-              ${data.message.note}
+              ${note}
             </div>
           </div>`;
 
@@ -385,7 +396,7 @@ function getSinglePost(id) {
         .insertAdjacentHTML("afterbegin", postHeader);
       document
         .getElementById("post-header")
-        .insertAdjacentHTML("afterend", postBody);
+        .insertAdjacentHTML("beforeend", postBody);
 
       if (data.message.note.toString().trim() === "") {
         document.getElementById('postnote').style.display = 'none';
