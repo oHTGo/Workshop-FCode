@@ -39,8 +39,6 @@ function renderPosts(pageNumber) {
   fetch("/api/topic/page/" + pageNumber)
     .then((response) => response.json())
     .then((data) => {
-      
-      // myStorage.setItem('CurrentUserID', data.message.author.name);
       let postsArray = data.message.map((element) => {
         const weeks = [
           "Sunday",
@@ -73,13 +71,14 @@ function renderPosts(pageNumber) {
           ", " +
           postDate.getUTCFullYear() +
           " - " +
-          postDate.getUTCHours() + ":" + postDate.getMinutes();
+          (postDate.getUTCHours() < 10 ? '0' : '') + postDate.getUTCHours() + ":" + (postDate.getMinutes() < 10 ? '0' : '') + postDate.getMinutes();
+        let imageUrl = 'https://drive.google.com/uc?export=view&id=' + element.background.slice(element.background.indexOf('/d/')+3, element.background.indexOf('/view'));
         let postRate = Math.round(element.averageRate * 100) / 100;
 
         return `
         <a class="blog-post" href="../SinglePost/" onClick="readPost('${element._id}', 1)">
           <div class="blog-post__img">
-            <img src="${element.background}" alt="">
+            <img src="${imageUrl}" alt="">
           </div>
           <div class="blog-post__rate">
             <span class="starRate">${postRate}</span>
