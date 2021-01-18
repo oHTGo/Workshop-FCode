@@ -241,6 +241,7 @@ async function checkStatusParticipant(req, res) {
 
 async function getRanking(req, res) {
     const queryAggregate = [
+        { $match: { status: 1 } },
         {
             $lookup: { //get review from userCollection
                 "from": Review.collection.name,
