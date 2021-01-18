@@ -108,6 +108,7 @@ function loadPosts() {
     .then((data) => {
       data.message.map((element) => {
         postsArray.push(element);
+        console.log(element);
       });
     })
     .catch((error) => console.log(error));
@@ -117,9 +118,9 @@ function loadPosts() {
 async function showEvent(month, year) {
   //await loadPosts();
   postsArray.map((topic) => {
-    yearE = new Date(topic.date).getFullYear();
+    yearE = new Date(topic.date).getUTCFullYear();
     monthE = new Date(topic.date).getMonth();
-    dayE = new Date(topic.date).getDate();
+    dayE = new Date(topic.date).getUTCDate();
     if (yearE == year && monthE == month) {
       let i = 100;
       for (const day of calendar(month + 1, year)) {
