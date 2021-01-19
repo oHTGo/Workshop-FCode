@@ -196,7 +196,7 @@ function review() {
 
 /*--------------------- Admin action -------------------*/
 function rejectPost(id) {
-  $(".dropdown-item").click(function(e) {
+  $(".dropdown-item").click(function (e) {
     e.preventDefault();
   });
   const rejectObj = {
@@ -222,7 +222,7 @@ function rejectPost(id) {
 }
 
 function acceptPost(id) {
-  $(".dropdown-item").click(function(e) {
+  $(".dropdown-item").click(function (e) {
     e.preventDefault();
   });
   const acceptObj = {
@@ -251,7 +251,7 @@ function acceptPost(id) {
 
 /*-------------------- Manage posts action ---------------------*/
 function deletePost(id) {
-  $(".dropdown-item").click(function(e) {
+  $(".dropdown-item").click(function (e) {
     e.preventDefault();
   });
   fetch("/api/topic/" + id, {
@@ -291,7 +291,8 @@ function getSinglePost(id) {
         months[parseInt(postDate.slice(5, 7)) - 1] +
         ", " +
         postDate.slice(0, 4) +
-        " - " + postDate.slice(11,16);
+        " - " +
+        postDate.slice(11, 16);
       let partner;
       if (data.message.group.length != 0) {
         partner = ", " + data.message.group[0].name;
@@ -378,11 +379,17 @@ function getSinglePost(id) {
             </div> 
           </div>`;
       }
+      let imageUrl =
+        "https://drive.google.com/uc?export=view&id=" +
+        data.message.background.slice(
+          data.message.background.indexOf("/d/") + 3,
+          data.message.background.indexOf("/view")
+        );
       let note = data.message.note;
-      note = note.replaceAll('<', '&lt');
-      note = note.replaceAll('>', '&gt');
+      note = note.replaceAll("<", "&lt");
+      note = note.replaceAll(">", "&gt");
       let postBody = `<div class="post__body">
-            <img src="${data.message.background}" />
+            <img src="${imageUrl}" />
             <p>
               ${data.message.detail}
             </p>
@@ -399,7 +406,7 @@ function getSinglePost(id) {
         .insertAdjacentHTML("beforeend", postBody);
 
       if (data.message.note.toString().trim() === "") {
-        document.getElementById('postnote').style.display = 'none';
+        document.getElementById("postnote").style.display = "none";
       }
 
       if (window.localStorage.PostStatus == 1) {
@@ -420,10 +427,12 @@ function getSinglePost(id) {
         // Post icon for only creators
         document.getElementById("post-icons").style.display = "none";
       } else if (window.localStorage.CurrentUserId == data.message.author._id) {
-        document.getElementById('blog-post__edit').style.display ='block';
+        document.getElementById("blog-post__edit").style.display = "block";
       }
-      if (window.localStorage.CurrentUserId == data.message.author._id ||
-        window.localStorage.Role == "Admin")  {
+      if (
+        window.localStorage.CurrentUserId == data.message.author._id ||
+        window.localStorage.Role == "Admin"
+      ) {
         // Show list of members joined the workshop for only author and admins
         document.getElementById("showlistButton").style.display =
           "inline-block";
@@ -534,7 +543,7 @@ function renderRankingBoard() {
       for (var i = 0; i < data.message.length && i < 5; i++) {
         document.getElementById(
           "rank" + (i + 1)
-        ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`;
+        ).innerHTML = `<a href="../SinglePost/" onclick="readTopicId('${data.message[i]._id}')">${data.message[i].name}</a>`;
         document.getElementById("rate" + (i + 1)).innerHTML =
           data.message[i].averageRate;
       }

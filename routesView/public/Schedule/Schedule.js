@@ -16,6 +16,10 @@ function getCurrentUser() {
     .catch((error) => console.log(error));
 }
 
+function resetTopicId() {
+  window.localStorage.setItem("topicId", "");
+}
+
 var monthName = [
   "January",
   "February",
@@ -104,42 +108,19 @@ function loadPosts() {
     .then((data) => {
       data.message.map((element) => {
         postsArray.push(element);
+        console.log(element);
       });
     })
     .catch((error) => console.log(error));
 }
 
-// async function showEvent(month, year) {
-//   try {
-//     const res = await fetch("/api/topic/schedule");
-//     const data = await res.json();
-//     data.message.map((topic) => {
-//       yearE = new Date(topic.date).getFullYear();
-//       monthE = new Date(topic.date).getMonth();
-//       dayE = new Date(topic.date).getDate();
-//       if (yearE == year && monthE == month) {
-//         let i = 100;
-//         for (const day of calendar(month + 1, year)) {
-//           if (dayE == day) {
-//             document.getElementById(
-//               i
-//             ).innerHTML = `<a href="../SinglePost/SinglePost.html" onclick="readTopicId('${topic._id}')" title="${topic.name}">${topic.name}</a>`;
-//           }
-//           i++;
-//         }
-//       }
-//     });
-//   } catch (error) {
-//     return console.log(error);
-//   }
-// }
 
 async function showEvent(month, year) {
   //await loadPosts();
   postsArray.map((topic) => {
-    yearE = new Date(topic.date).getFullYear();
+    yearE = new Date(topic.date).getUTCFullYear();
     monthE = new Date(topic.date).getMonth();
-    dayE = new Date(topic.date).getDate();
+    dayE = new Date(topic.date).getUTCDate();
     if (yearE == year && monthE == month) {
       let i = 100;
       for (const day of calendar(month + 1, year)) {

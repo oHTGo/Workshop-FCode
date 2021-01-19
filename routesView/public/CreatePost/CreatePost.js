@@ -40,7 +40,7 @@ async function post(e) {
     .format();
   
   let imageUrl = document.getElementById('imageUpload').value;
-  imageUrl = 'https://drive.google.com/uc?export=view&id=' + imageUrl.slice(imageUrl.indexOf('/d/')+3, imageUrl.indexOf('/view'));
+  // imageUrl = 'https://drive.google.com/uc?export=view&id=' + imageUrl.slice(imageUrl.indexOf('/d/')+3, imageUrl.indexOf('/view'));
 
   let postObj = {};
   if (groupAuthor[0]._id === "0") {
