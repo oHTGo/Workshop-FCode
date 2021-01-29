@@ -119,7 +119,7 @@ async function showEvent(month, year) {
   //await loadPosts();
   postsArray.map((topic) => {
     yearE = new Date(topic.date).getUTCFullYear();
-    monthE = new Date(topic.date).getMonth();
+    monthE = new Date(topic.date).getUTCMonth();
     dayE = new Date(topic.date).getUTCDate();
     if (yearE == year && monthE == month) {
       let i = 100;
