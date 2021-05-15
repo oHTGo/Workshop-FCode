@@ -16,7 +16,6 @@ const configPassport = () => {
         callbackURL: "/auth/google/callback"
     },
         function (accessToken, refreshToken, profile, done) {
-            // console.log(refreshToken);
             if (profile.id) {
                 User.findOne({ googleId: profile.id })
                     .then((user) => {
