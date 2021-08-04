@@ -1,6 +1,6 @@
 # Workshop F-Code
 ## Overview
-A platform that helps everyone in the club create an experience-sharing workshop
+A platform that helps everyone in the club create an experience-sharing workshop. [Demo](http://workshop-fcode.herokuapp.com)
 ## Features
 - Create a topic, wait for an admin to approve the post.
 - Rate and comment on this topic.
