@@ -19,22 +19,22 @@ A platform that helps everyone in the club create an experience-sharing workshop
 ## Images
 
 Login page
-![](./github/images/login-page.jpg)
+![](./.github/images/login-page.jpg)
 
 All post page
-![](./github/images/all-post.jpg)
+![](./.github/images/all-post.jpg)
 
 Post detail page
-![](./github/images/post-detail.jpg)
+![](./.github/images/post-detail.jpg)
 
 Create post page
-![](./github/images/create-post.jpg)
+![](./.github/images/create-post.jpg)
 
 Posts status page
-![](./github/images/posts-status.jpg)
+![](./.github/images/posts-status.jpg)
 
 Schedule page
-![](./github/images/schedule.jpg)
+![](./.github/images/schedule.jpg)
 
 ## Member
 
